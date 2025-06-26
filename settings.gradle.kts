@@ -31,4 +31,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "AndroidGPLibs"
 include(":app")
+include(":admob")
  
