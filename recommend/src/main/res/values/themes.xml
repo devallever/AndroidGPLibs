@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Theme.RecommendProject" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Primary brand color. -->
+
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+        <!--        <item name="android:windowTranslucentStatus">true</item>-->
+        <!--        <item name="android:windowIsTranslucent">true</item>-->
+        <!--        <item name="android:windowAnimationStyle">@null</item>-->
+        <!--        <item name="android:windowIsFloating">false</item>-->
+        <!--        <item name="android:windowFrame">@null</item>-->
+        <!--        <item name="android:navigationBarColor">@color/black</item>-->
+        <!--        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>-->
+    </style>
+
+</resources>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="recommend_googleRed">#EB4334</color>
+    <color name="recommend_googleGreen">#35AA53</color>
+    <color name="recommend_googleBleu">#4586F3</color>
+    <color name="recommend_googleYellow">#FBBD06</color>
+</resources>

@@ -1,0 +1,14 @@
+{
+  "msg": "",
+  "code": 0,
+  "data":[
+    {
+      "id": 0,
+      "pkg": "app.allever.android.device.detector",
+      "title": "Device Detector",
+      "desc": "Device Detector Description",
+      "iconUrl": "",
+      "version": "v1.0.0"
+    }
+  ]
+}
