@@ -29,6 +29,10 @@ object AdManager {
     private var mInterAdCacheTime = 0L
     private const val CACHE_TIME_OUT =  45 * 60 * 1000L
 
+    fun init(context: Application) {
+        mContext = context
+    }
+
     fun init(adConfig: IAdConfig, context: Application) {
         mAdConfig = adConfig
         mContext = context
