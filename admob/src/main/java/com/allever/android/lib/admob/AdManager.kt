@@ -33,12 +33,13 @@ object AdManager {
         mContext = context
     }
 
-    fun init(adConfig: IAdConfig, context: Application) {
+    fun init(adConfig: IAdConfig, context: Application, block: (() -> Unit)? = null) {
         mAdConfig = adConfig
         mContext = context
         MobileAds.initialize(context) {
             log("MobileAds: 初始化成功")
             justLoadInter()
+            block?.invoke()
         }
     }
 
