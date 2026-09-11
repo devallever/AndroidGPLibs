@@ -29,13 +29,17 @@ object AdManager {
     private var mInterAdCacheTime = 0L
     private const val CACHE_TIME_OUT =  45 * 60 * 1000L
 
-    fun init(context: Application) {
+    private var skipInterAd = false
+
+    fun init(context: Application, skipInterAd: Boolean = false) {
         mContext = context
+        this.skipInterAd = skipInterAd
     }
 
-    fun init(adConfig: IAdConfig, context: Application, block: (() -> Unit)? = null) {
+    fun init(adConfig: IAdConfig, context: Application, block: (() -> Unit)? = null, skipInterAd: Boolean = false) {
         mAdConfig = adConfig
         mContext = context
+        this.skipInterAd = skipInterAd
         MobileAds.initialize(context) {
             log("MobileAds: 初始化成功")
             justLoadInter()
@@ -44,6 +48,9 @@ object AdManager {
     }
 
     fun justLoadInter() {
+        if (skipInterAd) {
+            return
+        }
         val cacheTime = System.currentTimeMillis() - mInterAdCacheTime
         if (mInterAdCache != null && cacheTime < CACHE_TIME_OUT) {
             return
@@ -71,11 +78,16 @@ object AdManager {
             })
     }
 
-    fun showInter(activity: Activity, next: () -> Unit) {
+    fun showInter(activity: Activity, skipAd: Boolean = false, next: () -> Unit ) {
 
         if (mInterAdCache == null) {
             justLoadInter()
             log("InterAdCache: 缓存中无广告, 加载广告")
+            next.invoke()
+            return
+        }
+
+        if (skipAd) {
             next.invoke()
             return
         }
@@ -164,6 +176,9 @@ object AdManager {
     }
 
     fun loadInter(block: (interstitialAd: InterstitialAd) -> Unit) {
+        if (skipInterAd) {
+            return
+        }
         val adRequest = AdRequest.Builder().build()
 
         InterstitialAd.load(
