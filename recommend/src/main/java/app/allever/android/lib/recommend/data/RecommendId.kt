@@ -12,6 +12,8 @@ class RecommendId {
         const val CARD_MAKER = 6
         const val QR_SCANNER = 7
 
+        const val GIF_MEMES = 8
+
         fun getIconRes(id: Int): Int {
             return when (id) {
                 DEVICE_DETECTOR -> {
@@ -35,6 +37,9 @@ class RecommendId {
                 }
                 QR_SCANNER -> {
                     R.drawable.qr_scanner
+                }
+                GIF_MEMES -> {
+                    R.drawable.gif_memes
                 }
 
                 else -> {

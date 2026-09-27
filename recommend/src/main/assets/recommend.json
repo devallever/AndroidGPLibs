@@ -3,10 +3,42 @@
   "code": 0,
   "data":[
     {
+      "id": 1,
+      "pkg": "app.allever.android.device.detector",
+      "name": "Device Detector",
+      "desc": "Bluetooth Device Detector & Metal Detector",
+      "iconUrl": "",
+      "version": "v1.0.0"
+    },
+    {
       "id": 2,
       "pkg": "app.allever.android.note.just",
       "name": "Just Note",
       "desc": "Just Note - Simple Note App",
+      "iconUrl": "",
+      "version": "v1.0.0"
+    },
+    {
+      "id": 3,
+      "pkg": "app.allever.android.game.memory.kitties",
+      "name": "Kitties Memory Game",
+      "desc": "Kitties Memory Game - Challenge your brain",
+      "iconUrl": "",
+      "version": "v1.0.0"
+    },
+    {
+      "id": 4,
+      "pkg": "app.allever.android.game.linklinkgame",
+      "name": "Link Link Game",
+      "desc": "Link Link Game - Challenge your brain",
+      "iconUrl": "",
+      "version": "v1.0.0"
+    },
+    {
+      "id": 5,
+      "pkg": "app.allever.android.water.reminder",
+      "name": "Water Reminder",
+      "desc": "Water Reminder & Tracking",
       "iconUrl": "",
       "version": "v1.0.0"
     },
@@ -23,6 +55,14 @@
       "pkg": "app.allever.android.ai.qr.scanner",
       "name": "QR Scanner",
       "desc": "Scan, Create & Share Codes Effortlessly",
+      "iconUrl": "",
+      "version": "v1.0.0"
+    },
+    {
+      "id": 8,
+      "pkg": "Gif Memes - Maker & Downloader",
+      "name": "Gif Memes",
+      "desc": "recommend & search & download gif",
       "iconUrl": "",
       "version": "v1.0.0"
     }
