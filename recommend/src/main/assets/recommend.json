@@ -60,8 +60,8 @@
     },
     {
       "id": 8,
-      "pkg": "Gif Memes - Maker & Downloader",
-      "name": "Gif Memes",
+      "pkg": "app.funny.tech.gif.memes",
+      "name": "Gif Memes - Maker & Downloader",
       "desc": "recommend & search & download gif",
       "iconUrl": "",
       "version": "v1.0.0"
