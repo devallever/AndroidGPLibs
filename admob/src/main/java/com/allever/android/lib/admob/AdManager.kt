@@ -31,6 +31,54 @@ object AdManager {
 
     private var skipInterAd = false
 
+    /** ====== 插页广告频率控制 (AdMob 政策合规) ====== */
+
+    /** 两次插页广告之间的最小间隔（毫秒）— 60 秒 */
+    private const val INTER_INTERVAL_MS = 60_000L
+
+    /** 单个 Session 内插页广告展示上限 */
+    private const val MAX_INTER_PER_SESSION = 4
+
+    /** 上次插页广告展示的时间戳 */
+    private var mLastInterShowTime = 0L
+
+    /** 当前 Session 内插页广告已展示次数 */
+    private var mSessionInterShowCount = 0
+
+    /**
+     * 重置频率控制状态（在 App 从后台恢复时调用，开启新 Session）
+     */
+    fun resetInterFreqControl() {
+        mLastInterShowTime = 0L
+        mSessionInterShowCount = 0
+    }
+
+    /**
+     * 检查当前是否允许展示插页广告
+     * @param skipFreqCheck 是否跳过频率检查（特殊场景，默认 false）
+     */
+    private fun canShowInter(skipFreqCheck: Boolean = false): Boolean {
+        if (skipFreqCheck) return true
+
+        val now = System.currentTimeMillis()
+        val interval = now - mLastInterShowTime
+
+        // 检查间隔
+        if (mLastInterShowTime > 0 && interval < INTER_INTERVAL_MS) {
+            val remaining = (INTER_INTERVAL_MS - interval) / 1000
+            log("InterFreq: 距上次展示不足 60 秒，剩余 ${remaining}s，跳过")
+            return false
+        }
+
+        // 检查 Session 上限
+        if (mSessionInterShowCount >= MAX_INTER_PER_SESSION) {
+            log("InterFreq: 当前 Session 已展示 ${mSessionInterShowCount} 次，达到上限 $MAX_INTER_PER_SESSION，跳过")
+            return false
+        }
+
+        return true
+    }
+
     fun init(context: Application, skipInterAd: Boolean = false) {
         mContext = context
         this.skipInterAd = skipInterAd
@@ -78,16 +126,43 @@ object AdManager {
             })
     }
 
-    fun showInter(activity: Activity, skipAd: Boolean = false, next: () -> Unit ) {
-
-        if (mInterAdCache == null) {
-            justLoadInter()
-            log("InterAdCache: 缓存中无广告, 加载广告")
+    /**
+     * 展示插页广告
+     * @param activity 当前 Activity
+     * @param skipAd 是否跳过广告（业务层控制，如订阅用户免广告）
+     * @param next 广告关闭或跳过后的回调
+     * @param skipFreqCheck 是否跳过频率控制（默认 false，一般不需要）
+     */
+    fun showInter(
+        activity: Activity,
+        skipAd: Boolean = false,
+        skipFreqCheck: Boolean = false,
+        next: () -> Unit
+    ) {
+        // 业务层跳过
+        if (skipAd) {
             next.invoke()
             return
         }
 
-        if (skipAd) {
+        // 频率控制检查（AdMob 政策合规）
+        if (!canShowInter(skipFreqCheck)) {
+            log("InterFreq: 频率控制拦截，跳过插页广告")
+            next.invoke()
+            return
+        }
+
+        // Activity 状态检查
+        if (activity.isFinishing || activity.isDestroyed) {
+            log("InterAdCache: Activity 已销毁，跳过展示")
+            next.invoke()
+            return
+        }
+
+        // 缓存为空 → 加载并直接执行 next
+        if (mInterAdCache == null) {
+            justLoadInter()
+            log("InterAdCache: 缓存中无广告, 加载广告")
             next.invoke()
             return
         }
@@ -102,6 +177,12 @@ object AdManager {
         }
 
         log("使用InterAdCache")
+
+        // 记录本次展示时间和次数
+        mLastInterShowTime = System.currentTimeMillis()
+        mSessionInterShowCount++
+        log("InterFreq: 已展示，当前 Session 第 ${mSessionInterShowCount} 次")
+
         mInterAdCache?.fullScreenContentCallback = object : FullScreenContentCallback() {
             override fun onAdDismissedFullScreenContent() {
                 log("InterAdCache: 关闭")
@@ -112,6 +193,8 @@ object AdManager {
 
             override fun onAdFailedToShowFullScreenContent(p0: AdError) {
                 log("InterAdCache: 显示失败")
+                // 展示失败时不累计次数，回滚
+                mSessionInterShowCount = (mSessionInterShowCount - 1).coerceAtLeast(0)
                 mInterAdCache = null
                 next()
                 justLoadInter()
