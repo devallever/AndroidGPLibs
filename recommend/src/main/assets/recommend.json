@@ -19,10 +19,18 @@
       "version": "v1.0.0"
     },
     {
-      "id": 3,
-      "pkg": "app.allever.android.game.memory.kitties",
-      "name": "Kitties Memory Game",
-      "desc": "Kitties Memory Game - Challenge your brain",
+      "id": 6,
+      "pkg": "com.allever.android.card.text.pic.text",
+      "name": "Card Maker",
+      "desc": "Make Text To Beautiful Cards !",
+      "iconUrl": "",
+      "version": "v1.0.0"
+    },
+    {
+      "id": 8,
+      "pkg": "app.funny.tech.gif.memes",
+      "name": "Gif Memes - Maker & Downloader",
+      "desc": "recommend & search & download gif",
       "iconUrl": "",
       "version": "v1.0.0"
     },
@@ -35,6 +43,15 @@
       "version": "v1.0.0"
     },
     {
+      "id": 3,
+      "pkg": "app.allever.android.game.memory.kitties",
+      "name": "Kitties Memory Game",
+      "desc": "Kitties Memory Game - Challenge your brain",
+      "iconUrl": "",
+      "version": "v1.0.0"
+    },
+
+    {
       "id": 5,
       "pkg": "app.allever.android.water.reminder",
       "name": "Water Reminder",
@@ -42,27 +59,12 @@
       "iconUrl": "",
       "version": "v1.0.0"
     },
-    {
-      "id": 6,
-      "pkg": "com.allever.android.card.text.pic.text",
-      "name": "Card Maker",
-      "desc": "Make Text To Beautiful Cards !",
-      "iconUrl": "",
-      "version": "v1.0.0"
-    },
+
     {
       "id": 7,
       "pkg": "app.allever.android.ai.qr.scanner",
       "name": "QR Scanner",
       "desc": "Scan, Create & Share Codes Effortlessly",
-      "iconUrl": "",
-      "version": "v1.0.0"
-    },
-    {
-      "id": 8,
-      "pkg": "app.funny.tech.gif.memes",
-      "name": "Gif Memes - Maker & Downloader",
-      "desc": "recommend & search & download gif",
       "iconUrl": "",
       "version": "v1.0.0"
     }
