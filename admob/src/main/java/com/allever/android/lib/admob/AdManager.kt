@@ -80,11 +80,13 @@ object AdManager {
     }
 
     fun init(context: Application, skipInterAd: Boolean = false) {
+        log("init")
         mContext = context
         this.skipInterAd = skipInterAd
     }
 
     fun init(adConfig: IAdConfig, context: Application, block: (() -> Unit)? = null, skipInterAd: Boolean = false) {
+        log("init with config")
         mAdConfig = adConfig
         mContext = context
         this.skipInterAd = skipInterAd
@@ -124,6 +126,10 @@ object AdManager {
                     log("interAd: 缓存成功")
                 }
             })
+    }
+
+    fun canShowInterAd() : Boolean {
+        return mInterAdCache != null && !skipInterAd && canShowInter(false)
     }
 
     /**
