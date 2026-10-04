@@ -20,6 +20,10 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
+import com.google.android.gms.ads.rewarded.RewardItem
+import com.google.android.gms.ads.rewarded.RewardedAd
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
+import java.lang.ref.WeakReference
 
 object AdManager {
 
@@ -95,6 +99,52 @@ object AdManager {
             justLoadInter()
             block?.invoke()
         }
+    }
+
+    fun loadRewardedAd(
+        context: Activity,
+        adCallback: AdCallback? = null
+    ) {
+        val adId = mAdConfig.getAdId(IAdConfig.REWARD_AD)
+        log("Loading rewarded ad: $adId")
+
+        val adRequest = AdRequest.Builder().build()
+        var rewarded = false
+
+        RewardedAd.load(context.applicationContext, adId, adRequest, object : RewardedAdLoadCallback() {
+            override fun onAdFailedToLoad(adError: LoadAdError) {
+                logE("rewardedAd: 加载失败 -> ${adError.code}: ${adError.message}")
+            }
+
+            override fun onAdLoaded(ad: RewardedAd) {
+
+                ad.fullScreenContentCallback = object : FullScreenContentCallback() {
+                    override fun onAdDismissedFullScreenContent() {
+                        log("rewardedAd: 关闭")
+                        adCallback?.onAdDismiss(rewarded)
+                    }
+
+                    override fun onAdShowedFullScreenContent() {
+                        log("rewardedAd: 展示")
+                        adCallback?.onAdShow()
+                    }
+
+                    override fun onAdClicked() {
+                        log("rewardedAd: 点击")
+                        adCallback?.onAdClick()
+                    }
+
+                    override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+                        logE("rewardedAd: 展示失败 -> ${p0.code}: ${p0.message}")
+                        adCallback?.onAdFailLoad()
+                    }
+                }
+                ad.show(context) {
+                    log("rewardedAd: 获得奖励")
+                    rewarded = true
+                }
+            }
+        })
     }
 
     fun justLoadInter() {

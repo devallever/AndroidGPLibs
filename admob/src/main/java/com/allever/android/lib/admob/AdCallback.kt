@@ -4,6 +4,7 @@ interface AdCallback {
     fun onAdLoaded() {}
     fun onAdFailLoad() {}
     fun onAdShow() {}
+    fun onAdDismiss(rewarded: Boolean) {}
 
     fun onAdClick() {}
 
