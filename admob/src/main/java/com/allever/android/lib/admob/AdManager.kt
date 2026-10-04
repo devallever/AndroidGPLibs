@@ -225,7 +225,7 @@ object AdManager {
         // 激励广告始终可看，每次看完都会更新今日免广告日期
         AlertDialog.Builder(activity)
             .setTitle("No Ads Today")
-            .setMessage("Watch an ad to remove interstitial, native and banner ads for the rest of today")
+            .setMessage("Watch an ad to remove ads for the rest of today")
             .setPositiveButton("Watch Ad") { dialog, _ ->
                 dialog.dismiss()
                 showLoadingAndLoadReward(activity, callback)
