@@ -80,10 +80,10 @@ object AdManager {
         }
 
         // 检查 Session 上限
-        if (mSessionInterShowCount >= MAX_INTER_PER_SESSION) {
-            log("InterFreq: 当前 Session 已展示 ${mSessionInterShowCount} 次，达到上限 $MAX_INTER_PER_SESSION，跳过")
-            return false
-        }
+//        if (mSessionInterShowCount >= MAX_INTER_PER_SESSION) {
+//            log("InterFreq: 当前 Session 已展示 ${mSessionInterShowCount} 次，达到上限 $MAX_INTER_PER_SESSION，跳过")
+//            return false
+//        }
 
         return true
     }
