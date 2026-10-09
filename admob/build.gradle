@@ -22,16 +22,10 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = false
-    }
-
-    viewBinding {
-        enabled = true
-    }
-
     buildFeatures {
         buildConfig = true
+        dataBinding = false
+        viewBinding = true
     }
 
     compileOptions {
@@ -47,6 +41,7 @@ dependencies {
     api "androidx.constraintlayout:constraintlayout:2.1.4"
     //
     api "com.google.android.gms:play-services-ads:23.0.0"
+    api "com.google.ads.mediation:unity:4.12.1.0"
     api "com.github.bumptech.glide:glide:4.15.1"
     implementation 'com.google.android.material:material:1.6.0'
     api "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
