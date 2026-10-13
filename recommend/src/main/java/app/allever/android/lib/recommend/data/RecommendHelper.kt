@@ -16,7 +16,7 @@ object RecommendHelper {
         initRecommend()
     }
 
-    fun initRecommend() {
+    private fun initRecommend() {
         CoroutineScope(Dispatchers.IO).launch {
             val response = RecommendUtils.readFile2String(RecommendUtils.context, "recommend.json")
             val recommendResponse =
@@ -34,6 +34,7 @@ object RecommendHelper {
                 }
                 RecommendUtils.log(RecommendUtils.toJson(it))
             }
+
         }
     }
 
