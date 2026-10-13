@@ -13,4 +13,6 @@ class TestAdConfig: IAdConfig {
     override fun rewardAdId() = ""
 
     override fun nativeAdId() = ""
+
+    override fun openAdId() = ""
 }

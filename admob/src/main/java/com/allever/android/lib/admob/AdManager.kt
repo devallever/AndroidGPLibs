@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.android.gms.ads.*
+import com.google.android.gms.ads.appopen.AppOpenAd
 import com.google.android.gms.ads.interstitial.InterstitialAd
 import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.gms.ads.nativead.MediaView
@@ -35,7 +36,10 @@ object AdManager {
     private var mAdConfig: IAdConfig = TestAdConfig()
     private lateinit var mContext: Application
     private var mInterAdCache: InterstitialAd? = null
+    private var mOpenAdCache: AppOpenAd? = null
+    private var mLoadingOpenAd = false
     private var mInterAdCacheTime = 0L
+    private var mOpenAdCacheTime = 0L
     private const val CACHE_TIME_OUT =  45 * 60 * 1000L
 
     private var skipInterAd = false
@@ -102,6 +106,7 @@ object AdManager {
         MobileAds.initialize(context) {
             log("MobileAds: 初始化成功")
             justLoadInter()
+            justLoadOpen()
             block?.invoke()
         }
     }
@@ -320,6 +325,41 @@ object AdManager {
             })
     }
 
+    fun justLoadOpen() {
+        if (mLoadingOpenAd) {
+            return
+        }
+        val cacheTime = System.currentTimeMillis() - mOpenAdCacheTime
+        if (mOpenAdCache != null && cacheTime < CACHE_TIME_OUT) {
+            return
+        }
+
+        mLoadingOpenAd = true
+        mOpenAdCache = null
+
+        val adRequest = AdRequest.Builder().build()
+
+        val adId = mAdConfig.getAdId(IAdConfig.OPEN_AD)
+        AppOpenAd.load(
+            mContext,
+            adId,
+            adRequest,
+            object : AppOpenAd.AppOpenAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    logE("openAd加载失败[${adId}]： -> ${adError.code}")
+                    mLoadingOpenAd = false
+                }
+
+                override fun onAdLoaded(appOpenAd: AppOpenAd) {
+                    log("openAd: 加载成功")
+                    mOpenAdCache = appOpenAd
+                    mOpenAdCacheTime = System.currentTimeMillis()
+                    log("openAd: 缓存成功")
+                    mLoadingOpenAd = false
+                }
+            })
+    }
+
     fun canShowInterAd() : Boolean {
         return mInterAdCache != null && !skipInterAd && canShowInter(false)
     }
@@ -406,6 +446,63 @@ object AdManager {
             }
         }
         mInterAdCache?.show(activity)
+    }
+
+    fun showOpen(
+        activity: Activity,
+        next: () -> Unit
+    ) {
+        // 今日免广告拦截（外部零改动，自动生效）
+        if (isNoAdsActive()) {
+            log("免广告期：跳过插页广告")
+            next.invoke()
+            return
+        }
+
+        // Activity 状态检查
+        if (activity.isFinishing || activity.isDestroyed) {
+            log("OpenAd: Activity 已销毁，跳过展示")
+            next.invoke()
+            return
+        }
+
+        // 缓存为空 → 加载并直接执行 next
+        if (mOpenAdCache == null) {
+            justLoadOpen()
+            log("OpenAd: 缓存中无广告, 加载广告")
+            next.invoke()
+            return
+        }
+
+        val cacheTime = System.currentTimeMillis() - mOpenAdCacheTime
+        if (cacheTime > CACHE_TIME_OUT) {
+            log("OpenAd: 缓存已过期，加载广告")
+            mOpenAdCache = null
+            justLoadOpen()
+            next.invoke()
+            return
+        }
+
+        log("使用OpenAdCache")
+
+        mOpenAdCache?.fullScreenContentCallback = object : FullScreenContentCallback() {
+            override fun onAdDismissedFullScreenContent() {
+                log("OpenAd: 关闭")
+                mOpenAdCache = null
+                next()
+                justLoadOpen()
+            }
+
+            override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+                log("OpenAd: 显示失败")
+                // 展示失败时不累计次数，回滚
+                mSessionInterShowCount = (mSessionInterShowCount - 1).coerceAtLeast(0)
+                mOpenAdCache = null
+                next()
+                justLoadOpen()
+            }
+        }
+        mOpenAdCache?.show(activity)
     }
 
     fun loadBanner(bannerContainer: ViewGroup): AdView? {
