@@ -1,11 +1,8 @@
 package com.allever.android.lib.admob
 
 import android.app.Activity
-import android.app.AlertDialog
 import android.app.Application
-import android.app.ProgressDialog
 import android.content.Context
-import android.content.SharedPreferences
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,8 +11,6 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import java.util.Calendar
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -26,10 +21,8 @@ import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback
 import com.google.android.gms.ads.nativead.MediaView
 import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
-import com.google.android.gms.ads.rewarded.RewardItem
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
-import java.lang.ref.WeakReference
 
 object AdManager {
 
@@ -160,139 +153,6 @@ object AdManager {
         })
     }
 
-    /** ====== 今日免广告体系 ====== */
-
-    private const val SP_NAME = "ad_manager_sp"
-    private const val SP_KEY_NO_ADS_DATE = "sp_key_no_ads_date"
-
-    private var mSp: SharedPreferences? = null
-
-    /** 延迟获取 SharedPreferences，确保 init() 之后有 mContext */
-    private fun getSp(): SharedPreferences {
-        if (mSp == null) {
-            mSp = mContext.getSharedPreferences(SP_NAME, Context.MODE_PRIVATE)
-        }
-        return mSp!!
-    }
-
-    /**
-     * 获取今日日期 key，格式 yyyy-MM-dd，例如 "2026-10-04"
-     */
-    private fun todayKey(): String {
-        val cal = Calendar.getInstance()
-        val y = cal.get(Calendar.YEAR)
-        val m = (cal.get(Calendar.MONTH) + 1).toString().padStart(2, '0')
-        val d = cal.get(Calendar.DAY_OF_MONTH).toString().padStart(2, '0')
-        return "$y-$m-$d"
-    }
-
-    /**
-     * 检查今天是否处于免广告期间
-     */
-    private fun isNoAdsActive(): Boolean {
-        val stored = getSp().getString(SP_KEY_NO_ADS_DATE, "") ?: ""
-        val active = stored == todayKey()
-        log("免广告检查: stored=$stored, today=${todayKey()}, active=$active")
-        return active
-    }
-
-    /**
-     * 发放奖励：将今日日期写入 SP
-     */
-    private fun grantNoAdsToday() {
-        val today = todayKey()
-        getSp().edit().putString(SP_KEY_NO_ADS_DATE, today).apply()
-        log("免广告已开启，日期: $today")
-    }
-
-    /**
-     * 对外主入口：弹"今日免广告"提示弹窗
-     *
-     * 流程：
-     *  ① 今日已在免广告期 → 提示后 callback(false)
-     *  ② 弹 AlertDialog（免除 / 暂不）
-     *  ③ 点"免除" → 弹 Loading → 调用 loadRewardedAd()
-     *  ④ 广告关闭时根据 rewarded 参数决定是否发放奖励
-     *
-     * @param activity 当前 Activity
-     * @param callback 最终结果回调：true=看完完整广告并已免除今日广告
-     */
-    fun showNoAdsDialog(
-        activity: Activity,
-        callback: (success: Boolean) -> Unit
-    ) {
-        // Activity 状态检查
-        if (activity.isFinishing || activity.isDestroyed) {
-            callback(false)
-            return
-        }
-
-        // 激励广告始终可看，每次看完都会更新今日免广告日期
-        AlertDialog.Builder(activity)
-            .setTitle("No Ads Today")
-            .setMessage("Watch an ad to remove interstitial, native and banner ads for the rest of today")
-            .setPositiveButton("Watch Ad") { dialog, _ ->
-                dialog.dismiss()
-                showLoadingAndLoadReward(activity, callback)
-            }
-            .setNegativeButton("Not Now") { dialog, _ ->
-                dialog.dismiss()
-                callback(false)
-            }
-            .setCancelable(true)
-            .setOnCancelListener { callback(false) }
-            .create()
-            .show()
-    }
-
-    /**
-     * 内部流程：弹 Loading → 调用 loadRewardedAd → 处理回调
-     */
-    private fun showLoadingAndLoadReward(
-        activity: Activity,
-        callback: (success: Boolean) -> Unit
-    ) {
-        // Activity 状态检查
-        if (activity.isFinishing || activity.isDestroyed) {
-            callback(false)
-            return
-        }
-
-        val loading = ProgressDialog(activity).apply {
-            setMessage("Loading ad...")
-            setCancelable(false)
-            show()
-        }
-
-        loadRewardedAd(activity, object : AdCallback {
-            override fun onAdLoaded() {
-                // loadRewardedAd 内部已调用 ad.show()，广告已显示，关闭 loading
-                loading.dismiss()
-            }
-
-            override fun onAdFailLoad() {
-                loading.dismiss()
-                toast(activity, "Failed to load ad. Please try again later.")
-                callback(false)
-            }
-
-            override fun onAdDismiss(rewarded: Boolean) {
-                if (rewarded) {
-                    grantNoAdsToday()
-                    toast(activity, "Ads removed for today")
-                    callback(true)
-                } else {
-                    toast(activity, "You must watch the full ad to get the reward")
-                    callback(false)
-                }
-            }
-        })
-    }
-
-    private fun toast(context: Context, msg: String) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
-    }
-
     fun justLoadInter() {
         if (skipInterAd) {
             return
@@ -383,13 +243,6 @@ object AdManager {
             return
         }
 
-        // 今日免广告拦截（外部零改动，自动生效）
-        if (isNoAdsActive()) {
-            log("免广告期：跳过插页广告")
-            next.invoke()
-            return
-        }
-
         // 频率控制检查（AdMob 政策合规）
         if (!canShowInter(skipFreqCheck)) {
             log("InterFreq: 频率控制拦截，跳过插页广告")
@@ -452,13 +305,6 @@ object AdManager {
         activity: Activity,
         next: () -> Unit
     ) {
-        // 今日免广告拦截（外部零改动，自动生效）
-        if (isNoAdsActive()) {
-            log("免广告期：跳过插页广告")
-            next.invoke()
-            return
-        }
-
         // Activity 状态检查
         if (activity.isFinishing || activity.isDestroyed) {
             log("OpenAd: Activity 已销毁，跳过展示")
@@ -506,12 +352,6 @@ object AdManager {
     }
 
     fun loadBanner(bannerContainer: ViewGroup): AdView? {
-        // 今日免广告拦截
-        if (isNoAdsActive()) {
-            log("免广告期：跳过 Banner 广告加载")
-            return null
-        }
-
         val mBannerAd = AdView(bannerContainer.context)
         val autoAdWidth = getScreenWidth(bannerContainer.context)
         mBannerAd.setAdSize(
@@ -597,13 +437,6 @@ object AdManager {
         adLayoutId: Int = R.layout.ad_native_small,
         show: Boolean = true
     ) {
-        // 今日免广告拦截（外部零改动，自动生效）
-        if (isNoAdsActive()) {
-            log("免广告期：跳过原生广告加载")
-            destroyNativeAd(page)
-            return
-        }
-
         destroyNativeAd(page)
         mNativeBannerGroup[page] = viewGroup
         val adId = mAdConfig.getAdId(IAdConfig.NATIVE_AD)
