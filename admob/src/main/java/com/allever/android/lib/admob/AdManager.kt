@@ -118,7 +118,7 @@ object AdManager {
 
         RewardedAd.load(activity, adId, adRequest, object : RewardedAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
-                logE("rewardedAd: 加载失败 -> ${adError.code}: ${adError.message}")
+                logE("rewardedAd加载失败[${adId}]： -> ${adError.code}: ${adError.message}")
                 adCallback?.onAdFailLoad()
             }
 
@@ -301,13 +301,14 @@ object AdManager {
 
         val adRequest = AdRequest.Builder().build()
 
+        val adId = mAdConfig.getAdId(IAdConfig.INTER_AD)
         InterstitialAd.load(
             mContext,
-            mAdConfig.getAdId(IAdConfig.INTER_AD),
+            adId,
             adRequest,
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
-                    logE("interAd: 加载失败 -> ${adError.code}")
+                    logE("interAd加载失败[${adId}]： -> ${adError.code}")
                 }
 
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
@@ -422,7 +423,8 @@ object AdManager {
                 autoAdWidth
             )
         )
-        mBannerAd.adUnitId = mAdConfig.getAdId(IAdConfig.BANNER_AD)
+        val adId = mAdConfig.getAdId(IAdConfig.BANNER_AD)
+        mBannerAd.adUnitId = adId
 
         mBannerAd.adListener = object : AdListener() {
             override fun onAdLoaded() {
@@ -431,7 +433,7 @@ object AdManager {
             }
 
             override fun onAdFailedToLoad(error: LoadAdError) {
-                logE("加载失败：${error.code} -> ${error.message}")
+                logE("加载失败[${adId}]：${error.code} -> ${error.message}")
             }
         }
 
@@ -507,7 +509,8 @@ object AdManager {
 
         destroyNativeAd(page)
         mNativeBannerGroup[page] = viewGroup
-        val adLoader = AdLoader.Builder(viewGroup.context, mAdConfig.getAdId(IAdConfig.NATIVE_AD))
+        val adId = mAdConfig.getAdId(IAdConfig.NATIVE_AD)
+        val adLoader = AdLoader.Builder(viewGroup.context, adId)
             .forNativeAd {
                 log("forNativeAd")
                 mNativeBannerCache[page] = it
@@ -523,7 +526,7 @@ object AdManager {
                 }
 
                 override fun onAdFailedToLoad(error: LoadAdError) {
-                    logE("nativeBanner加载失败${error.code} -> ${error.message}")
+                    logE("nativeBanner[${adId}]加载失败 ${error.code} -> ${error.message}")
                 }
             })
             .build()
@@ -575,14 +578,14 @@ object AdManager {
     }
 
     private fun log(msg: String) {
-        if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG) {
             Log.d("ILogger", msg)
-        }
+//        }
     }
     private fun logE(msg: String) {
-        if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG) {
             Log.e("ILogger", msg)
-        }
+//        }
     }
 
     private fun getScreenWidth(context: Context): Int {
