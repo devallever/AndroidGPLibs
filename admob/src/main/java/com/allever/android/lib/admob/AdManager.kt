@@ -424,9 +424,62 @@ object AdManager {
 
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
                     log("interAd: 加载成功")
+                    mInterAdCache = interstitialAd
+                    mInterAdCacheTime = System.currentTimeMillis()
                     block.invoke(interstitialAd)
                 }
             })
+    }
+
+    fun loadInter(adCallback: AdCallback? = null) {
+        val cacheTime = System.currentTimeMillis() - mInterAdCacheTime
+        if (mInterAdCache != null && cacheTime < CACHE_TIME_OUT) {
+            log("interAd: 缓存未过期，使用缓存")
+            adCallback?.onAdLoaded()
+            return
+        }
+        val adRequest = AdRequest.Builder().build()
+
+        val adId = mAdConfig.getAdId(IAdConfig.INTER_AD)
+        InterstitialAd.load(
+            mContext,
+            adId,
+            adRequest,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    logE("interAd加载失败[${adId}] -> ${adError.code}")
+                    adCallback?.onAdFailLoad()
+                }
+
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    log("interAd: 加载成功")
+                    mInterAdCache = interstitialAd
+                    mInterAdCacheTime = System.currentTimeMillis()
+                    adCallback?.onAdLoaded()
+                }
+            })
+    }
+
+    fun showInter(activity: Activity, adCallback: AdCallback? = null) {
+        val cacheTime = System.currentTimeMillis() - mInterAdCacheTime
+        if (mInterAdCache != null && cacheTime < CACHE_TIME_OUT) {
+            log("interAd: 缓存未过期，使用缓存")
+            mInterAdCache?.fullScreenContentCallback = object : FullScreenContentCallback() {
+                override fun onAdDismissedFullScreenContent() {
+                    log("interAd: 关闭")
+                    adCallback?.onAdDismiss(false)
+                    mInterAdCache = null
+                }
+
+                override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+                    log("interAd: 显示失败")
+                    adCallback?.onAdFailLoad()
+                }
+            }
+            mInterAdCache?.show(activity)
+        } else {
+            adCallback?.onAdFailLoad()
+        }
     }
 
     private var mNativeBannerCache = mutableMapOf<String, NativeAd>()
