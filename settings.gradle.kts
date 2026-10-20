@@ -33,3 +33,4 @@ rootProject.name = "AndroidGPLibs"
 include(":app")
 include(":admob")
 include(":recommend")
+include(":billing")
