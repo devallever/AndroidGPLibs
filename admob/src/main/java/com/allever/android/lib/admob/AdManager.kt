@@ -51,12 +51,21 @@ object AdManager {
     /** 当前 Session 内插页广告已展示次数 */
     private var mSessionInterShowCount = 0
 
+    /** ====== 原生广告加载频率控制 ====== */
+
+    /** 两次原生广告加载之间的最小间隔（毫秒）— 5 秒 */
+    private const val NATIVE_INTERVAL_MS = 5_000L
+
+    /** 上次原生广告加载成功的时间戳 */
+    private var mLastNativeLoadTime = 0L
+
     /**
      * 重置频率控制状态（在 App 从后台恢复时调用，开启新 Session）
      */
     fun resetInterFreqControl() {
         mLastInterShowTime = 0L
         mSessionInterShowCount = 0
+        mLastNativeLoadTime = 0L
     }
 
     /**
@@ -81,6 +90,24 @@ object AdManager {
 //            log("InterFreq: 当前 Session 已展示 ${mSessionInterShowCount} 次，达到上限 $MAX_INTER_PER_SESSION，跳过")
 //            return false
 //        }
+        return true
+    }
+
+    /**
+     * 检查当前是否允许加载原生广告
+     * @param skipIntervalCheck 是否跳过间隔检查（特殊场景，默认 true）
+     */
+    private fun canLoadNative(skipIntervalCheck: Boolean = true): Boolean {
+        if (skipIntervalCheck) return true
+
+        val now = System.currentTimeMillis()
+        val interval = now - mLastNativeLoadTime
+
+        if (mLastNativeLoadTime > 0 && interval < NATIVE_INTERVAL_MS) {
+            val remaining = (NATIVE_INTERVAL_MS - interval) / 1000
+            log("NativeFreq: 距上次加载不足 ${NATIVE_INTERVAL_MS / 1000} 秒，剩余 ${remaining}s，跳过")
+            return false
+        }
 
         return true
     }
@@ -488,8 +515,14 @@ object AdManager {
         viewGroup: ViewGroup,
         page: String,
         adLayoutId: Int = R.layout.ad_native_small,
-        show: Boolean = true
+        skipIntervalCheck: Boolean = true
     ) {
+        // 间隔检查 —— 必须在 destroyNativeAd 之前，避免跳过加载时把现有广告也清掉
+        if (!canLoadNative(skipIntervalCheck)) {
+            log("NativeFreq: 跳过 loadNativeAd(page=$page)")
+            return
+        }
+
         destroyNativeAd(page)
         mNativeBannerGroup[page] = viewGroup
         val adId = mAdConfig.getAdId(IAdConfig.NATIVE_AD)
@@ -497,6 +530,8 @@ object AdManager {
             .forNativeAd {
                 log("forNativeAd")
                 mNativeBannerCache[page] = it
+                // 仅在广告成功加载时更新时间戳，失败不占用间隔
+                mLastNativeLoadTime = System.currentTimeMillis()
                 val adView = LayoutInflater.from(viewGroup.context)
                     .inflate(adLayoutId, null) as NativeAdView
                 viewGroup.removeAllViews()
@@ -520,6 +555,7 @@ object AdManager {
     fun resumeNativeBanner(page: String) {
         destroyNativeAd(page)
         mNativeBannerGroup[page]?.let {
+            // resume 是主动刷新场景，跳过间隔检查
             loadNativeAd(it, page)
         }
     }
