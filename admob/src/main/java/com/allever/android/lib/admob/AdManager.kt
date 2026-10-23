@@ -59,6 +59,8 @@ object AdManager {
     /** 上次原生广告加载成功的时间戳 */
     private var mLastNativeLoadTime = 0L
 
+    private var isInit = false
+
     /**
      * 重置频率控制状态（在 App 从后台恢复时调用，开启新 Session）
      */
@@ -81,7 +83,7 @@ object AdManager {
         // 检查间隔
         if (mLastInterShowTime > 0 && interval < INTER_INTERVAL_MS) {
             val remaining = (INTER_INTERVAL_MS - interval) / 1000
-            log("InterFreq: 距上次展示不足 60 秒，剩余 ${remaining}s，跳过")
+            log("InterFreq: 距上次展示不足 ${INTER_INTERVAL_MS / 1000} 秒，剩余 ${remaining}s，跳过")
             return false
         }
 
@@ -119,12 +121,17 @@ object AdManager {
     }
 
     fun init(adConfig: IAdConfig, context: Application, block: (() -> Unit)? = null, skipInterAd: Boolean = false) {
-        log("init with config")
         mAdConfig = adConfig
         mContext = context
         this.skipInterAd = skipInterAd
+        if (isInit) {
+            block?.invoke()
+            return
+        }
+        log("init with config")
         MobileAds.initialize(context) {
             log("MobileAds: 初始化成功")
+            isInit = true
             justLoadInter()
             justLoadOpen()
             block?.invoke()
