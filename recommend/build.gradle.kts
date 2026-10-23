@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "app.allever.android.lib.recommend"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 21

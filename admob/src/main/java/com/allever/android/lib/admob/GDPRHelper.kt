@@ -14,7 +14,7 @@ import com.google.android.ump.UserMessagingPlatform
  *@date: 2024/1/4
  */
 object GDPRHelper {
-    private val TAG = GDPRHelper::class.java.simpleName
+    private val TAG = "ILogger|${GDPRHelper::class.java.simpleName}"
     private lateinit var mConsentInformation: ConsentInformation
 
     fun init(context: Context) {
@@ -27,6 +27,7 @@ object GDPRHelper {
             ConsentDebugSettings.Builder(activity.applicationContext)
                 .setDebugGeography(ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA)
                 .addTestDeviceHashedId("FCC50892966215F27882878753C9AEE4")
+                .addTestDeviceHashedId("55AD2DC8DB6439EDA3D8E1FF53281E12")
                 .build()
         } else {
             null
@@ -73,14 +74,14 @@ object GDPRHelper {
     }
 
     private fun log(msg: String) {
-        if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG) {
             Log.d(TAG, msg)
-        }
+//        }
     }
 
     private fun logE(msg: String) {
-        if (BuildConfig.DEBUG) {
+//        if (BuildConfig.DEBUG) {
             Log.e(TAG, msg)
-        }
+//        }
     }
 }
