@@ -40,7 +40,7 @@ object AdManager {
     /** ====== 插页广告频率控制 (AdMob 政策合规) ====== */
 
     /** 两次插页广告之间的最小间隔（毫秒）— 60 秒 */
-    private const val INTER_INTERVAL_MS = 60_000L
+    private const val INTER_INTERVAL_MS = 30_000L
 
     /** 单个 Session 内插页广告展示上限 */
     private const val MAX_INTER_PER_SESSION = 4
@@ -138,6 +138,10 @@ object AdManager {
         }
     }
 
+    fun isInitSuccess(): Boolean {
+        return isInit
+    }
+
     fun loadRewardedAd(
         activity: Activity,
         adCallback: AdCallback? = null
@@ -215,6 +219,43 @@ object AdManager {
                     mInterAdCache = interstitialAd
                     mInterAdCacheTime = System.currentTimeMillis()
                     log("interAd: 缓存成功")
+                }
+            })
+    }
+
+    fun loadOpen(activity: Activity, cb: () -> Unit) {
+        if (!isInit) {
+            cb.invoke()
+            return
+        }
+
+        val adRequest = AdRequest.Builder().build()
+
+        val adId = mAdConfig.getAdId(IAdConfig.OPEN_AD)
+        AppOpenAd.load(
+            mContext,
+            adId,
+            adRequest,
+            object : AppOpenAd.AppOpenAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    logE("openAd加载失败[${adId}]： -> ${adError.code}")
+                    cb.invoke()
+                }
+
+                override fun onAdLoaded(appOpenAd: AppOpenAd) {
+                    log("openAd: 加载成功")
+                    appOpenAd.fullScreenContentCallback = object : FullScreenContentCallback() {
+                        override fun onAdDismissedFullScreenContent() {
+                            log("openAd: 关闭")
+                            cb.invoke()
+                        }
+
+                        override fun onAdFailedToShowFullScreenContent(p0: AdError) {
+                            logE("openAd: 展示失败 -> ${p0.code}: ${p0.message}")
+                            cb.invoke()
+                        }
+                    }
+                    appOpenAd.show(activity)
                 }
             })
     }

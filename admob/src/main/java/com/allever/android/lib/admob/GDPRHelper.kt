@@ -59,6 +59,8 @@ object GDPRHelper {
             { requestConsentError ->
                 // Consent gathering failed.
                 logE("requestConsentError Consent gathering failed: ${requestConsentError.errorCode}, ${requestConsentError.message}")
+                //todo 暂时先处理成功
+                success.invoke()
             })
 
     }
