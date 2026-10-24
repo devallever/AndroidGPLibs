@@ -133,7 +133,7 @@ object AdManager {
             log("MobileAds: 初始化成功")
             isInit = true
             justLoadInter()
-            justLoadOpen()
+//            justLoadOpen()
             block?.invoke()
         }
     }
