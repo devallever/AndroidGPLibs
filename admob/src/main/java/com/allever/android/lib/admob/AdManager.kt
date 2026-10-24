@@ -223,15 +223,16 @@ object AdManager {
             })
     }
 
-    fun loadOpen(activity: Activity, cb: () -> Unit) {
+    fun loadOpen(activity: Activity, adCallback: AdCallback? = null) {
         if (!isInit) {
-            cb.invoke()
+            adCallback?.onAdFailLoad()
             return
         }
 
         val adRequest = AdRequest.Builder().build()
 
         val adId = mAdConfig.getAdId(IAdConfig.OPEN_AD)
+        if (activity.isDestroyed || activity.isFinishing) return
         AppOpenAd.load(
             mContext,
             adId,
@@ -239,7 +240,7 @@ object AdManager {
             object : AppOpenAd.AppOpenAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     logE("openAd加载失败[${adId}]： -> ${adError.code}")
-                    cb.invoke()
+                    adCallback?.onAdFailLoad()
                 }
 
                 override fun onAdLoaded(appOpenAd: AppOpenAd) {
@@ -247,14 +248,20 @@ object AdManager {
                     appOpenAd.fullScreenContentCallback = object : FullScreenContentCallback() {
                         override fun onAdDismissedFullScreenContent() {
                             log("openAd: 关闭")
-                            cb.invoke()
+                            adCallback?.onAdDismiss(false)
                         }
 
                         override fun onAdFailedToShowFullScreenContent(p0: AdError) {
                             logE("openAd: 展示失败 -> ${p0.code}: ${p0.message}")
-                            cb.invoke()
+                            adCallback?.onAdFailLoad()
+                        }
+
+                        override fun onAdImpression() {
+                            log("openAd: 展示")
+                            adCallback?.onAdShow()
                         }
                     }
+                    if (activity.isDestroyed || activity.isFinishing) return
                     appOpenAd.show(activity)
                 }
             })
