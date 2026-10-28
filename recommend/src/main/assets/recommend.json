@@ -3,6 +3,14 @@
   "code": 0,
   "data":[
     {
+      "id": 9,
+      "pkg": "app.funnyappptech.android.fake.call",
+      "name": "FakeCall",
+      "desc": "FakeCall — Virtual Call Simulator",
+      "iconUrl": "",
+      "version": "v1.0.0"
+    },
+    {
       "id": 1,
       "pkg": "app.allever.android.device.detector",
       "name": "Device Detector",

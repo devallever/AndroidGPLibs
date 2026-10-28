@@ -14,6 +14,8 @@ class RecommendId {
 
         const val GIF_MEMES = 8
 
+        const val FAKE_CALL = 9
+
         fun getIconRes(id: Int): Int {
             return when (id) {
                 DEVICE_DETECTOR -> {
@@ -40,6 +42,9 @@ class RecommendId {
                 }
                 GIF_MEMES -> {
                     R.drawable.gif_memes
+                }
+                FAKE_CALL -> {
+                    R.drawable.fakecall
                 }
 
                 else -> {
