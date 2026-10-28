@@ -65,6 +65,7 @@ class RecommendDialog(context: Context, val exit: () -> Unit = {}) :
             tvRateUs.setOnClickListener {
                 val stars = ratingBar.rating
                 if (stars < 5) {
+                    toast("Thank you for your support!")
                     dismiss()
                 } else {
                     //jump GP
@@ -90,6 +91,8 @@ class RecommendDialog(context: Context, val exit: () -> Unit = {}) :
             RecommendId.getIconRes(mRecommend.id),
             RecommendUtils.dip2px(4).toFloat()
         )
+        mBinding.ratingBar.rating = 5f
+        mBinding.tvRecommend.text = mRecommend.desc
         mShakeViewContainer.start()
     }
 

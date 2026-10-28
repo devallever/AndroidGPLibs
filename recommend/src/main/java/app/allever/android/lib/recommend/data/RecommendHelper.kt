@@ -39,6 +39,6 @@ object RecommendHelper {
     }
 
     fun getRecommendApp(): Recommend {
-        return list.random()
+        return list.first()
     }
 }
