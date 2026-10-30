@@ -49,12 +49,13 @@ object BillingManager {
 
     // ==================== 初始化 ====================
 
-    fun init(context: Context) {
+    fun init(context: Context, cb: (connected: Boolean) -> Unit = {}) {
         log("init: pkg=${context.packageName}, isInitialized=$isInitialized")
         BillingHelper.init(context)
         BillingHelper.connect { success ->
             log("connect: success=$success")
             if (success) {
+                cb.invoke(true)
                 scope.launch {
                     // 1. 查询商品详情
                     loadProductDetails()
@@ -66,6 +67,7 @@ object BillingManager {
                     log("init: completed, products=${productDetailsMap.size}, hasActive=$hasActiveSubscription")
                 }
             } else {
+                cb.invoke(false)
                 logE("init: connect failed")
             }
         }

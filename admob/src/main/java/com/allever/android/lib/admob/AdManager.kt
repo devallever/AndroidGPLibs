@@ -37,6 +37,26 @@ object AdManager {
 
     private var skipInterAd = false
 
+    /** Premium 用户免广告开关，由业务层主动推送订阅状态 */
+    @Volatile
+    private var isPremiumUser = false
+
+    /**
+     * 更新会员状态，Premium 用户自动跳过所有广告。
+     * 由业务层（BillingManager）主动调用，模块解耦。
+     */
+    fun updatePremiumStatus(isPremium: Boolean) {
+        this.isPremiumUser = isPremium
+        log("updatePremiumStatus: isPremium=$isPremium")
+        if (isPremium) {
+            // 清掉已缓存的广告对象，节省内存
+            mInterAdCache = null
+            mOpenAdCache = null
+            mNativeBannerCache.values.forEach { it.destroy() }
+            mNativeBannerCache.clear()
+        }
+    }
+
     /** ====== 插页广告频率控制 (AdMob 政策合规) ====== */
 
     /** 两次插页广告之间的最小间隔（毫秒）— 60 秒 */
@@ -192,6 +212,7 @@ object AdManager {
     }
 
     fun justLoadInter() {
+        if (isPremiumUser) return
         if (skipInterAd) {
             return
         }
@@ -224,6 +245,7 @@ object AdManager {
     }
 
     fun loadOpen(activity: Activity, adCallback: AdCallback? = null) {
+        if (isPremiumUser) { adCallback?.onAdFailLoad(); return }
         if (!isInit) {
             adCallback?.onAdFailLoad()
             return
@@ -268,6 +290,7 @@ object AdManager {
     }
 
     fun justLoadOpen() {
+        if (isPremiumUser) return
         if (mLoadingOpenAd) {
             return
         }
@@ -303,6 +326,7 @@ object AdManager {
     }
 
     fun canShowInterAd() : Boolean {
+        if (isPremiumUser) return false
         return mInterAdCache != null && !skipInterAd && canShowInter(false)
     }
 
@@ -319,6 +343,12 @@ object AdManager {
         skipFreqCheck: Boolean = false,
         next: () -> Unit
     ) {
+        // Premium 用户免广告
+        if (isPremiumUser) {
+            next.invoke()
+            return
+        }
+
         // 业务层跳过
         if (skipAd) {
             next.invoke()
@@ -387,6 +417,8 @@ object AdManager {
         activity: Activity,
         next: () -> Unit
     ) {
+        if (isPremiumUser) { next.invoke(); return }
+
         // Activity 状态检查
         if (activity.isFinishing || activity.isDestroyed) {
             log("OpenAd: Activity 已销毁，跳过展示")
@@ -434,6 +466,7 @@ object AdManager {
     }
 
     fun loadBanner(bannerContainer: ViewGroup): AdView? {
+        if (isPremiumUser) return null
         val mBannerAd = AdView(bannerContainer.context)
         val autoAdWidth = getScreenWidth(bannerContainer.context)
         mBannerAd.setAdSize(
@@ -490,6 +523,7 @@ object AdManager {
     }
 
     fun loadInter(block: (interstitialAd: InterstitialAd) -> Unit) {
+        if (isPremiumUser) return
         if (skipInterAd) {
             return
         }
@@ -514,6 +548,7 @@ object AdManager {
     }
 
     fun loadInter(adCallback: AdCallback? = null) {
+        if (isPremiumUser) { adCallback?.onAdFailLoad(); return }
         val cacheTime = System.currentTimeMillis() - mInterAdCacheTime
         if (mInterAdCache != null && cacheTime < CACHE_TIME_OUT) {
             log("interAd: 缓存未过期，使用缓存")
@@ -543,6 +578,7 @@ object AdManager {
     }
 
     fun showInter(activity: Activity, adCallback: AdCallback? = null) {
+        if (isPremiumUser) { adCallback?.onAdDismiss(false); return }
         val cacheTime = System.currentTimeMillis() - mInterAdCacheTime
         if (mInterAdCache != null && cacheTime < CACHE_TIME_OUT) {
             log("interAd: 缓存未过期，使用缓存")
@@ -572,6 +608,12 @@ object AdManager {
         adLayoutId: Int = R.layout.ad_native_small,
         skipIntervalCheck: Boolean = true
     ) {
+        // Premium 用户清除已有原生广告，直接跳过
+        if (isPremiumUser) {
+            destroyNativeAd(page)
+            return
+        }
+
         // 间隔检查 —— 必须在 destroyNativeAd 之前，避免跳过加载时把现有广告也清掉
         if (!canLoadNative(skipIntervalCheck)) {
             log("NativeFreq: 跳过 loadNativeAd(page=$page)")
