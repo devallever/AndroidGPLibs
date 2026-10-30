@@ -46,6 +46,7 @@ fun interface PurchaseListener {
  */
 @SuppressLint("StaticFieldLeak")
 object BillingHelper {
+    private var privacyUrl: String = ""
     private const val TAG = "BillingHelper"
 
     private lateinit var context: Context
@@ -451,6 +452,13 @@ object BillingHelper {
     private fun log(msg: String) { Log.d(TAG, msg) }
     private fun logW(msg: String) { Log.w(TAG, msg) }
     private fun logE(msg: String) { Log.e(TAG, msg) }
+    fun updatePrivacyPolicy(privacyUrl: String) {
+        this.privacyUrl = privacyUrl
+    }
+
+    fun getPrivacyUrl(): String {
+        return privacyUrl
+    }
 }
 
 /**

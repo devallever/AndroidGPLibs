@@ -409,23 +409,6 @@
                 android:textSize="13sp" />
 
             <TextView
-                android:id="@+id/tvTerms"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="6dp"
-                android:text="@string/billing_terms_of_service"
-                android:textColor="@color/billing_text_secondary"
-                android:textSize="13sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="·"
-                android:textColor="@color/billing_text_secondary"
-                android:textSize="13sp" />
-
-            <TextView
                 android:id="@+id/tvRestore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

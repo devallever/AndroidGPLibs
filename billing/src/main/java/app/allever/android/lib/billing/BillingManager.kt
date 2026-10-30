@@ -55,9 +55,10 @@ object BillingManager {
 
     // ==================== 初始化 ====================
 
-    fun init(context: Context, cb: (connected: Boolean) -> Unit = {}) {
+    fun init(context: Context, privacyUrl: String, cb: (connected: Boolean) -> Unit = {}) {
         log("init: pkg=${context.packageName}, isInitialized=$isInitialized")
         BillingHelper.init(context)
+        BillingHelper.updatePrivacyPolicy(privacyUrl)
         BillingHelper.connect { success ->
             log("connect: success=$success")
             if (success) {
@@ -296,5 +297,9 @@ object BillingManager {
 
     private fun logE(msg: String) {
         Log.e(TAG, msg)
+    }
+
+    fun getPrivacyUrl(): String {
+        return BillingHelper.getPrivacyUrl()
     }
 }

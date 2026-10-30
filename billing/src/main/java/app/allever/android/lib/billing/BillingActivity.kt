@@ -1,6 +1,9 @@
 package app.allever.android.lib.billing
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -67,11 +70,8 @@ class BillingActivity : AppCompatActivity() {
         }
 
         binding.tvPrivacy.setOnClickListener {
+            startWebView(this, BillingManager.getPrivacyUrl())
             Toast.makeText(this, getString(R.string.billing_tip_privacy_click), Toast.LENGTH_SHORT).show()
-        }
-
-        binding.tvTerms.setOnClickListener {
-            Toast.makeText(this, getString(R.string.billing_tip_terms_click), Toast.LENGTH_SHORT).show()
         }
 
         binding.tvRestore.setOnClickListener {
@@ -86,7 +86,7 @@ class BillingActivity : AppCompatActivity() {
 
         lifecycleScope.launch {
             if (!BillingHelper.isConnected) {
-                BillingManager.init(this@BillingActivity)
+                BillingManager.init(this@BillingActivity, BillingHelper.getPrivacyUrl())
                 kotlinx.coroutines.delay(1500)
             }
 
@@ -363,5 +363,23 @@ class BillingActivity : AppCompatActivity() {
             ?.formattedPrice
             ?: oneTimePurchaseOfferDetails?.formattedPrice
             ?: ""
+    }
+
+    private fun startWebView(context: Context, uri: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET)
+        } else {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT)
+        }
+        try {
+            context.startActivity(intent)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(context, "Sorry, Your mobile can't be supported", Toast.LENGTH_LONG)
+                .show()
+        }
+
     }
 }
