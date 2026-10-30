@@ -2,6 +2,7 @@ package app.allever.android.lib.billing
 
 import android.app.Activity
 import android.content.Context
+import android.content.SharedPreferences
 import android.util.Log
 import com.android.billingclient.api.ProductDetails
 import com.android.billingclient.api.Purchase
@@ -47,6 +48,11 @@ object BillingManager {
      */
     private var globalPurchaseListener: ((PurchaseResult) -> Unit)? = null
 
+    @Volatile
+    private var sp: SharedPreferences? = null
+    private val lock = Any()
+    private const val KEY_HAS_ACTIVE_SUBSCRIPTION = "hasActiveSubscription"
+
     // ==================== 初始化 ====================
 
     fun init(context: Context, cb: (connected: Boolean) -> Unit = {}) {
@@ -91,6 +97,17 @@ object BillingManager {
                 // 通知业务层
                 withContext(Dispatchers.Main) {
                     globalPurchaseListener?.invoke(result)
+                }
+            }
+        }
+
+        if (sp == null) {
+            synchronized(lock) {
+                if (sp == null) {
+                    sp = context.getSharedPreferences(
+                        "billing_sp",
+                        Context.MODE_PRIVATE
+                    )
                 }
             }
         }
@@ -164,6 +181,10 @@ object BillingManager {
 
     // ==================== 查询/恢复购买 ====================
 
+    fun getHasActiveSubscriptionCache(): Boolean {
+        return sp?.getBoolean(KEY_HAS_ACTIVE_SUBSCRIPTION, false) ?: false
+    }
+
     /**
      * 刷新订阅状态 —— 从 Google Play 查询当前有效的订阅
      */
@@ -174,6 +195,7 @@ object BillingManager {
             val active = purchases.firstOrNull { isPurchaseActive(it) }
             activePurchase = active
             hasActiveSubscription = active != null
+            sp?.edit()?.putBoolean(KEY_HAS_ACTIVE_SUBSCRIPTION, hasActiveSubscription)?.apply()
             log("refreshSubscriptionStatus: active=$hasActiveSubscription, total=${purchases.size}, activeSku=${active?.products?.firstOrNull()}")
             return hasActiveSubscription
         } else {
