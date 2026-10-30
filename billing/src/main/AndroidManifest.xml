@@ -4,7 +4,6 @@
     <application>
         <activity
             android:name=".BillingActivity"
-            android:exported="false"
             android:theme="@style/Theme.Billing"
             android:windowSoftInputMode="adjustResize" />
     </application>
