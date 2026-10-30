@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 深色主题背景 -->
+    <color name="billing_bg">#0E0E12</color>
+
+    <!-- 卡片背景 -->
+    <color name="billing_card_bg">#1A1A22</color>
+    <color name="billing_plan_unselected_bg">#1A1A22</color>
+    <color name="billing_plan_selected_bg">#1E2230</color>
+
+    <!-- 描边 -->
+    <color name="billing_plan_unselected_border">#2A2A35</color>
+    <color name="billing_plan_selected_border">#5B7CFA</color>
+
+    <!-- 文字 -->
+    <color name="billing_text_primary">#FFFFFF</color>
+    <color name="billing_text_secondary">#9A9AA8</color>
+    <color name="billing_text_price">#FFFFFF</color>
+
+    <!-- 主色 / 选中 -->
+    <color name="billing_accent">#5B7CFA</color>
+    <color name="billing_accent_soft">#3A4FB0</color>
+
+    <!-- 按钮 -->
+    <color name="billing_btn_bg">#5B7CFA</color>
+    <color name="billing_btn_text">#FFFFFF</color>
+    <color name="billing_btn_disabled_bg">#2A2A35</color>
+    <color name="billing_btn_disabled_text">#6E6E7A</color>
+
+    <!-- Checkmark -->
+    <color name="billing_check_bg">#5B7CFA</color>
+    <color name="billing_check_icon">#FFFFFF</color>
+
+    <!-- Divider -->
+    <color name="billing_divider">#252530</color>
+</resources>

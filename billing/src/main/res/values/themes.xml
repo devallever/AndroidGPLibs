@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Billing 页面深色主题 -->
+    <style name="Theme.Billing" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/billing_bg</item>
+        <item name="android:statusBarColor">@color/billing_bg</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

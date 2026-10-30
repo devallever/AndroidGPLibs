@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 选中勾选圆圈 -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/billing_check_bg" />
+    <size
+        android:width="22dp"
+        android:height="22dp" />
+</shape>

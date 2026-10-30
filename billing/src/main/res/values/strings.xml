@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Title & Subtitle -->
+    <string name="billing_title">Premium</string>
+    <string name="billing_subtitle">Get exclusive identity badges and unlock Premium benefits</string>
+
+    <!-- Benefits -->
+    <string name="billing_benefits_title">Membership Benefits</string>
+    <string name="billing_benefit_1">No ads</string>
+    <string name="billing_benefit_2">No limit on the number of uses</string>
+    <string name="billing_benefit_3">More advanced features in the future</string>
+
+    <!-- Plans -->
+    <string name="billing_plans_title">Subscription Plans</string>
+    <string name="billing_plan_weekly">Weekly</string>
+    <string name="billing_plan_monthly">Monthly</string>
+    <string name="billing_plan_yearly">Yearly</string>
+    <string name="billing_plan_per_week">%s/wk</string>
+    <string name="billing_plan_per_month">%s/mo</string>
+    <string name="billing_plan_per_year">%s/yr</string>
+
+    <!-- Button -->
+    <string name="billing_subscribe_format">Subscribe to Premium · %s</string>
+    <string name="billing_subscribed">✓ Premium is active</string>
+    <string name="billing_loading">Processing…</string>
+
+    <!-- Footer -->
+    <string name="billing_terms">By purchasing, you agree to be charged; auto-renewal occurs 24 hours before the end of each term, and you can manage or cancel anytime in your system settings.</string>
+    <string name="billing_privacy_policy">Privacy Policy</string>
+    <string name="billing_terms_of_service">Terms of Service</string>
+    <string name="billing_restore_purchases">Restore Purchases</string>
+
+    <!-- Errors -->
+    <string name="billing_region_not_supported">Subscriptions are not available in your current region.</string>
+    <string name="billing_restore_success">Purchase restored</string>
+    <string name="billing_restore_failed">No previous purchases found</string>
+    <string name="billing_privacy_click">Privacy Policy tapped</string>
+    <string name="billing_terms_click">Terms of Service tapped</string>
+</resources>
