@@ -659,6 +659,7 @@ object AdManager {
 
     fun destroyNativeAd(page: String) {
         mNativeBannerCache.remove(page)?.destroy()
+        mNativeBannerGroup.remove(page)?.removeAllViews()
     }
 
     private fun setNativeAdViewContent(nativeAd: NativeAd, adNativeView: NativeAdView) {

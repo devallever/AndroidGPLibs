@@ -47,6 +47,7 @@
             android:id="@+id/viewCircle"
             android:layout_width="22dp"
             android:layout_height="22dp"
+            android:layout_gravity="center"
             android:background="@drawable/bg_plan_uncheck" />
 
         <ImageView
@@ -54,6 +55,7 @@
             android:layout_width="14dp"
             android:layout_height="14dp"
             android:src="@drawable/ic_check_white"
-            android:visibility="gone" />
+            android:layout_gravity="center"
+            android:visibility="visible" />
     </FrameLayout>
 </LinearLayout>
