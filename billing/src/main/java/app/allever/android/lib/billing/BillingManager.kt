@@ -50,19 +50,23 @@ object BillingManager {
     // ==================== 初始化 ====================
 
     fun init(context: Context) {
+        log("init: pkg=${context.packageName}, isInitialized=$isInitialized")
         BillingHelper.init(context)
         BillingHelper.connect { success ->
-            log("connect: $success")
+            log("connect: success=$success")
             if (success) {
                 scope.launch {
                     // 1. 查询商品详情
                     loadProductDetails()
                     // 2. 查询已有购买状态
                     refreshSubscriptionStatus()
-                    // 3. 恢复未处理的购买
+                    // 3. 处理未确认的购买
                     handlePendingPurchases()
                     isInitialized = true
+                    log("init: completed, products=${productDetailsMap.size}, hasActive=$hasActiveSubscription")
                 }
+            } else {
+                logE("init: connect failed")
             }
         }
 
