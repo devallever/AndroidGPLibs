@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 标题与副标题 -->
+    <string name="billing_title">Premium</string>
+    <string name="billing_subtitle">解锁专属身份徽章，畅享 Premium 特权</string>
+
+    <!-- 会员权益 -->
+    <string name="billing_benefits_title">会员权益</string>
+    <string name="billing_benefit_1">去除广告</string>
+    <string name="billing_benefit_2">不限使用次数</string>
+    <string name="billing_benefit_3">更多高级功能即将上线</string>
+
+    <!-- 订阅方案 -->
+    <string name="billing_plans_title">订阅方案</string>
+    <string name="billing_plan_weekly">周卡</string>
+    <string name="billing_plan_monthly">月卡</string>
+    <string name="billing_plan_yearly">年卡</string>
+    <string name="billing_plan_per_week">%s/周</string>
+    <string name="billing_plan_per_month">%s/月</string>
+    <string name="billing_plan_per_year">%s/年</string>
+
+    <!-- 按钮 -->
+    <string name="billing_subscribe_format">订阅 Premium · %s</string>
+    <string name="billing_subscribed">✓ Premium 已生效</string>
+    <string name="billing_loading">处理中…</string>
+
+    <!-- 页脚 -->
+    <string name="billing_terms">购买即表示同意扣款；自动续费将在每期到期前 24 小时内触发，您可随时在系统设置中管理或取消。</string>
+    <string name="billing_privacy_policy">隐私政策</string>
+    <string name="billing_terms_of_service">服务条款</string>
+    <string name="billing_restore_purchases">恢复购买</string>
+
+    <!-- 订阅已生效卡片 -->
+    <string name="billing_active_title">✓ Premium 已生效</string>
+    <string name="billing_active_identity_label">当前身份</string>
+    <string name="billing_active_identity_value">✅ Premium 会员</string>
+    <string name="billing_active_subscription_label">Premium 订阅</string>
+    <string name="billing_active_subscription_active">有效</string>
+    <string name="billing_active_subscription_expired">已过期</string>
+    <string name="billing_active_subscription_pending">待确认</string>
+    <string name="billing_active_renew_label">自动续订</string>
+    <string name="billing_active_renew_on">已开启</string>
+    <string name="billing_active_renew_off">已关闭</string>
+
+    <!-- 会员身份（根据 SKU 动态选择） -->
+    <string name="billing_identity_weekly">✅ 周卡会员</string>
+    <string name="billing_identity_monthly">✅ 月卡会员</string>
+    <string name="billing_identity_yearly">✅ 年卡会员</string>
+    <string name="billing_identity_default">✅ Premium 会员</string>
+
+    <!-- Toast / 交互提示 -->
+    <string name="billing_tip_select_plan">请选择订阅方案</string>
+    <string name="billing_tip_privacy_click">点击了隐私政策</string>
+    <string name="billing_tip_terms_click">点击了服务条款</string>
+    <string name="billing_tip_subscribe_success">订阅已激活！</string>
+    <string name="billing_tip_subscribe_failed">订阅失败：%s</string>
+    <string name="billing_tip_subscribe_canceled">已取消订阅</string>
+    <string name="billing_tip_restore_success">已恢复购买</string>
+    <string name="billing_tip_restore_failed">未找到可恢复的购买</string>
+
+    <!-- 错误 / 提示文案 -->
+    <string name="billing_region_not_supported">当前地区暂不支持订阅。</string>
+</resources>

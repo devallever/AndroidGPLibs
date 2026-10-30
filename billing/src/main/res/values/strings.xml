@@ -30,10 +30,34 @@
     <string name="billing_terms_of_service">Terms of Service</string>
     <string name="billing_restore_purchases">Restore Purchases</string>
 
+    <!-- Active subscription card -->
+    <string name="billing_active_title">✓ Premium is active</string>
+    <string name="billing_active_identity_label">Current identity</string>
+    <string name="billing_active_identity_value">✅ Premium Member</string>
+    <string name="billing_active_subscription_label">Premium subscription</string>
+    <string name="billing_active_subscription_active">Active</string>
+    <string name="billing_active_subscription_expired">Expired</string>
+    <string name="billing_active_subscription_pending">Pending</string>
+    <string name="billing_active_renew_label">Auto-renewal</string>
+    <string name="billing_active_renew_on">On</string>
+    <string name="billing_active_renew_off">Off</string>
+
+    <!-- Identity by SKU -->
+    <string name="billing_identity_weekly">✅ Weekly Member</string>
+    <string name="billing_identity_monthly">✅ Monthly Member</string>
+    <string name="billing_identity_yearly">✅ Yearly Member</string>
+    <string name="billing_identity_default">✅ Premium Member</string>
+
+    <!-- Toast / tips -->
+    <string name="billing_tip_select_plan">Please select a plan</string>
+    <string name="billing_tip_privacy_click">Privacy Policy tapped</string>
+    <string name="billing_tip_terms_click">Terms of Service tapped</string>
+    <string name="billing_tip_subscribe_success">Subscription activated!</string>
+    <string name="billing_tip_subscribe_failed">Purchase failed: %s</string>
+    <string name="billing_tip_subscribe_canceled">Purchase canceled</string>
+    <string name="billing_tip_restore_success">Purchase restored</string>
+    <string name="billing_tip_restore_failed">No previous purchases found</string>
+
     <!-- Errors -->
     <string name="billing_region_not_supported">Subscriptions are not available in your current region.</string>
-    <string name="billing_restore_success">Purchase restored</string>
-    <string name="billing_restore_failed">No previous purchases found</string>
-    <string name="billing_privacy_click">Privacy Policy tapped</string>
-    <string name="billing_terms_click">Terms of Service tapped</string>
 </resources>

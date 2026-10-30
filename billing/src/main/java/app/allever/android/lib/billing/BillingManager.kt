@@ -169,8 +169,10 @@ object BillingManager {
         val result = BillingHelper.querySubscriptions()
         if (result.isSuccess) {
             val purchases = result.getOrNull() ?: emptyList()
-            hasActiveSubscription = purchases.any { isPurchaseActive(it) }
-            log("refreshSubscriptionStatus: active=$hasActiveSubscription, total=${purchases.size}")
+            val active = purchases.firstOrNull { isPurchaseActive(it) }
+            activePurchase = active
+            hasActiveSubscription = active != null
+            log("refreshSubscriptionStatus: active=$hasActiveSubscription, total=${purchases.size}, activeSku=${active?.products?.firstOrNull()}")
             return hasActiveSubscription
         } else {
             logE("refreshSubscriptionStatus failed: ${result.exceptionOrNull()?.message}")
@@ -189,6 +191,11 @@ object BillingManager {
 
     /** 当前是否有有效的订阅 */
     fun hasActiveSubscription(): Boolean = hasActiveSubscription
+
+    /** 当前激活的订阅 purchase（可能为 null） */
+    @Volatile
+    private var activePurchase: Purchase? = null
+    fun getActivePurchase(): Purchase? = activePurchase
 
     /**
      * 判断 Purchase 是否为有效订阅

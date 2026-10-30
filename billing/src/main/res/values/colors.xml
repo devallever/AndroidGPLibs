@@ -33,4 +33,8 @@
 
     <!-- Divider -->
     <color name="billing_divider">#252530</color>
+
+    <!-- 状态色 -->
+    <color name="billing_status_active">#22C55E</color>
+    <color name="billing_status_expired">#EF4444</color>
 </resources>
