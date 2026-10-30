@@ -43,10 +43,10 @@
     <string name="billing_active_renew_off">Off</string>
 
     <!-- Identity by SKU -->
-    <string name="billing_identity_weekly">✅ Weekly Member</string>
-    <string name="billing_identity_monthly">✅ Monthly Member</string>
-    <string name="billing_identity_yearly">✅ Yearly Member</string>
-    <string name="billing_identity_default">✅ Premium Member</string>
+    <string name="billing_identity_weekly">Weekly Member</string>
+    <string name="billing_identity_monthly">Monthly Member</string>
+    <string name="billing_identity_yearly">Yearly Member</string>
+    <string name="billing_identity_default">Premium Member</string>
 
     <!-- Toast / tips -->
     <string name="billing_tip_select_plan">Please select a plan</string>

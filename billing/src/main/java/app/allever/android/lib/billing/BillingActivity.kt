@@ -141,9 +141,9 @@ class BillingActivity : AppCompatActivity() {
 
             // 当前身份（根据 SKU 动态展示）
             binding.tvIdentityValue.text = when {
-                sku.contains("weekly", true) -> getString(R.string.billing_identity_weekly)
-                sku.contains("monthly", true) -> getString(R.string.billing_identity_monthly)
-                sku.contains("yearly", true) -> getString(R.string.billing_identity_yearly)
+                sku.contains("weekly", true) -> "✅ " + getString(R.string.billing_identity_weekly)
+                sku.contains("monthly", true) -> "✅ " + getString(R.string.billing_identity_monthly)
+                sku.contains("yearly", true) -> "✅ " + getString(R.string.billing_identity_yearly)
                 else -> getString(R.string.billing_identity_default)
             }
 

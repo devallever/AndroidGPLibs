@@ -55,11 +55,22 @@ class PlanAdapter(
         private val binding: ItemPlanBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        private fun getTitle(productId: String): String {
+            val sku = productId.lowercase()
+            return when {
+            sku.contains("weekly", true) -> binding.root.context.getString(R.string.billing_identity_weekly)
+            sku.contains("monthly", true) -> binding.root.context.getString(R.string.billing_identity_monthly)
+            sku.contains("yearly", true) -> binding.root.context.getString(R.string.billing_identity_yearly)
+                else -> {
+                    binding.root.context.getString(R.string.billing_identity_default)}
+            }
+        }
+
         fun bind(details: ProductDetails, isSelected: Boolean) {
             val context = binding.root.context
 
             // 标题
-            binding.tvPlanTitle.text = details.title
+            binding.tvPlanTitle.text = getTitle(details.productId)
 
             // 价格
             val priceText = details.getSubscriptionPrice()
