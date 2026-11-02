@@ -23,6 +23,7 @@ import com.google.android.gms.ads.nativead.NativeAd
 import com.google.android.gms.ads.nativead.NativeAdView
 import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
+import com.unity3d.mediation.LevelPlay
 
 object AdManager {
 
@@ -138,9 +139,11 @@ object AdManager {
         log("init")
         mContext = context
         this.skipInterAd = skipInterAd
+        LevelPlay.setMetaData("do_not_sell", "true")
     }
 
     fun init(adConfig: IAdConfig, context: Application, block: (() -> Unit)? = null, skipInterAd: Boolean = false) {
+        LevelPlay.setMetaData("do_not_sell", "true")
         mAdConfig = adConfig
         mContext = context
         this.skipInterAd = skipInterAd
