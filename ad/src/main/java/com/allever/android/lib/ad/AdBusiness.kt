@@ -2,6 +2,7 @@ package com.allever.android.lib.ad
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import app.allever.android.lib.ad.R
 import app.allever.android.lib.ad.databinding.AdLocalNativeBinding
 import app.allever.android.lib.recommend.data.RecommendHelper
 import app.allever.android.lib.recommend.data.RecommendId
@@ -18,25 +19,39 @@ import com.allever.android.lib.admob.AdManager
  */
 object AdBusiness {
     private val localNativeCache by lazy { mutableMapOf<String, ViewGroup>() }
-    fun loadNativeAd(viewGroup: ViewGroup, page: String) {
-        AdManager.loadNativeAd(viewGroup, page, adCallback = object : AdCallback {
-            override fun onAdFailLoad() {
-                //加载失败，显示本地推荐广告
-                val recommend = RecommendHelper.getRandomRecommendApp()
-                recommend.iconUrl
-                val binding = AdLocalNativeBinding.inflate(LayoutInflater.from(viewGroup.context), viewGroup, true)
-                binding.adIcon.loadRound(RecommendId.getIconRes(recommend.id), 12f)
-                binding.adHeadline.text = recommend.name
-                binding.adBody.text = recommend.desc
-                binding.root.setOnClickListener {
-                    RecommendUtils.jumpToAppStore(recommend.pkg)
+    fun loadNativeAd(
+        viewGroup: ViewGroup,
+        page: String,
+        adLayoutId: Int = R.layout.ad_native_small,
+        skipIntervalCheck: Boolean = true
+    ) {
+        AdManager.loadNativeAd(
+            viewGroup,
+            page,
+            adLayoutId,
+            skipIntervalCheck,
+            adCallback = object : AdCallback {
+                override fun onAdFailLoad() {
+                    //加载失败，显示本地推荐广告
+                    val recommend = RecommendHelper.getRandomRecommendApp()
+                    recommend.iconUrl
+                    val binding = AdLocalNativeBinding.inflate(
+                        LayoutInflater.from(viewGroup.context),
+                        viewGroup,
+                        true
+                    )
+                    binding.adIcon.loadRound(RecommendId.getIconRes(recommend.id), 12f)
+                    binding.adHeadline.text = recommend.name
+                    binding.adBody.text = recommend.desc
+                    binding.root.setOnClickListener {
+                        RecommendUtils.jumpToAppStore(recommend.pkg)
+                    }
+                    viewGroup.removeAllViews()
+                    viewGroup.addView(binding.root)
+                    localNativeCache[page] = viewGroup
                 }
-                viewGroup.removeAllViews()
-                viewGroup.addView(binding.root)
-                localNativeCache[page] = viewGroup
-            }
 
-        })
+            })
     }
 
     fun destroyNativeAd(page: String) {
