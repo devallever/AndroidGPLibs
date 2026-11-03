@@ -34,6 +34,9 @@ import com.google.android.gms.ads.rewarded.RewardedAd
 import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback
 import com.unity3d.mediation.LevelPlay
 
+/**
+ * 对接sdk的广告加载管理类
+ */
 object AdManager {
 
     private var mAdConfig: IAdConfig = TestAdConfig()
@@ -657,7 +660,8 @@ object AdManager {
         viewGroup: ViewGroup,
         page: String,
         adLayoutId: Int = R.layout.ad_native_small,
-        skipIntervalCheck: Boolean = true
+        skipIntervalCheck: Boolean = true,
+        adCallback: AdCallback? = null
     ) {
         // Premium 用户清除已有原生广告，直接跳过
         if (isPremiumUser) {
@@ -693,6 +697,7 @@ object AdManager {
 
                 override fun onAdFailedToLoad(error: LoadAdError) {
                     logE("nativeBanner[${adId}]加载失败 ${error.code} -> ${error.message}")
+                    adCallback?.onAdFailLoad()
                 }
             })
             .build()

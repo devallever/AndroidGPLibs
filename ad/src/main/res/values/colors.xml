@@ -9,4 +9,15 @@
     <color name="recommend_googleGreen">#35AA53</color>
     <color name="recommend_googleBleu">#4586F3</color>
     <color name="recommend_googleYellow">#FBBD06</color>
+
+    <color name="vc_gradient_start">#5B7CFA</color>
+    <color name="vc_gradient_end">#8B5CF6</color>
+    <color name="vc_card_bg">#FFFFFF</color>
+    <color name="vc_card_shadow">#14000000</color>
+    <color name="vc_text_primary">#1A1A2E</color>
+    <color name="vc_text_secondary">#8E8EA0</color>
+    <color name="vc_chip_selected_bg">#E8E3FF</color>
+    <color name="vc_chip_selected_text">#7C5CFA</color>
+    <color name="vc_chip_unselected_bg">#F5F3F9</color>
+    <color name="vc_chip_unselected_text">#666666</color>
 </resources>

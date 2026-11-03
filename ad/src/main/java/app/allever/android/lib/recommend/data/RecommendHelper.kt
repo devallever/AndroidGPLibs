@@ -41,4 +41,8 @@ object RecommendHelper {
     fun getRecommendApp(): Recommend {
         return list.first()
     }
+
+    fun getRandomRecommendApp(): Recommend {
+        return list.random()
+    }
 }

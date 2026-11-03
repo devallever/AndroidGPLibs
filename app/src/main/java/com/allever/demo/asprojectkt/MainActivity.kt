@@ -2,6 +2,7 @@ package com.allever.demo.asprojectkt
 
 import app.allever.android.lib.basic.core.AbstractBindingActivity
 import app.allever.android.lib.basic.core.toast
+import com.allever.android.lib.ad.AdBusiness
 import com.allever.android.lib.admob.AdCallback
 import com.allever.android.lib.admob.AdManager
 import com.allever.demo.asprojectkt.databinding.ActivityMainBinding
@@ -38,7 +39,7 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
     override fun onResume() {
         super.onResume()
         AdManager.resumeBanner(mBinding.bannerContainer)
-        AdManager.loadNativeAd(mBinding.nativeContainer, "main")
+        AdBusiness.loadNative(mBinding.nativeContainer, "main")
     }
 
     override fun onPause() {
@@ -49,6 +50,6 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
     override fun onDestroy() {
         super.onDestroy()
         AdManager.destroyBanner(mBinding.bannerContainer)
-        AdManager.destroyNativeAd("main")
+        AdBusiness.destroyNativeAd("main")
     }
 }
