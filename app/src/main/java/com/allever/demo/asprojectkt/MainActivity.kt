@@ -39,7 +39,7 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
     override fun onResume() {
         super.onResume()
         AdManager.resumeBanner(mBinding.bannerContainer)
-        AdBusiness.loadNative(mBinding.nativeContainer, "main")
+        AdBusiness.loadNativeAd(mBinding.nativeContainer, "main")
     }
 
     override fun onPause() {

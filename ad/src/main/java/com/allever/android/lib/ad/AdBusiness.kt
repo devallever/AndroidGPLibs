@@ -7,7 +7,6 @@ import app.allever.android.lib.recommend.data.RecommendHelper
 import app.allever.android.lib.recommend.data.RecommendId
 import app.allever.android.lib.recommend.util.RecommendUtils
 import app.allever.android.lib.recommend.util.loadRound
-import coil.load
 import com.allever.android.lib.admob.AdCallback
 import com.allever.android.lib.admob.AdManager
 
@@ -19,7 +18,7 @@ import com.allever.android.lib.admob.AdManager
  */
 object AdBusiness {
     private val localNativeCache by lazy { mutableMapOf<String, ViewGroup>() }
-    fun loadNative(viewGroup: ViewGroup, page: String) {
+    fun loadNativeAd(viewGroup: ViewGroup, page: String) {
         AdManager.loadNativeAd(viewGroup, page, adCallback = object : AdCallback {
             override fun onAdFailLoad() {
                 //加载失败，显示本地推荐广告
