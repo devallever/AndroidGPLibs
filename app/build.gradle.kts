@@ -51,7 +51,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    implementation(project(":ad"))
     implementation(project(":basic"))
 
 //    implementation(project(":admob"))

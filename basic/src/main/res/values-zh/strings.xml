@@ -1,0 +1,22 @@
+<resources>
+
+    <string name="vc_share">分享</string>
+    <string name="vc_feedback">反馈</string>
+    <string name="vc_about">关于</string>
+    <string name="vc_support">支持我们</string>
+
+    <!-- ===== FeedbackHelper redesigned ===== -->
+    <string name="vc_feedback_user_label">您的反馈（请描述问题或建议）：</string>
+    <string name="vc_feedback_env_label">环境信息（自动采集，请勿删除）</string>
+    <string name="vc_feedback_chooser_title">选择邮件应用</string>
+    <string name="vc_feedback_no_mail_client">未找到邮件应用，反馈已复制到剪贴板</string>
+    <string name="vc_feedback_clip_label">FakeCall 反馈</string>
+
+    <!-- ===== Privacy Dialog ===== -->
+    <string name="vc_privacy_dialog_title">隐私政策</string>
+    <string name="vc_privacy_dialog_message">尊敬的用户，欢迎使用模拟来电！\n\n在您使用前请仔细阅读《隐私政策》内所有条款。我们将严格遵守您同意的各项条款，向您说明如下：\n\n1.为向您提供软件的使用功能，我们会收集、使用必要的信息；\n2.基于您的明示授权，我们可能会获取您的悬浮窗权限和点亮屏幕权限（为了模拟真实的来电场景）等信息，您有权拒绝获取授权；\n3.我们会采取先进的安全措施保护您的信息安全。</string>
+    <string name="vc_privacy_dialog_disagree">不同意</string>
+    <string name="vc_privacy_dialog_agree">同意并继续</string>
+    <string name="vc_privacy_dialog_toast">未同意本软件，我们将无法为您提供服务。</string>
+
+</resources>

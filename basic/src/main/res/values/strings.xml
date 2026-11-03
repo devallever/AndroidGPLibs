@@ -1,0 +1,22 @@
+<resources>
+
+    <string name="vc_share">Share</string>
+    <string name="vc_feedback">Feedback</string>
+    <string name="vc_about">About</string>
+    <string name="vc_support">Support us</string>
+
+    <!-- ===== FeedbackHelper redesigned ===== -->
+    <string name="vc_feedback_user_label">Your feedback (please describe the issue or suggestion):</string>
+    <string name="vc_feedback_env_label">Environment info (auto-collected, please do not delete)</string>
+    <string name="vc_feedback_chooser_title">Select an email app</string>
+    <string name="vc_feedback_no_mail_client">No email app found. Feedback copied to clipboard.</string>
+    <string name="vc_feedback_clip_label">FakeCall Feedback</string>
+
+    <!-- ===== Privacy Dialog ===== -->
+    <string name="vc_privacy_dialog_title">Privacy Policy</string>
+    <string name="vc_privacy_dialog_message">Dear user, welcome to Fake Call!\n\nPlease read all terms of the Privacy Policy carefully before use. We will strictly abide by the terms you agree to:\n\n1. To provide the app\'s core functionality, we collect and use necessary information;\n2. With your explicit consent, we may request overlay permission and wake-up permission to simulate a realistic incoming call experience. You have the right to deny any of these permissions;\n3. We employ advanced security measures to protect your information.</string>
+    <string name="vc_privacy_dialog_disagree">Disagree</string>
+    <string name="vc_privacy_dialog_agree">Agree &amp; Continue</string>
+    <string name="vc_privacy_dialog_toast">You must agree to the privacy policy to use this app.</string>
+
+</resources>

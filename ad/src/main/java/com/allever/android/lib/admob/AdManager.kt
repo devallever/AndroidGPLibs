@@ -90,6 +90,7 @@ object AdManager {
     private var mLastNativeLoadTime = 0L
 
     private var isInit = false
+    private var isIniting = false
 
     /**
      * 重置频率控制状态（在 App 从后台恢复时调用，开启新 Session）

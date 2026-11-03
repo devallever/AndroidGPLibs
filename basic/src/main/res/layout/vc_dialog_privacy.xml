@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/vc_card_bg"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="12dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="28dp"
+        android:paddingBottom="0dp"
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp">
+
+        <!-- 标题 -->
+        <TextView
+            android:id="@+id/tvDialogTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/vc_privacy_dialog_title"
+            android:textColor="@color/vc_text_primary"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 说明文本（隐私政策关键词可点击 + 下划线） -->
+        <TextView
+            android:id="@+id/tvDialogMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/vc_privacy_dialog_message"
+            android:textColor="@color/vc_text_secondary"
+            android:textSize="14sp"
+            android:lineSpacingExtra="4dp"
+            android:layout_marginBottom="20dp" />
+
+        <!-- 分隔线 -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/vc_divider"
+            android:layout_marginBottom="0dp" />
+
+        <!-- 按钮行 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- 不同意 -->
+            <TextView
+                android:id="@+id/btnDisagree"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:text="@string/vc_privacy_dialog_disagree"
+                android:textColor="@color/vc_text_secondary"
+                android:textSize="15sp"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
+            <!-- 分割线 -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/vc_divider" />
+
+            <!-- 同意并继续 -->
+            <TextView
+                android:id="@+id/btnAgree"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingTop="14dp"
+                android:paddingBottom="14dp"
+                android:text="@string/vc_privacy_dialog_agree"
+                android:textColor="@color/vc_gradient_start"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
