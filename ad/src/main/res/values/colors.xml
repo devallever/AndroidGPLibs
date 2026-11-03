@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ad_title_color">#3269FF</color>
+    <color name="ad_desc_color">#8A3269FF</color>
+    <color name="ad_bg_color">#263269FF</color>
+
+
+    <color name="recommend_googleRed">#EB4334</color>
+    <color name="recommend_googleGreen">#35AA53</color>
+    <color name="recommend_googleBleu">#4586F3</color>
+    <color name="recommend_googleYellow">#FBBD06</color>
+</resources>
