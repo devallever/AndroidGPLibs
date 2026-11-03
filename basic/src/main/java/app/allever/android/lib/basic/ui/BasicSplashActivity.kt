@@ -3,13 +3,16 @@ package app.allever.android.lib.basic.ui
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import app.allever.android.lib.basic.ProjectConfig
 import app.allever.android.lib.basic.R
+import app.allever.android.lib.basic.core.AbstractActivity
 import app.allever.android.lib.basic.core.DisplayHelper
+import app.allever.android.lib.basic.core.StatusBarCompat
 import app.allever.android.lib.basic.core.toast
 import app.allever.android.lib.basic.databinding.ActivityBasicSplashBinding
 import app.allever.android.lib.basic.ui.dialog.PrivacyDialog
@@ -21,7 +24,7 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
 
-open class BasicSplashActivity : AppCompatActivity() {
+open class BasicSplashActivity : AbstractActivity() {
     private val mBinding by lazy { ActivityBasicSplashBinding.inflate(layoutInflater) }
 
     private val jumpTask = Runnable {

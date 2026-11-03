@@ -90,7 +90,9 @@ object AdManager {
     private var mLastNativeLoadTime = 0L
 
     private var isInit = false
-    private var isIniting = false
+    private var isLoadingInter = false
+    private var isLoadingNative = false
+    private var isLoadingReward = false
 
     /**
      * 重置频率控制状态（在 App 从后台恢复时调用，开启新 Session）
@@ -184,12 +186,19 @@ object AdManager {
         val adId = mAdConfig.getAdId(IAdConfig.REWARD_AD)
         log("Loading rewarded ad: $adId")
 
+        if (isLoadingReward) {
+            log("rewardedAd: 正在加载中...，不需要重复加载")
+            return
+        }
+        isLoadingReward = true
+
         val adRequest = AdRequest.Builder().build()
         var rewarded = false
 
         RewardedAd.load(activity, adId, adRequest, object : RewardedAdLoadCallback() {
             override fun onAdFailedToLoad(adError: LoadAdError) {
                 logE("rewardedAd加载失败[${adId}]： -> ${adError.code}: ${adError.message}")
+                isLoadingReward = false
                 adCallback?.onAdFailLoad()
             }
 
@@ -218,6 +227,7 @@ object AdManager {
 
                 // 广告已就绪，先通知外部（关闭 loading），再展示
                 adCallback?.onAdLoaded()
+                isLoadingReward = false
                 ad.show(activity) {
                     log("rewardedAd: 获得奖励")
                     rewarded = true
@@ -236,10 +246,16 @@ object AdManager {
             return
         }
 
+        if (isLoadingInter) {
+            log("interAd: 正在加载中...，不需要重复加载")
+            return
+        }
+
         mInterAdCache = null
 
         val adRequest = AdRequest.Builder().build()
 
+        isLoadingInter = true
         val adId = mAdConfig.getAdId(IAdConfig.INTER_AD)
         InterstitialAd.load(
             mContext,
@@ -248,6 +264,7 @@ object AdManager {
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     logE("interAd加载失败[${adId}]： -> ${adError.code}")
+                    isLoadingInter = false
                 }
 
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
@@ -255,6 +272,7 @@ object AdManager {
                     mInterAdCache = interstitialAd
                     mInterAdCacheTime = System.currentTimeMillis()
                     log("interAd: 缓存成功")
+                    isLoadingInter = false
                 }
             })
     }
@@ -307,6 +325,7 @@ object AdManager {
     fun justLoadOpen() {
         if (isPremiumUser) return
         if (mLoadingOpenAd) {
+            log("openAd: 正在加载中...，不需要重复加载")
             return
         }
         val cacheTime = System.currentTimeMillis() - mOpenAdCacheTime
@@ -542,6 +561,13 @@ object AdManager {
         if (skipInterAd) {
             return
         }
+
+        if (isLoadingInter) {
+            log("interAd: 正在加载中...，不需要重复加载")
+            return
+        }
+        isLoadingInter = true
+
         val adRequest = AdRequest.Builder().build()
 
         InterstitialAd.load(
@@ -551,12 +577,14 @@ object AdManager {
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     logE("interAd: 加载失败 -> ${adError.code}")
+                    isLoadingInter = false
                 }
 
                 override fun onAdLoaded(interstitialAd: InterstitialAd) {
                     log("interAd: 加载成功")
                     mInterAdCache = interstitialAd
                     mInterAdCacheTime = System.currentTimeMillis()
+                    isLoadingInter = false
                     block.invoke(interstitialAd)
                 }
             })
@@ -570,6 +598,12 @@ object AdManager {
             adCallback?.onAdLoaded()
             return
         }
+
+        if (isLoadingInter) {
+            log("interAd: 正在加载中...，不需要重复加载")
+            return
+        }
+        isLoadingInter = true
         val adRequest = AdRequest.Builder().build()
 
         val adId = mAdConfig.getAdId(IAdConfig.INTER_AD)
@@ -580,6 +614,7 @@ object AdManager {
             object : InterstitialAdLoadCallback() {
                 override fun onAdFailedToLoad(adError: LoadAdError) {
                     logE("interAd加载失败[${adId}] -> ${adError.code}")
+                    isLoadingInter = false
                     adCallback?.onAdFailLoad()
                 }
 
@@ -587,6 +622,7 @@ object AdManager {
                     log("interAd: 加载成功")
                     mInterAdCache = interstitialAd
                     mInterAdCacheTime = System.currentTimeMillis()
+                    isLoadingInter = false
                     adCallback?.onAdLoaded()
                 }
             })
