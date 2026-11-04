@@ -1,7 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <FrameLayout
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/topBarContainer"
+        android:layout_width="match_parent"
+        android:background="#ffffff"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_height="56dp">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                android:gravity="center"
+                android:text="Settings"
+                android:textColor="#000000"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:layout_marginStart="6dp"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_back_rd"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvTitle" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@+id/topBarContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/itemFeedback"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <TextView
+                android:id="@+id/tvFeedback"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Feedback"
+                android:paddingHorizontal="16dp"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivFeedback"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="16dp"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_bc_feedback"
+                app:layout_constraintBottom_toBottomOf="@+id/tvFeedback"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvFeedback" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E5E5E5" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/itemAbout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+            <TextView
+                android:id="@+id/tvAbout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="About"
+                android:paddingHorizontal="16dp"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivAbout"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="16dp"
+                android:padding="12dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_bc_about"
+                app:layout_constraintBottom_toBottomOf="@+id/tvAbout"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvAbout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E5E5E5" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/itemRateUs"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+            <TextView
+                android:id="@+id/tvRateUs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Rate Us"
+                android:paddingHorizontal="16dp"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/ivRateUs"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="16dp"
+                android:padding="10dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_bc_rate_us"
+                app:layout_constraintBottom_toBottomOf="@+id/tvRateUs"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvRateUs" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+
+
+
 
 
 

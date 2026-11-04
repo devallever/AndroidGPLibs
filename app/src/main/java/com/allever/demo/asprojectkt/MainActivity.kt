@@ -1,7 +1,9 @@
 package com.allever.demo.asprojectkt
 
 import app.allever.android.lib.basic.core.AbstractBindingActivity
+import app.allever.android.lib.basic.core.ActivityHelper
 import app.allever.android.lib.basic.core.toast
+import app.allever.android.lib.basic.ui.BasicSettingActivity
 import com.allever.android.lib.ad.AdBusiness
 import com.allever.android.lib.admob.AdCallback
 import com.allever.android.lib.admob.AdManager
@@ -33,6 +35,9 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
                     toast("reward finish: $rewarded")
                 }
             })
+        }
+        mBinding.btnSetting.setOnClickListener {
+            ActivityHelper.startActivity<BasicSettingActivity>()
         }
     }
 

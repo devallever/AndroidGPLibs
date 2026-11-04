@@ -4,6 +4,7 @@
     <string name="vc_feedback">反馈</string>
     <string name="vc_about">关于</string>
     <string name="vc_support">支持我们</string>
+    <string name="vc_about_right">Copyright @2018–2026 %s All Rights Reserved</string>
 
     <!-- ===== FeedbackHelper redesigned ===== -->
     <string name="vc_feedback_user_label">您的反馈（请描述问题或建议）：</string>

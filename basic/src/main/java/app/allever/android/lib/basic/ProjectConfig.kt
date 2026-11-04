@@ -66,6 +66,15 @@ object ProjectConfig {
         return config.appIcon
     }
 
+    //versionName
+    fun getVersionName(): String {
+        return config.versionName
+    }
+
+    fun getVersionCode(): Int {
+        return config.versionCode
+    }
+
     fun getMainClz(): Class<*> {
         return config.mainClz
     }

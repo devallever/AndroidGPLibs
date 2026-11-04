@@ -19,7 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class RecommendDialog(context: Context, val exit: () -> Unit = {}) :
+class RecommendDialog(context: Context, val cancelText: String = "", val exit: () -> Unit = {}) :
     Dialog(context, com.google.android.material.R.style.Theme_Design_BottomSheetDialog) {
 
     private val mBinding: DialogRecommendBinding
@@ -53,6 +53,10 @@ class RecommendDialog(context: Context, val exit: () -> Unit = {}) :
     }
 
     private fun initView() {
+        if (cancelText.isNotEmpty()) {
+            mBinding.tvExit.text = cancelText
+        }
+
         mBinding.apply {
             tvExit.setOnClickListener {
                 dismissAndDestroy()
