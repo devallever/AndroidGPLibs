@@ -1,9 +1,12 @@
 package com.allever.demo.asprojectkt
 
+import android.annotation.SuppressLint
+import app.allever.android.lib.basic.UsageManager
 import app.allever.android.lib.basic.core.AbstractBindingActivity
 import app.allever.android.lib.basic.core.ActivityHelper
 import app.allever.android.lib.basic.core.toast
 import app.allever.android.lib.basic.ui.BasicSettingActivity
+import app.allever.android.lib.basic.ui.dialog.UsageLimitDialog
 import com.allever.android.lib.ad.AdBusiness
 import com.allever.android.lib.admob.AdCallback
 import com.allever.android.lib.admob.AdManager
@@ -39,12 +42,35 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
         mBinding.btnSetting.setOnClickListener {
             ActivityHelper.startActivity<BasicSettingActivity>()
         }
+
+        mBinding.btnFloatConsumeCount.setOnClickListener {
+        }
+
+        mBinding.tvLeftCount.setOnClickListener {
+            UsageLimitDialog.show(
+                this,
+                title = getString(R.string.vc_usage_reward_title),
+                message = getString(R.string.vc_usage_reward_message),
+                watchAdText = getString(R.string.vc_usage_reward_watch_ad)
+            ) { updateLeftCount() }
+        }
+
     }
+
+    /**
+     * 将剩余使用次数同步到右下角圆形徽章 tvLeftCount。
+     */
+    @SuppressLint("SetTextI18n")
+    private fun updateLeftCount() {
+        mBinding.tvLeftCount.text = UsageManager.getRemaining().toString()
+    }
+
 
     override fun onResume() {
         super.onResume()
         AdManager.resumeBanner(mBinding.bannerContainer)
         AdBusiness.loadNativeAd(mBinding.nativeContainer, "main")
+        updateLeftCount()
     }
 
     override fun onPause() {
