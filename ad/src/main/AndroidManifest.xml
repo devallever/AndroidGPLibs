@@ -12,6 +12,12 @@
         <activity android:name="com.allever.android.lib.admob.AdActivity"
             android:screenOrientation="portrait"/>
 
+        <activity
+            android:name="com.allever.android.lib.ad.LocalInterAdActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.RecommendProject" />
+
         <activity android:name="app.allever.android.lib.recommend.ui.RecommendListActivity"
             android:theme="@style/Theme.RecommendProject"/>
     </application>

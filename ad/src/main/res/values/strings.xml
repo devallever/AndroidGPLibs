@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="ad">Ad</string>
+
+    <!-- 本地插页广告页 -->
+    <string name="local_ad_about">About this app</string>
+    <string name="local_ad_get_on_play">Get it on Google Play</string>
+    <string name="local_ad_open">Open</string>
+    <string name="local_ad_close">Close ad</string>
+    <string name="local_ad_screenshot">App screenshot</string>
 </resources>

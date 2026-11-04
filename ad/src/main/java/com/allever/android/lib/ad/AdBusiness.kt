@@ -1,5 +1,6 @@
 package com.allever.android.lib.ad
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import app.allever.android.lib.ad.R
@@ -19,6 +20,38 @@ import com.allever.android.lib.admob.AdManager
  */
 object AdBusiness {
     private val localNativeCache by lazy { mutableMapOf<String, ViewGroup>() }
+
+    /**
+     * 展示插页广告
+     * 优先展示 AdMob 插页广告，不可用（无缓存/展示失败）时展示本地插页广告页
+     * @param activity 当前 Activity
+     * @param skipAd 是否跳过广告（业务层控制，如订阅用户免广告）
+     * @param skipFreqCheck 是否跳过频率控制（默认 false，一般不需要）
+     * @param next 广告关闭或跳过后的回调
+     */
+    fun showInter(
+        activity: Activity,
+        skipAd: Boolean = false,
+        skipFreqCheck: Boolean = false,
+        next: () -> Unit
+    ) {
+        AdManager.showInter(
+            activity = activity,
+            skipAd = skipAd,
+            skipFreqCheck = skipFreqCheck,
+            onFallback = {
+                val recommend = RecommendHelper.getRandomRecommendApp()
+                if (recommend == null) {
+                    RecommendUtils.log("localInterAd: 推荐数据为空，直接结束")
+                    next()
+                } else {
+                    LocalInterAdActivity.start(activity, recommend, next)
+                }
+            },
+            next = next
+        )
+    }
+
     fun loadNativeAd(
         viewGroup: ViewGroup,
         page: String,

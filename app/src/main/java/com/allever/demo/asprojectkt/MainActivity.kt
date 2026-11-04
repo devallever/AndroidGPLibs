@@ -28,7 +28,7 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
             }
         }
         mBinding.btnInter.setOnClickListener {
-            AdManager.showInter(this) {
+            AdBusiness.showInter(this) {
                 toast("inter finish")
             }
         }

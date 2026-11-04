@@ -20,4 +20,10 @@
     <color name="vc_chip_selected_text">#7C5CFA</color>
     <color name="vc_chip_unselected_bg">#F5F3F9</color>
     <color name="vc_chip_unselected_text">#666666</color>
+
+    <!-- 本地插页广告页 -->
+    <color name="local_ad_bg">#F7F8FC</color>
+    <color name="local_ad_text_body">#4A4A5C</color>
+    <color name="local_ad_divider">#EEF0F4</color>
+    <color name="local_ad_screenshot_bg">#EDEEF2</color>
 </resources>

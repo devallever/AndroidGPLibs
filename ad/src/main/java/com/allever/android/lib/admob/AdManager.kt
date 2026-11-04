@@ -368,16 +368,33 @@ object AdManager {
     }
 
     /**
+     * AdMob 插页不可用时执行兜底回调，未配置兜底则直接执行结束回调
+     */
+    private fun fallbackOrNext(onFallback: (() -> Unit)?, next: () -> Unit) {
+        if (onFallback == null) {
+            next.invoke()
+            return
+        }
+        // 本地插页同样计入频率控制
+        mLastInterShowTime = System.currentTimeMillis()
+        mSessionInterShowCount++
+        log("InterAd: AdMob 插页不可用，展示本地插页")
+        onFallback.invoke()
+    }
+
+    /**
      * 展示插页广告
      * @param activity 当前 Activity
      * @param skipAd 是否跳过广告（业务层控制，如订阅用户免广告）
-     * @param next 广告关闭或跳过后的回调
      * @param skipFreqCheck 是否跳过频率控制（默认 false，一般不需要）
+     * @param onFallback AdMob 插页不可用或展示失败时的兜底回调（如展示本地插页）
+     * @param next 广告关闭或跳过后的回调
      */
     fun showInter(
         activity: Activity,
         skipAd: Boolean = false,
         skipFreqCheck: Boolean = false,
+        onFallback: (() -> Unit)? = null,
         next: () -> Unit
     ) {
         // Premium 用户免广告
@@ -406,11 +423,11 @@ object AdManager {
             return
         }
 
-        // 缓存为空 → 加载并直接执行 next
+        // 缓存为空 → 加载并执行兜底/结束回调
         if (mInterAdCache == null) {
             justLoadInter()
             log("InterAdCache: 缓存中无广告, 加载广告")
-            next.invoke()
+            fallbackOrNext(onFallback, next)
             return
         }
 
@@ -419,7 +436,7 @@ object AdManager {
             log("InterAdCache: 缓存已过期，加载广告")
             mInterAdCache = null
             justLoadInter()
-            next.invoke()
+            fallbackOrNext(onFallback, next)
             return
         }
 
@@ -443,7 +460,7 @@ object AdManager {
                 // 展示失败时不累计次数，回滚
                 mSessionInterShowCount = (mSessionInterShowCount - 1).coerceAtLeast(0)
                 mInterAdCache = null
-                next()
+                fallbackOrNext(onFallback, next)
                 justLoadInter()
             }
         }
