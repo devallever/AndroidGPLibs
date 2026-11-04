@@ -12,7 +12,7 @@
         android:layout_height="64dp"
         android:layout_gravity="center_horizontal"
         android:layout_margin="24dp"
-        android:background="@drawable/vc_floating_btn_bg"
+        android:background="@drawable/bc_floating_btn_bg"
         android:elevation="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

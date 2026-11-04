@@ -8,56 +8,56 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="vc_default_gray">#eeeeee</color>
-    <color name="vc_default_gray_alpha">#aaeeeeee</color>
+    <color name="bc_default_gray">#eeeeee</color>
+    <color name="bc_default_gray_alpha">#aaeeeeee</color>
 
-    <color name="vc_colorDefault">#2196f3</color>
+    <color name="bc_colorDefault">#2196f3</color>
 
-    <color name="vc_default_theme_color">#2196f3</color>
-    <color name="vc_default_background_color">@color/white</color>
+    <color name="bc_default_theme_color">#2196f3</color>
+    <color name="bc_default_background_color">@color/white</color>
 
-    <color name="vc_default_top_bar_background_color">@color/vc_default_theme_color</color>
-    <color name="vc_default_icon_color_filter">@color/black</color>
-    <color name="vc_default_btn_color_filter">@color/black</color>
-    <color name="vc_default_btn_background">@color/black</color>
-    <color name="vc_default_tv_color">@color/black</color>
+    <color name="bc_default_top_bar_background_color">@color/bc_default_theme_color</color>
+    <color name="bc_default_icon_color_filter">@color/black</color>
+    <color name="bc_default_btn_color_filter">@color/black</color>
+    <color name="bc_default_btn_background">@color/black</color>
+    <color name="bc_default_tv_color">@color/black</color>
 
-    <color name="vc_top_bar_icon_color_filter">@color/white</color>
-    <color name="vc_top_bar_tv_color">@color/white</color>
+    <color name="bc_top_bar_icon_color_filter">@color/white</color>
+    <color name="bc_top_bar_tv_color">@color/white</color>
 
-    <color name="vc_divider_color">#19474747</color>
+    <color name="bc_divider_color">#19474747</color>
 
-    <color name="vc_main_tab_highlight">@color/vc_default_theme_color</color>
-    <color name="vc_main_tab_unselect_color">#8a8a8a</color>
+    <color name="bc_main_tab_highlight">@color/bc_default_theme_color</color>
+    <color name="bc_main_tab_unselect_color">#8a8a8a</color>
 
-    <color name="vc_item_ringtone_un_selected">#8a8a8a</color>
-    <color name="vc_item_ringtone_selected">@color/vc_default_theme_color</color>
+    <color name="bc_item_ringtone_un_selected">#8a8a8a</color>
+    <color name="bc_item_ringtone_selected">@color/bc_default_theme_color</color>
 
-    <color name="vc_start_color">#0288d1</color>
-    <color name="vc_end_color">#1976d2</color>
+    <color name="bc_start_color">#0288d1</color>
+    <color name="bc_end_color">#1976d2</color>
 
     <!-- New theme colors for redesigned MainFragment -->
-    <color name="vc_bg_start">#F0EDFB</color>
-    <color name="vc_bg_end">#EDE7F6</color>
+    <color name="bc_bg_start">#F0EDFB</color>
+    <color name="bc_bg_end">#EDE7F6</color>
 
-    <color name="vc_gradient_start">#5B7CFA</color>
-    <color name="vc_gradient_end">#8B5CF6</color>
+    <color name="bc_gradient_start">#5B7CFA</color>
+    <color name="bc_gradient_end">#8B5CF6</color>
 
-    <color name="vc_card_bg">#FFFFFF</color>
-    <color name="vc_card_shadow">#14000000</color>
+    <color name="bc_card_bg">#FFFFFF</color>
+    <color name="bc_card_shadow">#14000000</color>
 
-    <color name="vc_chip_selected_bg">#E8E3FF</color>
-    <color name="vc_chip_selected_text">#7C5CFA</color>
-    <color name="vc_chip_unselected_bg">#F5F3F9</color>
-    <color name="vc_chip_unselected_text">#666666</color>
+    <color name="bc_chip_selected_bg">#E8E3FF</color>
+    <color name="bc_chip_selected_text">#7C5CFA</color>
+    <color name="bc_chip_unselected_bg">#F5F3F9</color>
+    <color name="bc_chip_unselected_text">#666666</color>
 
-    <color name="vc_label_cyan">#00BCD4</color>
-    <color name="vc_label_blue">#2196F3</color>
-    <color name="vc_label_purple">#9C27B0</color>
-    <color name="vc_label_orange">#FF9800</color>
+    <color name="bc_label_cyan">#00BCD4</color>
+    <color name="bc_label_blue">#2196F3</color>
+    <color name="bc_label_purple">#9C27B0</color>
+    <color name="bc_label_orange">#FF9800</color>
 
-    <color name="vc_text_primary">#1A1A2E</color>
-    <color name="vc_text_secondary">#8E8EA0</color>
-    <color name="vc_divider">#F0EEF5</color>
-    <color name="vc_hint">#B0AEC1</color>
+    <color name="bc_text_primary">#1A1A2E</color>
+    <color name="bc_text_secondary">#8E8EA0</color>
+    <color name="bc_divider">#F0EEF5</color>
+    <color name="bc_hint">#B0AEC1</color>
 </resources>

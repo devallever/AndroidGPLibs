@@ -16,7 +16,7 @@ import android.view.View
 import android.view.WindowManager
 import app.allever.android.lib.basic.ProjectConfig
 import app.allever.android.lib.basic.R
-import app.allever.android.lib.basic.databinding.VcDialogPrivacyBinding
+import app.allever.android.lib.basic.databinding.DialogBasicPrivacyBinding
 import app.funnyappptech.android.fake.call.util.SystemUtils
 
 /**
@@ -43,7 +43,7 @@ class PrivacyDialog private constructor(
 ) {
 
     private val dialog: Dialog
-    private val binding: VcDialogPrivacyBinding = VcDialogPrivacyBinding.inflate(LayoutInflater.from(activity))
+    private val binding: DialogBasicPrivacyBinding = DialogBasicPrivacyBinding.inflate(LayoutInflater.from(activity))
     private var isDismissed = false
 
     init {
@@ -67,7 +67,7 @@ class PrivacyDialog private constructor(
      * 安全检查：indexOf < 0 时降级为普通文本，避免 setSpan 崩溃。
      */
     private fun setupClickableMessage() {
-        val rawMessage = activity.getString(R.string.vc_privacy_dialog_message)
+        val rawMessage = activity.getString(R.string.bc_privacy_dialog_message)
         val span = SpannableString(rawMessage)
 
         // 同时匹配中英文关键词，兼容两种语言环境
@@ -93,7 +93,7 @@ class PrivacyDialog private constructor(
                 override fun updateDrawState(ds: TextPaint) {
                     super.updateDrawState(ds)
                     ds.isUnderlineText = true
-                    ds.color = activity.getColor(R.color.vc_gradient_start)
+                    ds.color = activity.getColor(R.color.bc_gradient_start)
                     ds.isFakeBoldText = true
                 }
             }

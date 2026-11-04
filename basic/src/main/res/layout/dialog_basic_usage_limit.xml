@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/vc_card_bg"
+    app:cardBackgroundColor="@color/bc_card_bg"
     app:cardCornerRadius="28dp"
     app:cardElevation="12dp"
     app:cardUseCompatPadding="true">
@@ -24,7 +24,7 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/vc_dialog_icon_circle_bg"
+            android:background="@drawable/bc_dialog_icon_circle_bg"
             android:padding="14dp"
             android:src="@drawable/ic_bc_bell"
             app:tint="@color/white" />
@@ -34,8 +34,8 @@
             android:id="@+id/tvDialogTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/vc_usage_dialog_title"
-            android:textColor="@color/vc_text_primary"
+            android:text="@string/bc_usage_dialog_title"
+            android:textColor="@color/bc_text_primary"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
@@ -46,8 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/vc_usage_dialog_message"
-            android:textColor="@color/vc_text_secondary"
+            android:text="@string/bc_usage_dialog_message"
+            android:textColor="@color/bc_text_secondary"
             android:textSize="14sp"
             android:lineSpacingExtra="4dp"
             android:layout_marginBottom="24dp" />
@@ -58,11 +58,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/vc_dialog_chip_bg"
+            android:background="@drawable/bc_dialog_chip_bg"
             android:paddingHorizontal="16dp"
             android:paddingVertical="6dp"
-            android:text="@string/vc_usage_dialog_reward_chip"
-            android:textColor="@color/vc_chip_selected_text"
+            android:text="@string/bc_usage_dialog_reward_chip"
+            android:textColor="@color/bc_chip_selected_text"
             android:textSize="13sp"
             android:textStyle="bold" />
 
@@ -75,12 +75,12 @@
                 android:id="@+id/btnWatchAd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/vc_dialog_btn_reward_bg"
+                android:background="@drawable/bc_dialog_btn_reward_bg"
                 android:gravity="center"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:layout_margin="10dp"
-                android:text="@string/vc_usage_dialog_watch_ad"
+                android:text="@string/bc_usage_dialog_watch_ad"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -92,7 +92,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:layout_gravity="center"
-                android:indeterminateTint="@color/vc_gradient_start"
+                android:indeterminateTint="@color/bc_gradient_start"
                 android:visibility="gone" />
 
         </FrameLayout>
@@ -106,8 +106,8 @@
             android:paddingHorizontal="24dp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:text="@string/vc_bc_cancel"
-            android:textColor="@color/vc_text_secondary"
+            android:text="@string/bc_bc_cancel"
+            android:textColor="@color/bc_text_secondary"
             android:textSize="14sp" />
 
     </LinearLayout>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/vc_card_bg"
+    app:cardBackgroundColor="@color/bc_card_bg"
     app:cardCornerRadius="24dp"
     app:cardElevation="12dp"
     app:cardUseCompatPadding="true">
@@ -23,8 +23,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/vc_privacy_dialog_title"
-            android:textColor="@color/vc_text_primary"
+            android:text="@string/bc_privacy_dialog_title"
+            android:textColor="@color/bc_text_primary"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginBottom="16dp" />
@@ -35,8 +35,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
-            android:text="@string/vc_privacy_dialog_message"
-            android:textColor="@color/vc_text_secondary"
+            android:text="@string/bc_privacy_dialog_message"
+            android:textColor="@color/bc_text_secondary"
             android:textSize="14sp"
             android:lineSpacingExtra="4dp"
             android:layout_marginBottom="20dp" />
@@ -45,7 +45,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/vc_divider"
+            android:background="@color/bc_divider"
             android:layout_marginBottom="0dp" />
 
         <!-- 按钮行 -->
@@ -63,8 +63,8 @@
                 android:gravity="center"
                 android:paddingTop="14dp"
                 android:paddingBottom="14dp"
-                android:text="@string/vc_privacy_dialog_disagree"
-                android:textColor="@color/vc_text_secondary"
+                android:text="@string/bc_privacy_dialog_disagree"
+                android:textColor="@color/bc_text_secondary"
                 android:textSize="15sp"
                 android:background="?attr/selectableItemBackgroundBorderless" />
 
@@ -72,7 +72,7 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="@color/vc_divider" />
+                android:background="@color/bc_divider" />
 
             <!-- 同意并继续 -->
             <TextView
@@ -83,8 +83,8 @@
                 android:gravity="center"
                 android:paddingTop="14dp"
                 android:paddingBottom="14dp"
-                android:text="@string/vc_privacy_dialog_agree"
-                android:textColor="@color/vc_gradient_start"
+                android:text="@string/bc_privacy_dialog_agree"
+                android:textColor="@color/bc_gradient_start"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:background="?attr/selectableItemBackgroundBorderless" />

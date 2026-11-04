@@ -5,13 +5,13 @@ import app.allever.android.lib.basic.ProjectConfig
 import app.allever.android.lib.basic.core.AbstractActivity
 import app.allever.android.lib.basic.core.loadRound
 import app.allever.android.lib.basic.databinding.ActivityBasicSplashBinding
-import app.allever.android.lib.basic.databinding.VcActivityAboutBinding
+import app.allever.android.lib.basic.databinding.ActivityBasicAboutBinding
 import app.funnyappptech.android.fake.call.util.SystemUtils
 import kotlin.getValue
 
 class BasicAboutActivity : AbstractActivity() {
     //binding by lazy
-    private val mBinding by lazy { VcActivityAboutBinding.inflate(layoutInflater) }
+    private val mBinding by lazy { ActivityBasicAboutBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)

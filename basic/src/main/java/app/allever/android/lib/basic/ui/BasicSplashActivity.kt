@@ -3,16 +3,13 @@ package app.allever.android.lib.basic.ui
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.activity.OnBackPressedCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import app.allever.android.lib.basic.ProjectConfig
 import app.allever.android.lib.basic.R
 import app.allever.android.lib.basic.core.AbstractActivity
 import app.allever.android.lib.basic.core.DisplayHelper
-import app.allever.android.lib.basic.core.StatusBarCompat
 import app.allever.android.lib.basic.core.toast
 import app.allever.android.lib.basic.databinding.ActivityBasicSplashBinding
 import app.allever.android.lib.basic.ui.dialog.PrivacyDialog
@@ -64,7 +61,7 @@ open class BasicSplashActivity : AbstractActivity() {
                         }
                     },
                     onDisagree = {
-                        toast(getString(R.string.vc_privacy_dialog_toast))
+                        toast(getString(R.string.bc_privacy_dialog_toast))
                         finish()
                     }
                 )

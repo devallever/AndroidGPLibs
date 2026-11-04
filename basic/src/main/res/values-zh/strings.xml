@@ -1,23 +1,38 @@
 <resources>
 
-    <string name="vc_share">分享</string>
-    <string name="vc_feedback">反馈</string>
-    <string name="vc_about">关于</string>
-    <string name="vc_support">支持我们</string>
-    <string name="vc_about_right">Copyright @2018–2026 %s All Rights Reserved</string>
+    <string name="bc_share">分享</string>
+    <string name="bc_feedback">反馈</string>
+    <string name="bc_about">关于</string>
+    <string name="bc_support">支持我们</string>
+    <string name="bc_about_right">Copyright @2018–2026 %s All Rights Reserved</string>
 
     <!-- ===== FeedbackHelper redesigned ===== -->
-    <string name="vc_feedback_user_label">您的反馈（请描述问题或建议）：</string>
-    <string name="vc_feedback_env_label">环境信息（自动采集，请勿删除）</string>
-    <string name="vc_feedback_chooser_title">选择邮件应用</string>
-    <string name="vc_feedback_no_mail_client">未找到邮件应用，反馈已复制到剪贴板</string>
-    <string name="vc_feedback_clip_label">FakeCall 反馈</string>
+    <string name="bc_feedback_user_label">您的反馈（请描述问题或建议）：</string>
+    <string name="bc_feedback_env_label">环境信息（自动采集，请勿删除）</string>
+    <string name="bc_feedback_chooser_title">选择邮件应用</string>
+    <string name="bc_feedback_no_mail_client">未找到邮件应用，反馈已复制到剪贴板</string>
+    <string name="bc_feedback_clip_label">%s 反馈</string>
 
     <!-- ===== Privacy Dialog ===== -->
-    <string name="vc_privacy_dialog_title">隐私政策</string>
-    <string name="vc_privacy_dialog_message">尊敬的用户，欢迎使用模拟来电！\n\n在您使用前请仔细阅读《隐私政策》内所有条款。我们将严格遵守您同意的各项条款，向您说明如下：\n\n1.为向您提供软件的使用功能，我们会收集、使用必要的信息；\n2.基于您的明示授权，我们可能会获取您的悬浮窗权限和点亮屏幕权限（为了模拟真实的来电场景）等信息，您有权拒绝获取授权；\n3.我们会采取先进的安全措施保护您的信息安全。</string>
-    <string name="vc_privacy_dialog_disagree">不同意</string>
-    <string name="vc_privacy_dialog_agree">同意并继续</string>
-    <string name="vc_privacy_dialog_toast">未同意本软件，我们将无法为您提供服务。</string>
+    <string name="bc_privacy_dialog_title">隐私政策</string>
+    <string name="bc_privacy_dialog_message">尊敬的用户，欢迎使用模拟来电！\n\n在您使用前请仔细阅读《隐私政策》内所有条款。我们将严格遵守您同意的各项条款，向您说明如下：\n\n1.为向您提供软件的使用功能，我们会收集、使用必要的信息；\n2.基于您的明示授权，我们可能会获取您的悬浮窗权限和点亮屏幕权限（为了模拟真实的来电场景）等信息，您有权拒绝获取授权；\n3.我们会采取先进的安全措施保护您的信息安全。</string>
+    <string name="bc_privacy_dialog_disagree">不同意</string>
+    <string name="bc_privacy_dialog_agree">同意并继续</string>
+    <string name="bc_privacy_dialog_toast">未同意本软件，我们将无法为您提供服务。</string>
+
+    <!-- ===== Usage Limit Dialog ===== -->
+    <string name="bc_usage_dialog_title">今日次数已用完</string>
+    <string name="bc_usage_dialog_message">今日免费次数已用完，观看短视频即可获得更多使用次数。</string>
+    <string name="bc_usage_dialog_reward_chip">+3 次额外机会</string>
+    <string name="bc_usage_dialog_watch_ad">观看视频继续使用</string>
+    <string name="bc_usage_reward_success">奖励到账！获得 %d 次额外机会</string>
+    <string name="bc_usage_ad_fail">暂时无法加载广告，请稍后再试</string>
+    <string name="bc_bc_cancel">取消</string>
+
+    <!-- ===== Usage Reward Dialog (positive, triggered by tapping badge) ===== -->
+    <string name="bc_usage_reward_title">获取更多次数</string>
+    <string name="bc_usage_reward_message">观看短视频，立即获得额外使用次数。</string>
+    <string name="bc_usage_reward_watch_ad">观看视频 立即+3</string>
+    <string name="bc_save_success">save success!</string>
 
 </resources>

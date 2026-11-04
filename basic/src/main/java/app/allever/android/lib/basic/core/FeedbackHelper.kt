@@ -33,7 +33,7 @@ object FeedbackHelper {
         context ?: return
 
         val appName = ProjectConfig.getAppName()
-        val subject = "[$appName] ${context.getString(R.string.vc_feedback)}"
+        val subject = "[$appName] ${context.getString(R.string.bc_feedback)}"
         val body = buildFeedbackBody(context)
 
         val uri = Uri.parse("mailto:$FEEDBACK_TO")
@@ -45,7 +45,7 @@ object FeedbackHelper {
 
         if (intent.resolveActivity(context.packageManager) != null) {
             context.startActivity(
-                Intent.createChooser(intent, context.getString(R.string.vc_feedback_chooser_title))
+                Intent.createChooser(intent, context.getString(R.string.bc_feedback_chooser_title))
             )
         } else {
             copyToClipboard(context, body)
@@ -59,11 +59,11 @@ object FeedbackHelper {
     private fun buildFeedbackBody(context: Context): String {
         val divider = "─────────────────────────"
         return buildString {
-            appendLine(context.getString(R.string.vc_feedback_user_label))
+            appendLine(context.getString(R.string.bc_feedback_user_label))
             appendLine()
             appendLine()
             appendLine(divider)
-            appendLine(context.getString(R.string.vc_feedback_env_label))
+            appendLine(context.getString(R.string.bc_feedback_env_label))
             appendLine(divider)
             appendLine(buildAppBlock(context))
             appendLine()
@@ -146,7 +146,7 @@ object FeedbackHelper {
     }
 
     private fun copyToClipboard(context: Context, text: String) {
-        val label = context.getString(R.string.vc_feedback_clip_label)
+        val label = context.getString(R.string.bc_feedback_clip_label, ProjectConfig.getAppName())
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val cm = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
             cm.setPrimaryClip(ClipData.newPlainText(label, text))

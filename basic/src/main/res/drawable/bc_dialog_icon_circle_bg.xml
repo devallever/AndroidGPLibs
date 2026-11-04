@@ -3,8 +3,8 @@
     android:shape="oval">
 
     <gradient
-        android:startColor="@color/vc_gradient_start"
-        android:endColor="@color/vc_gradient_end"
+        android:startColor="@color/bc_gradient_start"
+        android:endColor="@color/bc_gradient_end"
         android:angle="135" />
 
 </shape>

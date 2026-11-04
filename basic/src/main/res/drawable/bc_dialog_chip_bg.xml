@@ -2,7 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
 
-    <solid android:color="@color/vc_card_bg" />
-    <corners android:radius="28dp" />
+    <solid android:color="@color/bc_chip_selected_bg" />
+    <corners android:radius="16dp" />
 
 </shape>

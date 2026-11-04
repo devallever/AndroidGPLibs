@@ -8,14 +8,14 @@ import android.view.LayoutInflater
 import androidx.constraintlayout.widget.ConstraintLayout
 import app.allever.android.lib.basic.R
 import app.allever.android.lib.basic.UsageManager
-import app.allever.android.lib.basic.databinding.BcLeftCountViewBinding
+import app.allever.android.lib.basic.databinding.BasicLeftCountViewBinding
 import app.allever.android.lib.basic.ui.dialog.UsageLimitDialog
 
 class LeftCountView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : ConstraintLayout(context, attrs) {
     private val mBinding by lazy {
-        BcLeftCountViewBinding.inflate(
+        BasicLeftCountViewBinding.inflate(
             LayoutInflater.from(context),
             this,
             true
@@ -27,9 +27,9 @@ class LeftCountView @JvmOverloads constructor(
         mBinding.tvLeftCount.setOnClickListener {
             UsageLimitDialog.show(
                 context as Activity,
-                title = context.getString(R.string.vc_usage_reward_title),
-                message = context.getString(R.string.vc_usage_reward_message),
-                watchAdText = context.getString(R.string.vc_usage_reward_watch_ad)
+                title = context.getString(R.string.bc_usage_reward_title),
+                message = context.getString(R.string.bc_usage_reward_message),
+                watchAdText = context.getString(R.string.bc_usage_reward_watch_ad)
             ) { updateLeftCount() }
         }
     }
