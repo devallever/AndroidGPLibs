@@ -6,6 +6,7 @@ import app.allever.android.lib.basic.core.ActivityHelper
 import app.allever.android.lib.basic.core.toast
 import app.allever.android.lib.basic.ui.BasicSettingActivity
 import app.allever.android.lib.basic.ui.dialog.UsageLimitDialog
+import app.allever.android.lib.billing.BillingActivity
 import com.allever.android.lib.ad.AdBusiness
 import com.allever.android.lib.admob.AdCallback
 import com.allever.android.lib.admob.AdManager
@@ -63,6 +64,9 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
         }
 
 
+        mBinding.btnPremiumContainer.setOnClickListener {
+            ActivityHelper.startActivity<BillingActivity>()
+        }
     }
 
     private fun doFunction() {

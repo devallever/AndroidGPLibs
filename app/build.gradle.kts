@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.allever.demo.asprojectkt"
-    compileSdk = 34
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.allever.demo.asprojectkt"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 36
         versionCode = 1
         versionName = "1.0"
 
@@ -54,6 +54,7 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation(project(":basic"))
+    implementation(project(":billing"))
 
 //    implementation(project(":admob"))
 //    implementation(project(":recommend"))

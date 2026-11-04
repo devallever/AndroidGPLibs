@@ -102,4 +102,8 @@ object ProjectConfig {
     fun getInitBillingTask(): () -> Unit {
         return config.initBillingTask
     }
+
+    fun hasActiveSubscription(): Boolean {
+        return config.hasActiveSubscriptionCache.invoke()
+    }
 }

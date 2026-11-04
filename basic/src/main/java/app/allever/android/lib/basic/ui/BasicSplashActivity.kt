@@ -121,7 +121,7 @@ open class BasicSplashActivity : AbstractActivity() {
                     if (!isActive || isDestroyed || isFinishing || lifecycle.currentState != Lifecycle.State.RESUMED)return@init
                     if (AdManager.isInitSuccess()) {
                         if (!isActive) return@init
-                        if (ProjectConfig.billingEnable() &&  hasActiveSubscription()){
+                        if (ProjectConfig.billingEnable() && ProjectConfig.hasActiveSubscription()){
                             showAd = true
                             jumpTask.run()
                             return@init
@@ -155,9 +155,5 @@ open class BasicSplashActivity : AbstractActivity() {
 
     private fun huaweiWay() {
 
-    }
-
-    open fun hasActiveSubscription(): Boolean {
-        return false
     }
 }

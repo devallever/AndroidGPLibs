@@ -12,6 +12,7 @@ data class Config(
     val adConfig: IAdConfig,
     val billingEnable: Boolean,
     val privacyUrl: String,
+    val hasActiveSubscriptionCache: () -> Boolean,
     val initBillingTask: () -> Unit
 ) {
 }
