@@ -89,6 +89,11 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <Button
+                android:id="@+id/btnRecommend"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="推荐功能" />
 
 
         </LinearLayout>

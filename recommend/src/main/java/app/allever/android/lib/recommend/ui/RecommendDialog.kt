@@ -88,7 +88,7 @@ class RecommendDialog(context: Context, val exit: () -> Unit = {}) :
         super.show()
         mRecommend = RecommendHelper.getRecommendApp()
         mBinding.ivRecommendApp.loadRound(
-            RecommendId.getIconRes(mRecommend.id),
+            RecommendId.getIconRes(mRecommend.pkg),
             RecommendUtils.dip2px(4).toFloat()
         )
         mBinding.ratingBar.rating = 5f

@@ -29,7 +29,7 @@ class RecommendAdapter(val data: MutableList<Recommend>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
         holder.binding.apply {
-            ivIcon.loadCircle(RecommendId.getIconRes(item.id), 0)
+            ivIcon.loadCircle(RecommendId.getIconRes(item.pkg), 0)
             tvTitle.text = item.name
             tvDesc.text = item.desc
             if (RecommendUtils.isAppExist(RecommendUtils.context, item.pkg)) {

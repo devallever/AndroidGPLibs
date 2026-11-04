@@ -7,6 +7,7 @@ import app.allever.android.lib.basic.core.toast
 import app.allever.android.lib.basic.ui.BasicSettingActivity
 import app.allever.android.lib.basic.ui.dialog.UsageLimitDialog
 import app.allever.android.lib.billing.BillingActivity
+import app.allever.android.lib.recommend.ui.RecommendListActivity
 import com.allever.android.lib.ad.AdBusiness
 import com.allever.android.lib.admob.AdCallback
 import com.allever.android.lib.admob.AdManager
@@ -66,6 +67,10 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
 
         mBinding.btnPremiumContainer.setOnClickListener {
             ActivityHelper.startActivity<BillingActivity>()
+        }
+
+        mBinding.btnRecommend.setOnClickListener {
+            ActivityHelper.startActivity<RecommendListActivity>()
         }
     }
 

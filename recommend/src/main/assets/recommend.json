@@ -1,81 +1,168 @@
 {
   "msg": "",
   "code": 0,
-  "data":[
+  "data": [
     {
       "id": 9,
+      "category": "fakecall",
       "pkg": "app.funnyappptech.android.fake.call",
+      "size": "1MB",
       "name": "FakeCall",
       "desc": "FakeCall — Virtual Call Simulator",
-      "iconUrl": "",
+      "longDesc": "FakeCall — Virtual Call Simulator",
+      "iconUrl": "https://devallever.github.io/app/fakecall/image/logo.webp",
+      "bannerUrl": "https://devallever.github.io/app/fakecall/image/banner.webp",
+      "screenUrl": [
+        "https://devallever.github.io/app/fakecall/image/screen/01.webp",
+        "https://devallever.github.io/app/fakecall/image/screen/02.webp",
+        "https://devallever.github.io/app/fakecall/image/screen/03.webp",
+        "https://devallever.github.io/app/fakecall/image/screen/04.webp"
+      ],
       "version": "v1.0.0"
     },
     {
       "id": 1,
+      "category": "devicedetector",
       "pkg": "app.allever.android.device.detector",
+      "size": "1MB",
       "name": "Device Detector",
       "desc": "Bluetooth Device Detector & Metal Detector",
-      "iconUrl": "",
+      "longDesc": "Bluetooth Device Detector & Metal Detector",
+      "iconUrl": "https://devallever.github.io/app/devicedetector/image/logo.webp",
+      "bannerUrl": "https://devallever.github.io/app/devicedetector/image/banner.webp",
+      "screenUrl": [
+        "https://devallever.github.io/app/devicedetector/image/screen/01.webp",
+        "https://devallever.github.io/app/devicedetector/image/screen/02.webp",
+        "https://devallever.github.io/app/devicedetector/image/screen/03.webp",
+        "https://devallever.github.io/app/devicedetector/image/screen/04.webp"
+      ],
       "version": "v1.0.0"
     },
     {
       "id": 2,
+      "category": "justnote",
       "pkg": "app.allever.android.note.just",
+      "size": "1MB",
       "name": "Just Note",
       "desc": "Just Note - Simple Note App",
-      "iconUrl": "",
+      "longDesc": "Just Note - Simple Note App",
+      "iconUrl": "https://devallever.github.io/app/justnote/image/logo.webp",
+      "bannerUrl": "https://devallever.github.io/app/justnote/image/banner.webp",
+      "screenUrl": [
+        "https://devallever.github.io/app/justnote/image/screen/01.webp",
+        "https://devallever.github.io/app/justnote/image/screen/02.webp",
+        "https://devallever.github.io/app/justnote/image/screen/03.webp",
+        "https://devallever.github.io/app/justnote/image/screen/04.webp"
+      ],
       "version": "v1.0.0"
     },
     {
       "id": 6,
+      "category": "cardmaker",
       "pkg": "com.allever.android.card.text.pic.text",
+      "size": "1MB",
       "name": "Card Maker",
       "desc": "Make Text To Beautiful Cards !",
-      "iconUrl": "",
+      "longDesc": "Make Text To Beautiful Cards !",
+      "iconUrl": "https://devallever.github.io/app/cardmaker/image/logo.webp",
+      "bannerUrl": "https://devallever.github.io/app/cardmaker/image/banner.webp",
+      "screenUrl": [
+        "https://devallever.github.io/app/cardmaker/image/screen/01.webp",
+        "https://devallever.github.io/app/cardmaker/image/screen/02.webp",
+        "https://devallever.github.io/app/cardmaker/image/screen/03.webp",
+        "https://devallever.github.io/app/cardmaker/image/screen/04.webp"
+      ],
       "version": "v1.0.0"
     },
     {
       "id": 8,
+      "category": "gif",
       "pkg": "app.funny.tech.gif.memes",
+      "size": "1MB",
       "name": "Gif Memes - Maker & Downloader",
       "desc": "recommend & search & download gif",
-      "iconUrl": "",
+      "iconUrl": "https://devallever.github.io/app/gif/image/logo.webp",
+      "bannerUrl": "https://devallever.github.io/app/gif/image/banner.webp",
+      "screenUrl": [
+        "https://devallever.github.io/app/gif/image/screen/01.webp",
+        "https://devallever.github.io/app/gif/image/screen/02.webp",
+        "https://devallever.github.io/app/gif/image/screen/03.webp",
+        "https://devallever.github.io/app/gif/image/screen/04.webp"
+      ],
+      "longDesc": "recommend & search & download gif",
       "version": "v1.0.0"
     },
     {
       "id": 4,
+      "category": "linklinkgame",
       "pkg": "app.allever.android.game.linklinkgame",
+      "size": "1MB",
       "name": "Link Link Game",
       "desc": "Link Link Game - Challenge your brain",
-      "iconUrl": "",
+      "longDesc": "Link Link Game - Challenge your brain",
+      "iconUrl": "https://devallever.github.io/app/linklinkgame/image/logo.webp",
+      "bannerUrl": "https://devallever.github.io/app/linklinkgame/image/banner.webp",
+      "screenUrl": [
+        "https://devallever.github.io/app/linklinkgame/image/screen/01.webp",
+        "https://devallever.github.io/app/linklinkgame/image/screen/02.webp",
+        "https://devallever.github.io/app/linklinkgame/image/screen/03.webp",
+        "https://devallever.github.io/app/linklinkgame/image/screen/04.webp"
+      ],
       "version": "v1.0.0"
     },
     {
       "id": 3,
+      "category": "memorykitties",
       "pkg": "app.allever.android.game.memory.kitties",
+      "size": "1MB",
       "name": "Kitties Memory Game",
       "desc": "Kitties Memory Game - Challenge your brain",
-      "iconUrl": "",
+      "longDesc": "Kitties Memory Game - Challenge your brain",
+      "iconUrl": "https://devallever.github.io/app/memorykitties/image/logo.webp",
+      "bannerUrl": "https://devallever.github.io/app/memorykitties/image/banner.webp",
+      "screenUrl": [
+        "https://devallever.github.io/app/memorykitties/image/screen/01.webp",
+        "https://devallever.github.io/app/memorykitties/image/screen/02.webp",
+        "https://devallever.github.io/app/memorykitties/image/screen/03.webp",
+        "https://devallever.github.io/app/memorykitties/image/screen/04.webp"
+      ],
       "version": "v1.0.0"
     },
-
     {
       "id": 5,
+      "category": "waterremider",
       "pkg": "app.allever.android.water.reminder",
+      "size": "1MB",
       "name": "Water Reminder",
       "desc": "Water Reminder & Tracking",
-      "iconUrl": "",
+      "longDesc": "Water Reminder & Tracking",
+      "iconUrl": "https://devallever.github.io/app/waterremider/image/logo.webp",
+      "bannerUrl": "https://devallever.github.io/app/waterremider/image/banner.webp",
+      "screenUrl": [
+        "https://devallever.github.io/app/waterremider/image/screen/01.webp",
+        "https://devallever.github.io/app/waterremider/image/screen/02.webp",
+        "https://devallever.github.io/app/waterremider/image/screen/03.webp",
+        "https://devallever.github.io/app/waterremider/image/screen/04.webp"
+      ],
       "version": "v1.0.0"
     },
-
     {
       "id": 7,
+      "category": "qrcode",
       "pkg": "app.allever.android.ai.qr.scanner",
+      "size": "1MB",
       "name": "QR Scanner",
       "desc": "Scan, Create & Share Codes Effortlessly",
-      "iconUrl": "",
+      "longDesc": "Scan, Create & Share Codes Effortlessly",
+      "iconUrl": "https://devallever.github.io/app/qrcode/image/logo.webp",
+      "bannerUrl": "https://devallever.github.io/app/qrcode/image/banner.webp",
+      "screenUrl": [
+        "https://devallever.github.io/app/qrcode/image/screen/01.webp",
+        "https://devallever.github.io/app/qrcode/image/screen/02.webp",
+        "https://devallever.github.io/app/qrcode/image/screen/03.webp",
+        "https://devallever.github.io/app/qrcode/image/screen/04.webp"
+      ],
       "version": "v1.0.0"
     }
-
   ]
 }

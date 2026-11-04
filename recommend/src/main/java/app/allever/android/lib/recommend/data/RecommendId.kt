@@ -4,20 +4,20 @@ import app.allever.android.lib.recommend.R
 
 class RecommendId {
     companion object {
-        const val DEVICE_DETECTOR = 1
-        const val JUST_NOTE = 2
-        const val MEMORY_KITTIE = 3
-        const val LINK_LINK_GAME = 4
-        const val WATER_REMINDER = 5
-        const val CARD_MAKER = 6
-        const val QR_SCANNER = 7
+        const val DEVICE_DETECTOR = "app.allever.android.device.detector"
+        const val JUST_NOTE = "app.allever.android.note.just"
+        const val MEMORY_KITTIE = "app.allever.android.game.memory.kitties"
+        const val LINK_LINK_GAME = "app.allever.android.game.linklinkgame"
+        const val WATER_REMINDER = "app.allever.android.water.reminder"
+        const val CARD_MAKER = "com.allever.android.card.text.pic.text"
+        const val QR_SCANNER = "app.allever.android.ai.qr.scanner"
 
-        const val GIF_MEMES = 8
+        const val GIF_MEMES = "app.funny.tech.gif.memes"
 
-        const val FAKE_CALL = 9
+        const val FAKE_CALL = "app.funnyappptech.android.fake.call"
 
-        fun getIconRes(id: Int): Int {
-            return when (id) {
+        fun getIconRes(pkg: String): Int {
+            return when (pkg) {
                 DEVICE_DETECTOR -> {
                     R.drawable.device_detector
                 }
