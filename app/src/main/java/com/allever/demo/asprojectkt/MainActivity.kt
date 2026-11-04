@@ -1,6 +1,5 @@
 package com.allever.demo.asprojectkt
 
-import android.annotation.SuppressLint
 import app.allever.android.lib.basic.UsageManager
 import app.allever.android.lib.basic.core.AbstractBindingActivity
 import app.allever.android.lib.basic.core.ActivityHelper
@@ -44,9 +43,30 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
         }
 
         mBinding.btnFloatConsumeCount.setOnClickListener {
+            // === 使用次数检测（Premium 用户跳过） ===
+//            val isPremium = BillingManager.hasActiveSubscription()
+            val isPremium = false
+            if (!isPremium && !UsageManager.consume()) {
+                // 次数耗尽，弹窗提示看广告
+                UsageLimitDialog.show(this) { success ->
+                    if (success && UsageManager.consume()) {
+                        mBinding.leftCountView.updateLeftCount()
+                        doFunction()
+                    }
+                    mBinding.leftCountView.updateLeftCount()
+                }
+                return@setOnClickListener
+            }
+
+            if (!isPremium) mBinding.leftCountView.updateLeftCount()
+            doFunction()
         }
 
 
+    }
+
+    private fun doFunction() {
+        toast("执行成功，消耗1个次数")
     }
 
 
