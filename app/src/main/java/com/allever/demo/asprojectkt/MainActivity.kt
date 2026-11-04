@@ -46,23 +46,7 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
         mBinding.btnFloatConsumeCount.setOnClickListener {
         }
 
-        mBinding.tvLeftCount.setOnClickListener {
-            UsageLimitDialog.show(
-                this,
-                title = getString(R.string.vc_usage_reward_title),
-                message = getString(R.string.vc_usage_reward_message),
-                watchAdText = getString(R.string.vc_usage_reward_watch_ad)
-            ) { updateLeftCount() }
-        }
 
-    }
-
-    /**
-     * 将剩余使用次数同步到右下角圆形徽章 tvLeftCount。
-     */
-    @SuppressLint("SetTextI18n")
-    private fun updateLeftCount() {
-        mBinding.tvLeftCount.text = UsageManager.getRemaining().toString()
     }
 
 
@@ -70,7 +54,7 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
         super.onResume()
         AdManager.resumeBanner(mBinding.bannerContainer)
         AdBusiness.loadNativeAd(mBinding.nativeContainer, "main")
-        updateLeftCount()
+        mBinding.leftCountView.updateLeftCount()
     }
 
     override fun onPause() {

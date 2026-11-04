@@ -1,9 +1,3 @@
 <resources>
     <string name="app_name">AndroidGPLibs</string>
-
-    <!-- ===== Usage Reward Dialog (positive, triggered by tapping badge) ===== -->
-    <string name="vc_usage_reward_title">Get more uses</string>
-    <string name="vc_usage_reward_message">Watch a short video and instantly get extra uses for today.</string>
-    <string name="vc_usage_reward_watch_ad">Watch video to get +3</string>
-    <string name="vc_save_success">save success!</string>
 </resources>
