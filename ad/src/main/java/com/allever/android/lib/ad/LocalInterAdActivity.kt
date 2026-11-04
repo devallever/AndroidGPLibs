@@ -2,11 +2,13 @@ package com.allever.android.lib.ad
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.activity.OnBackPressedCallback
 import app.allever.android.lib.ad.R
 import app.allever.android.lib.ad.databinding.ActivityLocalAdBinding
 import app.allever.android.lib.recommend.data.Recommend
@@ -65,6 +67,7 @@ class LocalInterAdActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         mBinding = ActivityLocalAdBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+        setupTransition()
 
         mDismissCallback = mPendingDismissCallback
 
@@ -94,8 +97,46 @@ class LocalInterAdActivity : AppCompatActivity() {
 
     private fun initView() {
         mBinding.ivClose.setOnClickListener {
-            finish()
+            finishWithAnimation()
         }
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                finishWithAnimation()
+            }
+        })
+    }
+
+    /**
+     * 页面从底部滑入
+     */
+    private fun setupTransition() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(
+                OVERRIDE_TRANSITION_OPEN,
+                R.anim.ad_slide_in_bottom,
+                R.anim.ad_hold
+            )
+        } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.ad_slide_in_bottom, R.anim.ad_hold)
+        }
+    }
+
+    /**
+     * 页面向下滑出后关闭
+     */
+    private fun finishWithAnimation() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            overrideActivityTransition(
+                OVERRIDE_TRANSITION_CLOSE,
+                R.anim.ad_hold,
+                R.anim.ad_slide_out_bottom
+            )
+        } else {
+            @Suppress("DEPRECATION")
+            overridePendingTransition(R.anim.ad_hold, R.anim.ad_slide_out_bottom)
+        }
+        finish()
     }
 
     private fun bindRecommend() {
@@ -121,7 +162,7 @@ class LocalInterAdActivity : AppCompatActivity() {
             } else {
                 RecommendUtils.jumpToAppStore(recommend.pkg)
             }
-            finish()
+            finishWithAnimation()
         }
     }
 
@@ -134,15 +175,16 @@ class LocalInterAdActivity : AppCompatActivity() {
 
         val container = mBinding.screenshotContainer
         container.removeAllViews()
-        // 单张截图宽度约屏宽的 78%，高度按 16:9 计算
-        val imageWidth = (resources.displayMetrics.widthPixels * 0.78f).toInt()
-        val imageHeight = (imageWidth * 9 / 16f).toInt()
-        val marginEnd = RecommendUtils.dip2px(10)
+        // 竖屏截图：高度约屏高的 42%，宽度按 9:16 计算
+        val imageHeight = (resources.displayMetrics.heightPixels * 0.42f).toInt()
+        val imageWidth = (imageHeight * 9 / 16f).toInt()
+        val margin = RecommendUtils.dip2px(5)
 
-        screenUrl.forEach { url ->
+        screenUrl.forEachIndexed { index, url ->
             val imageView = ImageView(this).apply {
                 layoutParams = LinearLayout.LayoutParams(imageWidth, imageHeight).apply {
-                    this.marginEnd = marginEnd
+                    this.marginEnd = if (index == screenUrl.size - 1) RecommendUtils.dip2px(20) else margin
+                    this.marginStart = if (index == 0) RecommendUtils.dip2px(20) else margin
                 }
                 scaleType = ImageView.ScaleType.CENTER_CROP
                 setBackgroundResource(R.drawable.bg_local_ad_screenshot)
