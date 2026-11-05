@@ -1,9 +1,13 @@
 package com.allever.android.lib.ad
 
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
+import android.animation.ValueAnimator
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
@@ -25,6 +29,10 @@ abstract class BaseLocalInterAdActivity : AppCompatActivity() {
     protected lateinit var mRecommend: Recommend
     private var mDismissCallback: (() -> Unit)? = null
     private var mCountDownTimer: CountDownTimer? = null
+    private var mCtaPulseAnimator: ObjectAnimator? = null
+
+    /** 是否点击过跳转按钮，用于从商店/目标应用返回后自动关闭 */
+    private var mCtaClicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -122,15 +130,45 @@ abstract class BaseLocalInterAdActivity : AppCompatActivity() {
     }
 
     /**
-     * CTA：已安装则打开应用，未安装则跳转应用商店，随后关闭广告页
+     * 跳转按钮进入页面后持续循环放大缩小，吸引用户注意
+     */
+    protected fun startCtaPulseAnimation(view: View) {
+        mCtaPulseAnimator?.cancel()
+        val animator = ObjectAnimator.ofPropertyValuesHolder(
+            view,
+            PropertyValuesHolder.ofFloat(View.SCALE_X, 1f, 1.06f),
+            PropertyValuesHolder.ofFloat(View.SCALE_Y, 1f, 1.06f)
+        ).apply {
+            duration = 600L
+            repeatMode = ValueAnimator.REVERSE
+            repeatCount = ValueAnimator.INFINITE
+            interpolator = AccelerateDecelerateInterpolator()
+        }
+        animator.start()
+        mCtaPulseAnimator = animator
+    }
+
+    /**
+     * CTA：已安装则打开应用，未安装则跳转应用商店
+     * 跳转后不立即关闭，避免在商店/目标应用前台时提前触发 next()；
+     * 标记已点击，用户返回广告页时再自动关闭
      */
     protected fun handleCtaClick(installed: Boolean) {
+        mCtaClicked = true
         if (installed) {
             openApp(mRecommend.pkg)
         } else {
             RecommendUtils.jumpToAppStore(mRecommend.pkg)
         }
-        finishWithAnimation()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // 点击跳转后从商店/目标应用返回，自动关闭广告页
+        if (mCtaClicked) {
+            mCtaClicked = false
+            finishWithAnimation()
+        }
     }
 
     private fun setupTransition() {
@@ -163,6 +201,8 @@ abstract class BaseLocalInterAdActivity : AppCompatActivity() {
     override fun onDestroy() {
         mCountDownTimer?.cancel()
         mCountDownTimer = null
+        mCtaPulseAnimator?.cancel()
+        mCtaPulseAnimator = null
         super.onDestroy()
         if (isFinishing) {
             LocalInterAd.onAdActivityFinished()

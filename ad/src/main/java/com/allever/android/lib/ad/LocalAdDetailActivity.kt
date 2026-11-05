@@ -32,6 +32,7 @@ class LocalAdDetailActivity : BaseLocalInterAdActivity() {
         mBinding.btnCta.text =
             getString(if (installed) R.string.local_ad_open else R.string.local_ad_get_on_play)
         mBinding.btnCta.setOnClickListener { handleCtaClick(installed) }
+        startCtaPulseAnimation(mBinding.btnCta)
     }
 
     /**
