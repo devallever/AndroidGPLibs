@@ -397,8 +397,6 @@ object AdManager {
         onFallback: (() -> Unit)? = null,
         next: () -> Unit
     ) {
-        onFallback?.invoke()
-        return
         // Premium 用户免广告
         if (isPremiumUser) {
             next.invoke()
