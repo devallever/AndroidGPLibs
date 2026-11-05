@@ -13,7 +13,13 @@
             android:screenOrientation="portrait"/>
 
         <activity
-            android:name="com.allever.android.lib.ad.LocalInterAdActivity"
+            android:name="com.allever.android.lib.ad.LocalAdDetailActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.RecommendProject" />
+
+        <activity
+            android:name="com.allever.android.lib.ad.LocalAdPlayActivity"
             android:exported="false"
             android:launchMode="singleTop"
             android:theme="@style/Theme.RecommendProject" />

@@ -11,5 +11,7 @@ data class Recommend(
     val iconUrl: String,
     var isInstall: Boolean = false,
     val longDesc: String? = null,
-    val screenUrl: List<String>? = null
+    val screenUrl: List<String>? = null,
+    val rating: String? = null,
+    val downloads: String? = null
 )

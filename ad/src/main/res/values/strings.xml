@@ -8,4 +8,11 @@
     <string name="local_ad_open">Open</string>
     <string name="local_ad_close">Close ad</string>
     <string name="local_ad_screenshot">App screenshot</string>
+    <string name="local_ad_install">Install</string>
+    <string name="local_ad_ratings">Ratings</string>
+    <string name="local_ad_downloads">Downloads</string>
+    <string name="local_ad_free">Free</string>
+    <string name="local_ad_close_text">Close</string>
+    <string name="local_ad_google_play">Google Play</string>
+    <string name="local_ad_countdown">%1$ds</string>
 </resources>

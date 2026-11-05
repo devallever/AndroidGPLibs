@@ -45,7 +45,7 @@ object AdBusiness {
                     RecommendUtils.log("localInterAd: 推荐数据为空，直接结束")
                     next()
                 } else {
-                    LocalInterAdActivity.start(activity, recommend, next)
+                    LocalInterAd.start(activity, recommend, next)
                 }
             },
             next = next
