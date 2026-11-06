@@ -87,7 +87,7 @@ object AdManager {
     /** ====== 原生广告加载频率控制 ====== */
 
     /** 两次原生广告加载之间的最小间隔（毫秒）— 5 秒 */
-    private const val NATIVE_INTERVAL_MS = 5_000L
+    private const val NATIVE_INTERVAL_MS = 30_000L
 
     /** 上次原生广告加载成功的时间戳 */
     private var mLastNativeLoadTime = 0L
@@ -689,6 +689,7 @@ object AdManager {
         // 间隔检查 —— 必须在 destroyNativeAd 之前，避免跳过加载时把现有广告也清掉
         if (!canLoadNative(skipIntervalCheck)) {
             log("NativeFreq: 跳过 loadNativeAd(page=$page)")
+            adCallback?.onAdFailLoad()
             return
         }
 
