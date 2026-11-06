@@ -9,7 +9,7 @@
       "size": "1MB",
       "name": "FakeCall",
       "desc": "FakeCall — Virtual Call Simulator",
-      "longDesc": "FakeCall — Virtual Call Simulator",
+      "longDesc": " FakeCall is a fun and practical virtual call simulator that lets you create realistic fake incoming calls on your Android device — in just a few MB.\n  Whether you need a quick social excuse to escape an awkward meeting, want to prank your friends, or just enjoy a silly idol-themed morning call, FakeCall has you covered.\n  ✨ Key Features\n  • Ultra-Lightweight — The entire app is only a few MB. Install it in seconds, even on slow connections.\n  • One-Tap Escape — Trigger a default fake call instantly with a single tap. No setup needed for quick emergencies.\n  • Fully Customizable Caller — Set any contact name, phone number, location label, avatar, ringtone, and vibration pattern. Make it look like whoever you want.\n  • Custom Ringtones & Wallpapers — Choose from system ringtones or import your own. Switch between multiple beautiful call screen themes to match different scenarios.\n  • Scheduled Calls — Set a countdown timer (2s, 15s, 30s, or 1 minute) and let the call arrive exactly when you need it.\n  • Realistic Call Screens — High-fidelity call interface with answer/reject buttons, call duration display, and smooth call-in transition.\n  • Repeat Mode — Set the fake call to ring multiple times at custom intervals for extra authenticity.\n  \uD83C\uDFAF Perfect For\n- Escaping awkward situations (boring meetings, uncomfortable conversations, blind dates)\n- Pranking friends with a \"surprise call\" from a celebrity or mutual acquaintance\n- Fun with friends at parties and gatherings\n- Practicing call handling or demonstrating apps\n  \uD83D\uDD12 Your Privacy, Respected\n  FakeCall is designed with privacy in mind:\n  • No sign-up or account required\n  • Your settings stay on your device only\n  • Does not read your full contacts book — uses the system contact picker\n  • No phone dialing — no actual calls are made\n  ⚠\uFE0F Disclaimer\n  FakeCall is intended for entertainment purposes only. It does not make real phone calls, send messages, or connect to any real phone network. Please use it responsibly and do not use it to harass, scam, or deceive others.\n  Download now — it's just a few MB!\n  Need help or have feedback? Email us at funnyappptech@hotmail.com",
       "iconUrl": "https://devallever.github.io/app/fakecall/image/logo.webp",
       "bannerUrl": "https://devallever.github.io/app/fakecall/image/banner.webp",
       "screenUrl": [
@@ -27,7 +27,7 @@
       "size": "1MB",
       "name": "Device Detector",
       "desc": "Bluetooth Device Detector & Metal Detector",
-      "longDesc": "Bluetooth Device Detector & Metal Detector",
+      "longDesc": "  Device Detector can find bluetooth devices and detect nearby metal. Has the following functions:\n  Find the Bluetooth device: You can search for the location of your Bluetooth device, and you can know the approximate location of the device by calculating the distance according to the Bluetooth semaphore;\n  Metal detector: you can find keys, find small screws dropped on the carpet, and even find the wires on the wall and other scenes!\n  NOTE: If your phone compass doesn't have a magnetometer inside it won't work.",
       "iconUrl": "https://devallever.github.io/app/devicedetector/image/logo.webp",
       "bannerUrl": "https://devallever.github.io/app/devicedetector/image/banner.webp",
       "screenUrl": [
@@ -45,14 +45,15 @@
       "size": "1MB",
       "name": "Just Note",
       "desc": "Just Note - Simple Note App",
-      "longDesc": "Just Note - Simple Note App",
+      "longDesc": "Just Note is a Beautiful simple and intuitive App that allows you to create, manage, and organize your notes on Android devices. Whether you need to jot down ideas, make to-do lists, or keep track of important information, this app provides a convenient and efficient way to do so.\n- Note Creation and Editing\n- Search and Filters\n- Offline Access\n- Dark Mode",
       "iconUrl": "https://devallever.github.io/app/justnote/image/logo.webp",
       "bannerUrl": "https://devallever.github.io/app/justnote/image/banner.webp",
       "screenUrl": [
         "https://devallever.github.io/app/justnote/image/screen/01.webp",
         "https://devallever.github.io/app/justnote/image/screen/02.webp",
         "https://devallever.github.io/app/justnote/image/screen/03.webp",
-        "https://devallever.github.io/app/justnote/image/screen/04.webp"
+        "https://devallever.github.io/app/justnote/image/screen/04.webp",
+        "https://devallever.github.io/app/justnote/image/screen/05.webp"
       ],
       "version": "v1.0.0"
     },
@@ -63,14 +64,16 @@
       "size": "1MB",
       "name": "Card Maker",
       "desc": "Make Text To Beautiful Cards !",
-      "longDesc": "Make Text To Beautiful Cards !",
+      "longDesc": "\uD83C\uDF1F Make Text To Beautiful Cards!\nTransform Words into Stunning Visual Cards in Seconds!\n\n✨ Quick & Magical Card Creation\nGot words? Turn them into eye-catching cards! Whether it’s a heartfelt message, festive greeting, or social media post, our app instantly converts your text into beautiful, shareable designs. No design skills needed!\n\n✨ KEY FEATURES\n✅ Easy Text-to-Card Conversion\nType or paste text → Pick a template → Boom! Your card is ready.\n✅ Many Stunning Templates\nMedia, geek, solid, bento ticket – find the perfect style for every occasion.\n✅ Customize Everything\nChange colors, fonts and backgrounds, and icon to make your card uniquely yours.\n✅ One-Tap Sharing\nShare your creations directly to friends.\n✅ No Watermarks\nYour cards, your art – export clean, professional-quality images.\n✅ Works Offline\nDesign cards anytime, anywhere – no internet needed!",
       "iconUrl": "https://devallever.github.io/app/cardmaker/image/logo.webp",
       "bannerUrl": "https://devallever.github.io/app/cardmaker/image/banner.webp",
       "screenUrl": [
         "https://devallever.github.io/app/cardmaker/image/screen/01.webp",
         "https://devallever.github.io/app/cardmaker/image/screen/02.webp",
         "https://devallever.github.io/app/cardmaker/image/screen/03.webp",
-        "https://devallever.github.io/app/cardmaker/image/screen/04.webp"
+        "https://devallever.github.io/app/cardmaker/image/screen/04.webp",
+        "https://devallever.github.io/app/cardmaker/image/screen/05.webp",
+        "https://devallever.github.io/app/cardmaker/image/screen/06.webp"
       ],
       "version": "v1.0.0"
     },
@@ -87,9 +90,10 @@
         "https://devallever.github.io/app/gif/image/screen/01.webp",
         "https://devallever.github.io/app/gif/image/screen/02.webp",
         "https://devallever.github.io/app/gif/image/screen/03.webp",
-        "https://devallever.github.io/app/gif/image/screen/04.webp"
+        "https://devallever.github.io/app/gif/image/screen/04.webp",
+        "https://devallever.github.io/app/gif/image/screen/05.webp"
       ],
-      "longDesc": "recommend & search & download gif",
+      "longDesc": "Gif Memes is funny app to get all list of Gif Memes.\nApp contains following features.\n\n1)\uD83D\uDC4D List of Hot gifs memes.\n2)\uD83D\uDE0D Search your like for gifs using keyword.\n3)\uD83D\uDE0E Collect your Gif memes.\n4)\uD83D\uDE09Share on social media platforms.\n5)\uD83D\uDE03Save Gif to local\n6)\uD83E\uDDBECreate your gif memes（Video to Gif）",
       "version": "v1.0.0"
     },
     {
@@ -99,14 +103,17 @@
       "size": "1MB",
       "name": "Link Link Game",
       "desc": "Link Link Game - Challenge your brain",
-      "longDesc": "Link Link Game - Challenge your brain",
+      "longDesc": "Countless beautifully designed levels await you to challenge!\n\nAnimal Link is a popular connection elimination puzzle game. You can play this game for free on your\nphone and tablet. Animal Link's massive levels allow you to exercise your brain and memory while playing\ngames, and it is also the most popular toilet game.\n\nHow to play?\n★ The goal of the game is to eliminate all blocks on the chessboard by linking identical graphic blocks.\n★ Find the same block and eliminate it within three segments of the line.\n★ Maintain brain alertness while relaxing, entertaining, and relieving stress.\n\nFeature\n★ Simple and fun game mechanics\n★ Combining Classic Mahjong Lianliankan with New Game Mechanisms\n★ Use props to quickly clear levels\n\nAmazing and unique artistic design\n★ All tiles are rendered using 3D models\n★ Designed many exquisite themes\n\nWhy Play Animal Link?\n★ Free offline single player game\n★ Exercise your brain. If you cannot find a block that can be eliminated, you can use refresh and prompts ",
       "iconUrl": "https://devallever.github.io/app/linklinkgame/image/logo.webp",
       "bannerUrl": "https://devallever.github.io/app/linklinkgame/image/banner.webp",
       "screenUrl": [
         "https://devallever.github.io/app/linklinkgame/image/screen/01.webp",
         "https://devallever.github.io/app/linklinkgame/image/screen/02.webp",
         "https://devallever.github.io/app/linklinkgame/image/screen/03.webp",
-        "https://devallever.github.io/app/linklinkgame/image/screen/04.webp"
+        "https://devallever.github.io/app/linklinkgame/image/screen/04.webp",
+        "https://devallever.github.io/app/linklinkgame/image/screen/05.webp",
+        "https://devallever.github.io/app/linklinkgame/image/screen/06.webp",
+        "https://devallever.github.io/app/linklinkgame/image/screen/07.webp"
       ],
       "version": "v1.0.0"
     },
@@ -117,7 +124,7 @@
       "size": "1MB",
       "name": "Kitties Memory Game",
       "desc": "Kitties Memory Game - Challenge your brain",
-      "longDesc": "Kitties Memory Game - Challenge your brain",
+      "longDesc": "A memory game where you have to find matching pictures in a matching game. Play this matching game, improve your memory and concentration and sharpen your memory. This is the classic memo board game that is simple, addictive and relaxing.\n\nTwo modes: casual mode and challenge mode\n\nMemorize, match and solve card puzzles!",
       "iconUrl": "https://devallever.github.io/app/memorykitties/image/logo.webp",
       "bannerUrl": "https://devallever.github.io/app/memorykitties/image/banner.webp",
       "screenUrl": [
@@ -135,7 +142,7 @@
       "size": "1MB",
       "name": "Water Reminder",
       "desc": "Water Reminder & Tracking",
-      "longDesc": "Water Reminder & Tracking",
+      "longDesc": "  Easy to use, beautiful interface.\n\nBased on  weight will let you know how much water should drink a day.\nHuman body graphics to drinking water tracker\nCan choose the amount of water each time.\nSmart reminder: time mode go to bed so you don't get drink water reminder.",
       "iconUrl": "https://devallever.github.io/app/waterremider/image/logo.webp",
       "bannerUrl": "https://devallever.github.io/app/waterremider/image/banner.webp",
       "screenUrl": [
@@ -153,14 +160,16 @@
       "size": "1MB",
       "name": "QR Scanner",
       "desc": "Scan, Create & Share Codes Effortlessly",
-      "longDesc": "Scan, Create & Share Codes Effortlessly",
+      "longDesc": "  QR Scanner: Scan, Create & Share Codes Effortlessly\n  \uD83D\uDD0D Powerful QR & Barcode Scanner\n  Instantly scan any QR code or barcode! Open websites, sms, view product details, check event info, or decode contact cards — all with a single tap. Works flawlessly in low light and handles damaged codes smartly.\n  ✨ Create Custom QR Codes\n  Generate stylish QR codes for URLs, text, contacts, events, or messages. Personalize with colors and save/share your creations instantly. You control the content you create.\n  \uD83D\uDCDA Organized Scan History\n  Never lose a scan! Your decoded results are saved locally in a searchable history. Revisit links, contacts, or info anytime. Clear your history easily in settings.\n  \uD83D\uDCE4 Quick Social Sharing\n  Found something great? Share scanned results or your custom QR codes directly to messaging apps, email, or social media with one tap.\n  \uD83D\uDEE1 Simple & Respectful\n  We prioritize your privacy:\n- Scans happen in real-time; no unwanted data uploads.\n- History is stored locally on your device.\n- Optional permissions (Camera, Storage for saving images) are clearly explained.\uD83C\uDFAF Key Features:\n- QR & barcode scanning\n- QR code generation (text, URL, contact, sms + more)\n- Local scan history with search & export\n- One-tap sharing to social apps/messages\n- Works offline (scanning & history)\n- User-friendly, minimalist interface\uD83D\uDCCE Perfect for:Opening links • Checking prices • Sharing contacts • Saving promotions • Creating event invites • Storing info securely • And much more!➡\uFE0F Get started now — simplify your digital life!",
       "iconUrl": "https://devallever.github.io/app/qrcode/image/logo.webp",
       "bannerUrl": "https://devallever.github.io/app/qrcode/image/banner.webp",
       "screenUrl": [
         "https://devallever.github.io/app/qrcode/image/screen/01.webp",
         "https://devallever.github.io/app/qrcode/image/screen/02.webp",
         "https://devallever.github.io/app/qrcode/image/screen/03.webp",
-        "https://devallever.github.io/app/qrcode/image/screen/04.webp"
+        "https://devallever.github.io/app/qrcode/image/screen/04.webp",
+        "https://devallever.github.io/app/qrcode/image/screen/05.webp",
+        "https://devallever.github.io/app/qrcode/image/screen/06.webp"
       ],
       "version": "v1.0.0"
     }
