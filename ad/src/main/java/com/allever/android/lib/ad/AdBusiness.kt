@@ -79,6 +79,9 @@ object AdBusiness {
                     binding.root.setOnClickListener {
                         RecommendUtils.jumpToAppStore(recommend.pkg)
                     }
+                    binding.adCta.setOnClickListener {
+                        RecommendUtils.jumpToAppStore(recommend.pkg)
+                    }
                     viewGroup.removeAllViews()
                     viewGroup.addView(binding.root)
                     localNativeCache[page] = viewGroup
