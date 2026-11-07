@@ -676,8 +676,8 @@ object AdManager {
     fun loadNativeAd(
         viewGroup: ViewGroup,
         page: String,
-        adLayoutId: Int = R.layout.ad_native_small,
-        skipIntervalCheck: Boolean = true,
+        adLayoutId: Int = R.layout.ad_native_banner,
+        skipIntervalCheck: Boolean = false,
         adCallback: AdCallback? = null
     ) {
         // Premium 用户清除已有原生广告，直接跳过
