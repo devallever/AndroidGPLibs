@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.view.Gravity
+import app.allever.android.lib.ad.R
 import app.allever.android.lib.recommend.data.Recommend
 import app.allever.android.lib.recommend.data.RecommendHelper
 import app.allever.android.lib.recommend.data.RecommendId
@@ -19,7 +20,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class RecommendDialog(context: Context, val cancelText: String = "", val exit: () -> Unit = {}) :
+class RecommendDialog(context: Context, val cancelText: String = "", val giftedCount: Int = 0, val exit: () -> Unit = {}) :
     Dialog(context, com.google.android.material.R.style.Theme_Design_BottomSheetDialog) {
 
     private val mBinding: DialogRecommendBinding
@@ -97,6 +98,14 @@ class RecommendDialog(context: Context, val cancelText: String = "", val exit: (
         )
         mBinding.ratingBar.rating = 5f
         mBinding.tvRecommend.text = mRecommend.desc
+
+        // 赠送模式：显示顶部提示，中间改为好评引导
+        if (giftedCount > 0) {
+            mBinding.tvGiftHint.visibility = android.view.View.VISIBLE
+            mBinding.tvGiftHint.text = context.getString(R.string.rc_gift_hint, giftedCount)
+            mBinding.tvContent.text = context.getString(R.string.rc_gift_rate_prompt)
+        }
+
         mShakeViewContainer.start()
     }
 

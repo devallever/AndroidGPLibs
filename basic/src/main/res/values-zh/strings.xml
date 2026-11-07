@@ -27,6 +27,7 @@
     <string name="bc_usage_dialog_watch_ad">观看视频继续使用</string>
     <string name="bc_usage_reward_success">奖励到账！获得 %d 次额外机会</string>
     <string name="bc_usage_ad_fail">暂时无法加载广告，请稍后再试</string>
+    <string name="bc_ad_fail_gift_hint">已送您 %d 次使用次数</string>
     <string name="bc_bc_cancel">取消</string>
 
     <!-- ===== Usage Reward Dialog (positive, triggered by tapping badge) ===== -->

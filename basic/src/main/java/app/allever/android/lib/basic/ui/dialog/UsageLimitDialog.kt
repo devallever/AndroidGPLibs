@@ -11,6 +11,7 @@ import app.allever.android.lib.basic.R
 import app.allever.android.lib.basic.UsageManager
 import app.allever.android.lib.basic.core.toast
 import app.allever.android.lib.basic.databinding.DialogBasicUsageLimitBinding
+import app.allever.android.lib.recommend.ui.RecommendDialog
 import com.allever.android.lib.admob.AdCallback
 import com.allever.android.lib.admob.AdManager
 import kotlin.apply
@@ -119,6 +120,7 @@ class UsageLimitDialog private constructor(
                     if (rewarded) {
                         // 用户看完了广告，发放奖励
                         UsageManager.addCount(rewardCount)
+                        UsageManager.resetAdFailCount()
                         toast(activity.getString(R.string.bc_usage_reward_success, rewardCount))
                         dismiss(true)
                     } else {
@@ -140,7 +142,18 @@ class UsageLimitDialog private constructor(
     private fun onAdFail() {
         isAdLoading = false
         showLoading(false)
-        toast(activity.getString(R.string.bc_usage_ad_fail))
+        val failCount = UsageManager.addAdFailCount()
+        if (failCount >= UsageManager.AD_FAIL_THRESHOLD) {
+            // 达到失败阈值，赠送次数
+            UsageManager.resetAdFailCount()
+            UsageManager.addCount(rewardCount)
+            toast(activity.getString(R.string.bc_ad_fail_gift_hint, rewardCount))
+            dismiss(false)
+//            onFailWithGift?.invoke(rewardCount)
+            RecommendDialog(activity, "Cancel", rewardCount).show()
+        } else {
+            toast(activity.getString(R.string.bc_usage_ad_fail))
+        }
     }
 
     private fun showLoading(loading: Boolean) {

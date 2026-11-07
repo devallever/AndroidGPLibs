@@ -14,6 +14,7 @@ import app.allever.android.lib.basic.R
 import app.allever.android.lib.basic.UsageManager
 import app.allever.android.lib.basic.databinding.BasicLeftCountViewBinding
 import app.allever.android.lib.basic.ui.dialog.UsageLimitDialog
+import app.allever.android.lib.recommend.ui.RecommendDialog
 
 class LeftCountView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null

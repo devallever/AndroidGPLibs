@@ -27,6 +27,7 @@
     <string name="bc_usage_dialog_watch_ad">Watch video to continue</string>
     <string name="bc_usage_reward_success">Rewarded! You got %d extra uses</string>
     <string name="bc_usage_ad_fail">Ad not available right now, please try again later</string>
+    <string name="bc_ad_fail_gift_hint">Gift for you! %d extra uses added</string>
     <string name="bc_bc_cancel">Cancel</string>
 
 

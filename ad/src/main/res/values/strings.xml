@@ -15,4 +15,8 @@
     <string name="local_ad_close_text">Close</string>
     <string name="local_ad_google_play">Google Play</string>
     <string name="local_ad_countdown">%1$ds</string>
+
+    <!-- ===== Recommend Dialog (gift mode) ===== -->
+    <string name="rc_gift_hint">%d extra uses have been added to your account</string>
+    <string name="rc_gift_rate_prompt">If you like this app, please give us a 5-star rating!</string>
 </resources>

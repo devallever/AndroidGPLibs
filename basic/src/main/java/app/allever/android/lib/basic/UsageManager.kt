@@ -31,10 +31,14 @@ import java.util.TimeZone
 object UsageManager {
 
     /** 每天默认免费次数 */
-    private const val DEFAULT_DAILY_LIMIT = 3
+    const val DEFAULT_DAILY_LIMIT = 3
+
+    /** 广告失败多少次后赠送使用次数（可配置） */
+    const val AD_FAIL_THRESHOLD = 3
 
     private const val KEY_REMAINING_COUNT = "USAGE_REMAINING_COUNT"
     private const val KEY_DATE_STAMP = "USAGE_DATE_STAMP"
+    private const val KEY_AD_FAIL_COUNT = "USAGE_AD_FAIL_COUNT"
 
     private val lock = Any()
 
@@ -111,5 +115,35 @@ object UsageManager {
         return cal.get(Calendar.YEAR) * 10000L +
                 (cal.get(Calendar.MONTH) + 1) * 100L +
                 cal.get(Calendar.DAY_OF_MONTH)
+    }
+
+    /**
+     * 记录一次广告加载/展示失败。
+     * @return 失败次数 +1 后的值
+     */
+    fun addAdFailCount(): Int {
+        synchronized(lock) {
+            val count = StoreCore.getInt(KEY_AD_FAIL_COUNT, 0) + 1
+            StoreCore.putInt(KEY_AD_FAIL_COUNT, count)
+            return count
+        }
+    }
+
+    /**
+     * 重置广告失败计数（广告成功看完时调用）。
+     */
+    fun resetAdFailCount() {
+        synchronized(lock) {
+            StoreCore.putInt(KEY_AD_FAIL_COUNT, 0)
+        }
+    }
+
+    /**
+     * 获取当前广告失败计数。
+     */
+    fun getAdFailCount(): Int {
+        synchronized(lock) {
+            return StoreCore.getInt(KEY_AD_FAIL_COUNT, 0)
+        }
     }
 }
