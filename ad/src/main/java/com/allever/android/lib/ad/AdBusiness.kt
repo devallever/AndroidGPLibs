@@ -55,7 +55,7 @@ object AdBusiness {
     fun loadNativeAd(
         viewGroup: ViewGroup,
         page: String,
-        adLayoutId: Int = R.layout.ad_native_banner,
+        adLayoutId: Int = R.layout.ad_native_banner_normal,
         skipIntervalCheck: Boolean = false
     ) {
         AdManager.loadNativeAd(
