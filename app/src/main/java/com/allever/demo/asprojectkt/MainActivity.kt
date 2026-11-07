@@ -1,12 +1,15 @@
 package com.allever.demo.asprojectkt
 
+import androidx.activity.OnBackPressedCallback
 import app.allever.android.lib.basic.UsageManager
 import app.allever.android.lib.basic.core.AbstractBindingActivity
 import app.allever.android.lib.basic.core.ActivityHelper
+import app.allever.android.lib.basic.core.log
 import app.allever.android.lib.basic.core.toast
 import app.allever.android.lib.basic.ui.BasicSettingActivity
 import app.allever.android.lib.basic.ui.dialog.UsageLimitDialog
 import app.allever.android.lib.billing.BillingActivity
+import app.allever.android.lib.recommend.ui.RecommendDialog
 import app.allever.android.lib.recommend.ui.RecommendListActivity
 import com.allever.android.lib.ad.AdBusiness
 import com.allever.android.lib.admob.AdCallback
@@ -15,12 +18,26 @@ import com.allever.demo.asprojectkt.databinding.ActivityMainBinding
 
 class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
 
+    private val mRecommendDialog by lazy {
+        RecommendDialog(this) {
+            finish()
+        }
+    }
+
     override fun inflate(): ActivityMainBinding {
         return ActivityMainBinding.inflate(layoutInflater)
     }
 
     override fun init() {
         adaptStatusBar(mBinding.funContainer)
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                log("execute handleOnBackPressed")
+                handleBackPress()
+            }
+        })
+
         AdManager.loadBanner(mBinding.bannerContainer)
         mBinding.btnOpen.setOnClickListener {
             AdManager.showOpen(this) {
@@ -78,6 +95,18 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
         toast("执行成功，消耗1个次数")
     }
 
+    override fun onBackPressed() {
+        log("execute onBackPressed")
+        handleBackPress()
+    }
+
+    private fun handleBackPress() {
+        if (mRecommendDialog.isShowing) {
+            mRecommendDialog.dismiss()
+        } else  {
+            mRecommendDialog.show()
+        }
+    }
 
     override fun onResume() {
         super.onResume()
