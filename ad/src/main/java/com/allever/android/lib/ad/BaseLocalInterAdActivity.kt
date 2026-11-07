@@ -6,12 +6,16 @@ import android.animation.ValueAnimator
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import app.allever.android.lib.ad.R
 import app.allever.android.lib.recommend.data.Recommend
 import app.allever.android.lib.recommend.data.RecommendId
@@ -209,5 +213,39 @@ abstract class BaseLocalInterAdActivity : AppCompatActivity() {
             mDismissCallback?.invoke()
             mDismissCallback = null
         }
+    }
+
+    override fun setContentView(view: View?) {
+        super.setContentView(view)
+        log("适配导航栏：${this.javaClass.simpleName}")
+        adaptNavigationBar(view)
+    }
+
+    override fun setContentView(layoutResID: Int) {
+        super.setContentView(layoutResID)
+        log("适配导航栏：${this.javaClass.simpleName}")
+        val contentView = window.findViewById<ViewGroup>(android.R.id.content)
+        val childView = contentView.getChildAt(0)
+        if (childView != null) {
+            adaptNavigationBar(childView)
+        }
+    }
+
+
+    /**
+     * 适配导航栏：确保内容不被导航栏覆盖
+     */
+    protected fun adaptNavigationBar(view: View?) {
+        if (view == null) return
+        ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+            val navigationBars = insets.getInsets(WindowInsetsCompat.Type.navigationBars())
+            log("适配导航栏：导航栏高度 = ${navigationBars.bottom}")
+            v.setPadding(v.paddingLeft, v.paddingTop, v.paddingRight, navigationBars.bottom)
+            insets
+        }
+    }
+
+    private fun log(msg: String) {
+        Log.d("LocalInterAd", msg)
     }
 }
