@@ -19,17 +19,19 @@ import kotlinx.coroutines.launch
 object ProjectConfig {
     lateinit var context: Context
     private lateinit var config: Config
-    fun init(context: Context, config: Config) {
+    fun init(context: Context, config: Config, executeInit: Boolean = true) {
         this.context = context
         this.config = config
 
-        CoilLoader.init(context)
+        if (executeInit) {
+            CoilLoader.init(context)
 
-        if (!isHuawei()) {
-            initSdk()
-        } else {
-            if (isAgreePrivacy()) {
+            if (!isHuawei()) {
                 initSdk()
+            } else {
+                if (isAgreePrivacy()) {
+                    initSdk()
+                }
             }
         }
     }

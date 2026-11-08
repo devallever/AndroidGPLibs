@@ -7,6 +7,7 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import app.allever.android.lib.basic.BuildConfig
 import app.allever.android.lib.basic.core.ProcessHelper.isInMainProcess
 import app.allever.android.lib.basic.core.crash.Cockroach
 import app.allever.android.lib.basic.core.crash.ExceptionHandler
@@ -46,11 +47,10 @@ abstract class App : Application() {
 
         @SuppressLint("StaticFieldLeak")
         lateinit var context: Context
-        lateinit var mainHandler: Handler
+        val mainHandler by lazy { Handler(Looper.getMainLooper()) }
 
         val DEBUG by lazy {
-//            BuildConfig.DEBUG
-            true
+            BuildConfig.DEBUG
         }
 
         private var activityCount = 0
@@ -58,7 +58,6 @@ abstract class App : Application() {
 
         fun init(context: Context) {
             Companion.context = context.applicationContext
-            mainHandler = Handler(Looper.getMainLooper())
             app = context as Application
         }
     }
