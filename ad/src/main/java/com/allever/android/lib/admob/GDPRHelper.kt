@@ -27,8 +27,8 @@ object GDPRHelper {
         val debugSettings = if (BuildConfig.DEBUG) {
             ConsentDebugSettings.Builder(activity.applicationContext)
                 .setDebugGeography(ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA)
-                .addTestDeviceHashedId("FCC50892966215F27882878753C9AEE4")
-                .addTestDeviceHashedId("55AD2DC8DB6439EDA3D8E1FF53281E12")
+                // .addTestDeviceHashedId("FCC50892966215F27882878753C9AEE4")
+                // .addTestDeviceHashedId("55AD2DC8DB6439EDA3D8E1FF53281E12")
                 .build()
         } else {
             null
