@@ -68,6 +68,7 @@ object UsageManager {
             val remaining = StoreCore.getInt(KEY_REMAINING_COUNT, DEFAULT_DAILY_LIMIT)
             if (remaining <= 0) return false
             StoreCore.putInt(KEY_REMAINING_COUNT, remaining - 1)
+            notifyCountChanged()
             return true
         }
     }
@@ -82,6 +83,7 @@ object UsageManager {
             checkAndResetIfNewDay()
             val remaining = StoreCore.getInt(KEY_REMAINING_COUNT, DEFAULT_DAILY_LIMIT)
             StoreCore.putInt(KEY_REMAINING_COUNT, remaining + count)
+            notifyCountChanged()
         }
     }
 
@@ -145,5 +147,25 @@ object UsageManager {
         synchronized(lock) {
             return StoreCore.getInt(KEY_AD_FAIL_COUNT, 0)
         }
+    }
+
+    /** 次数变化监听器 */
+    fun interface OnCountChangeListener {
+        fun onCountChanged(count: Int)
+    }
+
+    private val mListeners = mutableListOf<OnCountChangeListener>()
+
+    fun addCountChangeListener(listener: OnCountChangeListener) {
+        if (!mListeners.contains(listener)) mListeners.add(listener)
+    }
+
+    fun removeCountChangeListener(listener: OnCountChangeListener) {
+        mListeners.remove(listener)
+    }
+
+    private fun notifyCountChanged() {
+        val count = getRemaining()
+        mListeners.forEach { it.onCountChanged(count) }
     }
 }
