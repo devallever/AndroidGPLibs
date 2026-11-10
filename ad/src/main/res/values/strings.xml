@@ -15,6 +15,7 @@
     <string name="local_ad_close_text">Close</string>
     <string name="local_ad_google_play">Google Play</string>
     <string name="local_ad_countdown">%1$ds</string>
+    <string name="local_ad_recommend_title">Recommend Our Hot App</string>
 
     <!-- ===== Recommend Dialog (gift mode) ===== -->
     <string name="rc_gift_hint">%d extra uses have been added to your account</string>

@@ -3,6 +3,8 @@ package com.allever.android.lib.ad
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.animation.ValueAnimator
+import android.graphics.LinearGradient
+import android.graphics.Shader
 import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -131,6 +133,20 @@ abstract class BaseLocalInterAdActivity : AppCompatActivity() {
         val icon: Any = mRecommend.iconUrl.takeIf { it.isNotBlank() }
             ?: RecommendId.getIconRes(mRecommend.id)
         imageView.loadRound(icon, radius)
+    }
+
+    /**
+     * 为 TextView 设置水平渐变色文字，从左到右使用 vc_gradient_start → vc_gradient_end
+     */
+    protected fun setGradientText(textView: TextView) {
+        val startColor = getColor(R.color.vc_gradient_start)
+        val endColor = getColor(R.color.vc_gradient_end)
+        textView.post {
+            textView.paint.shader = LinearGradient(
+                0f, 0f, textView.width.toFloat(), 0f,
+                startColor, endColor, Shader.TileMode.CLAMP
+            )
+        }
     }
 
     /**

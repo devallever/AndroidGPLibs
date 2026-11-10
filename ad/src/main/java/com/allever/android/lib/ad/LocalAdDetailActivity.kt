@@ -27,6 +27,7 @@ class LocalAdDetailActivity : BaseLocalInterAdActivity() {
         mBinding.tvLongDesc.text = mRecommend.longDesc?.takeIf { it.isNotBlank() } ?: mRecommend.desc
         loadIcon(mBinding.ivIcon, 18f)
         bindScreenshots(mRecommend.screenUrl ?: emptyList())
+        setGradientText(mBinding.tvRecommendTitle)
 
         val installed = RecommendUtils.isAppExist(this, mRecommend.pkg)
         mBinding.btnCta.text =

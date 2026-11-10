@@ -30,6 +30,7 @@ class LocalAdPlayActivity : BaseLocalInterAdActivity() {
         mBinding.tvShortDesc.text = mRecommend.desc
         loadIcon(mBinding.ivIcon, 32f)
         bindStats()
+        setGradientText(mBinding.tvRecommendTitle)
 
         val installed = RecommendUtils.isAppExist(this, mRecommend.pkg)
         mBinding.btnInstall.text =
