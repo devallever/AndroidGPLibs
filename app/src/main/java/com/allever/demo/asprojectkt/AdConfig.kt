@@ -4,23 +4,23 @@ import com.allever.android.lib.admob.IAdConfig
 
 class AdConfig: IAdConfig {
     override fun bannerAdId(): String {
-        return "ca-app-pub-3940256099942544/6300978100"
+        return "ca-app-pub-3940256099942544/6300978111"
     }
 
     override fun interAdId(): String {
-        return "ca-app-pub-3940256099942544/1033173700"
+        return "ca-app-pub-3940256099942544/1033173712"
     }
 
     override fun rewardAdId(): String {
-        return "ca-app-pub-3940256099942544/5224354900"
+        return "ca-app-pub-3940256099942544/5224354917"
     }
 
     override fun nativeAdId(): String {
-        return "ca-app-pub-3940256099942544/2247696100"
+        return "ca-app-pub-3940256099942544/2247696110"
     }
 
     override fun openAdId(): String {
-        return "ca-app-pub-3940256099942544/3419835200"
+        return "ca-app-pub-3940256099942544/3419835294"
     }
 
     override fun getAdId(type: Int): String {

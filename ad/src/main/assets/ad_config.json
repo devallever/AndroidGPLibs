@@ -1,0 +1,15 @@
+{
+  "switch": {
+    "open": true,
+    "inter": true,
+    "reward": true,
+    "native": true,
+    "banner": true
+  },
+  "interval": {
+    "inter": 30,
+    "reward": 30,
+    "native": 30,
+    "banner": 15
+  }
+}

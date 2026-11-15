@@ -13,6 +13,8 @@ data class Config(
     val billingEnable: Boolean,
     val privacyUrl: String,
     val hasActiveSubscriptionCache: () -> Boolean,
+    /** 广告配置接口地址，各项目传入自己的接口，为空时只使用缓存和 assets 兜底 */
+    val adConfigUrl: String = "",
     val initBillingTask: () -> Unit
 ) {
 }

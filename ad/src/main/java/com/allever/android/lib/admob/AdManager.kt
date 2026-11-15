@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import app.allever.android.lib.ad.R
+import com.allever.android.lib.admob.config.AdConfigHelper
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
@@ -72,9 +73,6 @@ object AdManager {
 
     /** ====== 插页广告频率控制 (AdMob 政策合规) ====== */
 
-    /** 两次插页广告之间的最小间隔（毫秒）— 60 秒 */
-    private const val INTER_INTERVAL_MS = 30_000L
-
     /** 单个 Session 内插页广告展示上限 */
     private const val MAX_INTER_PER_SESSION = 4
 
@@ -85,9 +83,6 @@ object AdManager {
     private var mSessionInterShowCount = 0
 
     /** ====== 原生广告加载频率控制 ====== */
-
-    /** 两次原生广告加载之间的最小间隔（毫秒）— 30 秒 */
-    private const val NATIVE_INTERVAL_MS = 30_000L
 
     /** 上次原生广告加载成功的时间戳 */
     private var mLastNativeLoadTime = 0L
@@ -114,12 +109,13 @@ object AdManager {
         if (skipFreqCheck) return true
 
         val now = System.currentTimeMillis()
-        val interval = now - mLastInterShowTime
+        val intervalMs = AdConfigHelper.getIntervalMs(IAdConfig.INTER_AD)
+        val elapsed = now - mLastInterShowTime
 
         // 检查间隔
-        if (mLastInterShowTime > 0 && interval < INTER_INTERVAL_MS) {
-            val remaining = (INTER_INTERVAL_MS - interval) / 1000
-            log("InterFreq: 距上次展示不足 ${INTER_INTERVAL_MS / 1000} 秒，剩余 ${remaining}s，跳过")
+        if (mLastInterShowTime > 0 && elapsed < intervalMs) {
+            val remaining = (intervalMs - elapsed) / 1000
+            log("InterFreq: 距上次展示不足 ${intervalMs / 1000} 秒，剩余 ${remaining}s，跳过")
             return false
         }
 
@@ -139,11 +135,12 @@ object AdManager {
         if (skipIntervalCheck) return true
 
         val now = System.currentTimeMillis()
-        val interval = now - mLastNativeLoadTime
+        val intervalMs = AdConfigHelper.getIntervalMs(IAdConfig.NATIVE_AD)
+        val elapsed = now - mLastNativeLoadTime
 
-        if (mLastNativeLoadTime > 0 && interval < NATIVE_INTERVAL_MS) {
-            val remaining = (NATIVE_INTERVAL_MS - interval) / 1000
-            log("NativeFreq: 距上次加载不足 ${NATIVE_INTERVAL_MS / 1000} 秒，剩余 ${remaining}s，跳过")
+        if (mLastNativeLoadTime > 0 && elapsed < intervalMs) {
+            val remaining = (intervalMs - elapsed) / 1000
+            log("NativeFreq: 距上次加载不足 ${intervalMs / 1000} 秒，剩余 ${remaining}s，跳过")
             return false
         }
 
@@ -186,6 +183,12 @@ object AdManager {
         activity: Activity,
         adCallback: AdCallback? = null
     ) {
+        // 远程配置关闭激励广告
+        if (!AdConfigHelper.isEnabled(IAdConfig.REWARD_AD)) {
+            log("rewardedAd: 远程配置已关闭")
+            adCallback?.onAdFailLoad()
+            return
+        }
         val adId = mAdConfig.getAdId(IAdConfig.REWARD_AD)
         log("Loading rewarded ad: $adId")
 
@@ -241,6 +244,10 @@ object AdManager {
 
     fun justLoadInter() {
         if (isPremiumUser) return
+        // 远程配置关闭插页广告
+        if (!AdConfigHelper.isEnabled(IAdConfig.INTER_AD)) {
+            return
+        }
         if (skipInterAd) {
             return
         }
@@ -282,6 +289,12 @@ object AdManager {
 
     fun loadOpen(activity: Activity, adCallback: AdCallback? = null) {
         if (isPremiumUser) { adCallback?.onAdFailLoad(); return }
+        // 远程配置关闭开屏广告
+        if (!AdConfigHelper.isEnabled(IAdConfig.OPEN_AD)) {
+            log("openAd: 远程配置已关闭")
+            adCallback?.onAdFailLoad()
+            return
+        }
         if (!isInit) {
             adCallback?.onAdFailLoad()
             return
@@ -327,6 +340,10 @@ object AdManager {
 
     fun justLoadOpen() {
         if (isPremiumUser) return
+        // 远程配置关闭开屏广告
+        if (!AdConfigHelper.isEnabled(IAdConfig.OPEN_AD)) {
+            return
+        }
         if (mLoadingOpenAd) {
             log("openAd: 正在加载中...，不需要重复加载")
             return
@@ -403,6 +420,13 @@ object AdManager {
             return
         }
 
+        // 远程配置关闭插页广告，本地插页也不再兜底
+        if (!AdConfigHelper.isEnabled(IAdConfig.INTER_AD)) {
+            log("InterAd: 远程配置已关闭，跳过")
+            next.invoke()
+            return
+        }
+
         // 业务层跳过
         if (skipAd) {
             next.invoke()
@@ -473,6 +497,13 @@ object AdManager {
     ) {
         if (isPremiumUser) { next.invoke(); return }
 
+        // 远程配置关闭开屏广告
+        if (!AdConfigHelper.isEnabled(IAdConfig.OPEN_AD)) {
+            log("OpenAd: 远程配置已关闭，跳过展示")
+            next.invoke()
+            return
+        }
+
         // Activity 状态检查
         if (activity.isFinishing || activity.isDestroyed) {
             log("OpenAd: Activity 已销毁，跳过展示")
@@ -521,6 +552,11 @@ object AdManager {
 
     fun loadBanner(bannerContainer: ViewGroup): AdView? {
         if (isPremiumUser) return null
+        // 远程配置关闭横幅广告
+        if (!AdConfigHelper.isEnabled(IAdConfig.BANNER_AD)) {
+            log("bannerAd: 远程配置已关闭")
+            return null
+        }
         val mBannerAd = AdView(bannerContainer.context)
         val autoAdWidth = getScreenWidth(bannerContainer.context)
         mBannerAd.setAdSize(
@@ -578,6 +614,10 @@ object AdManager {
 
     fun loadInter(block: (interstitialAd: InterstitialAd) -> Unit) {
         if (isPremiumUser) return
+        // 远程配置关闭插页广告
+        if (!AdConfigHelper.isEnabled(IAdConfig.INTER_AD)) {
+            return
+        }
         if (skipInterAd) {
             return
         }
@@ -612,6 +652,12 @@ object AdManager {
 
     fun loadInter(adCallback: AdCallback? = null) {
         if (isPremiumUser) { adCallback?.onAdFailLoad(); return }
+        // 远程配置关闭插页广告
+        if (!AdConfigHelper.isEnabled(IAdConfig.INTER_AD)) {
+            log("interAd: 远程配置已关闭")
+            adCallback?.onAdFailLoad()
+            return
+        }
         val cacheTime = System.currentTimeMillis() - mInterAdCacheTime
         if (mInterAdCache != null && cacheTime < CACHE_TIME_OUT) {
             log("interAd: 缓存未过期，使用缓存")
@@ -650,6 +696,12 @@ object AdManager {
 
     fun showInter(activity: Activity, adCallback: AdCallback? = null) {
         if (isPremiumUser) { adCallback?.onAdDismiss(false); return }
+        // 远程配置关闭插页广告
+        if (!AdConfigHelper.isEnabled(IAdConfig.INTER_AD)) {
+            log("interAd: 远程配置已关闭")
+            adCallback?.onAdFailLoad()
+            return
+        }
         val cacheTime = System.currentTimeMillis() - mInterAdCacheTime
         if (mInterAdCache != null && cacheTime < CACHE_TIME_OUT) {
             log("interAd: 缓存未过期，使用缓存")
@@ -686,10 +738,17 @@ object AdManager {
             return
         }
 
+        // 远程配置关闭原生广告，连同本地兜底一起跳过
+        if (!AdConfigHelper.isEnabled(IAdConfig.NATIVE_AD)) {
+            log("NativeAd: 远程配置已关闭, page=$page")
+            destroyNativeAd(page)
+            return
+        }
+
         // 间隔检查 —— 必须在 destroyNativeAd 之前，避免跳过加载时把现有广告也清掉
         if (!canLoadNative(skipIntervalCheck)) {
             log("NativeFreq: 跳过 loadNativeAd(page=$page)")
-            adCallback?.onAdFailLoad()
+//            adCallback?.onAdFailLoad()
             return
         }
 

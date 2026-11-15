@@ -11,6 +11,8 @@ import app.allever.android.lib.recommend.util.RecommendUtils
 import app.allever.android.lib.recommend.util.loadRound
 import com.allever.android.lib.admob.AdCallback
 import com.allever.android.lib.admob.AdManager
+import com.allever.android.lib.admob.IAdConfig
+import com.allever.android.lib.admob.config.AdConfigHelper
 
 /**
  * 广告业务
@@ -58,6 +60,12 @@ object AdBusiness {
         adLayoutId: Int = R.layout.ad_native_banner_normal,
         skipIntervalCheck: Boolean = false
     ) {
+        // 远程配置关闭原生广告，AdMob 与本地兜底卡片都不展示
+        if (!AdConfigHelper.isEnabled(IAdConfig.NATIVE_AD)) {
+            RecommendUtils.log("nativeAd: 远程配置已关闭, page=$page")
+            destroyNativeAd(page)
+            return
+        }
         AdManager.loadNativeAd(
             viewGroup,
             page,
