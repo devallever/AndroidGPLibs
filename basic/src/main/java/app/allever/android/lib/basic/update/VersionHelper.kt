@@ -34,7 +34,7 @@ import java.util.Locale
  */
 object VersionHelper {
 
-    private const val TAG = "VersionHelper"
+    private const val TAG = "ILogger"
 
     /** 网络超时时间 */
     private const val TIME_OUT = 10_000
