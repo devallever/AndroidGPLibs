@@ -30,6 +30,14 @@
     <string name="bc_ad_fail_gift_hint">Gift for you! %d extra uses added</string>
     <string name="bc_bc_cancel">Cancel</string>
 
+    <!-- ===== Update Dialog ===== -->
+    <string name="bc_update_title">New version available</string>
+    <string name="bc_update_version">Version %1$s</string>
+    <string name="bc_update_now">Update now</string>
+    <string name="bc_update_later">Later</string>
+    <string name="bc_update_exit">Exit</string>
+    <string name="bc_update_jump_failed">Unable to open Google Play</string>
+
 
     <!-- ===== Usage Reward Dialog (positive, triggered by tapping badge) ===== -->
     <string name="bc_usage_reward_title">Get more uses</string>

@@ -11,6 +11,7 @@ import com.allever.android.lib.admob.AdManager
 import com.allever.android.lib.admob.GDPRHelper
 import com.allever.android.lib.admob.IAdConfig
 import com.allever.android.lib.admob.config.AdConfigHelper
+import app.allever.android.lib.basic.update.VersionHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -46,6 +47,7 @@ object ProjectConfig {
         }
         RecommendHelper.init(context)
         AdConfigHelper.init(context, config.adConfigUrl)
+        VersionHelper.init(context, config.versionCheckUrl)
 
         getInitBillingTask().invoke()
     }

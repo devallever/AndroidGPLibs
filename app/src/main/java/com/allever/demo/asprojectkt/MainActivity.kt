@@ -8,6 +8,7 @@ import app.allever.android.lib.basic.core.log
 import app.allever.android.lib.basic.core.toast
 import app.allever.android.lib.basic.ui.BasicSettingActivity
 import app.allever.android.lib.basic.ui.dialog.UsageLimitDialog
+import app.allever.android.lib.basic.update.VersionHelper
 import app.allever.android.lib.billing.BillingActivity
 import app.allever.android.lib.recommend.ui.RecommendDialog
 import app.allever.android.lib.recommend.ui.RecommendListActivity
@@ -113,6 +114,7 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
         AdManager.resumeBanner(mBinding.bannerContainer)
         AdBusiness.loadNativeAd(mBinding.nativeContainer, "main")
         mBinding.leftCountView.updateLeftCount()
+        VersionHelper.checkAndShow(this)
     }
 
     override fun onPause() {

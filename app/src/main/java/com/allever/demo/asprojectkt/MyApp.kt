@@ -24,6 +24,10 @@ class MyApp : App() {
                 AdConfig(),
                 false,
                 "https://baidu.com",
+                "https://devallever.github.io/app/androidgplibs/ad_config.json",
+                "https://devallever.github.io/app/androidgplibs/version.json",
+//                "",
+//                "",
                 { BillingManager.getHasActiveSubscriptionCache() },
             ) {
                 BillingManager.init(context, "https://baidu.com") { connected ->
