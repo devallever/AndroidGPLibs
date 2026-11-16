@@ -46,7 +46,7 @@ object ProjectConfig {
         if (GDPRHelper.canRequestAds()) {
             AdManager.init(getAdConfig(), App.app)
         } else {
-            AdManager.init(getAdConfig(), App.app)
+            AdManager.initPre(getAdConfig(), App.app)
         }
 
         getInitBillingTask().invoke()

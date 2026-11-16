@@ -147,7 +147,7 @@ object AdManager {
         return true
     }
 
-    fun init(adConfig: IAdConfig, context: Application, skipInterAd: Boolean = false) {
+    fun initPre(adConfig: IAdConfig, context: Application, skipInterAd: Boolean = false) {
         log("init")
         mContext = context
         mAdConfig = adConfig
