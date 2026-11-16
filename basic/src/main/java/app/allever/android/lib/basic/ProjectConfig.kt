@@ -24,9 +24,12 @@ object ProjectConfig {
     fun init(context: Context, config: Config, executeInit: Boolean = true) {
         this.context = context
         this.config = config
+        CoilLoader.init(context)
+        RecommendHelper.init(context)
+        AdConfigHelper.init(context, config.adConfigUrl)
+        VersionHelper.init(context, config.versionCheckUrl)
 
         if (executeInit) {
-            CoilLoader.init(context)
 
             if (!isHuawei()) {
                 initSdk()
@@ -43,11 +46,8 @@ object ProjectConfig {
         if (GDPRHelper.canRequestAds()) {
             AdManager.init(getAdConfig(), App.app)
         } else {
-            AdManager.init(App.app)
+            AdManager.init(getAdConfig(), App.app)
         }
-        RecommendHelper.init(context)
-        AdConfigHelper.init(context, config.adConfigUrl)
-        VersionHelper.init(context, config.versionCheckUrl)
 
         getInitBillingTask().invoke()
     }

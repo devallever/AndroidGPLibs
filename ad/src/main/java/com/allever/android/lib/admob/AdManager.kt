@@ -147,9 +147,10 @@ object AdManager {
         return true
     }
 
-    fun init(context: Application, skipInterAd: Boolean = false) {
+    fun init(adConfig: IAdConfig, context: Application, skipInterAd: Boolean = false) {
         log("init")
         mContext = context
+        mAdConfig = adConfig
         this.skipInterAd = skipInterAd
         LevelPlay.setMetaData("do_not_sell", "true")
 //        LevelPlay.validateIntegration(context)
