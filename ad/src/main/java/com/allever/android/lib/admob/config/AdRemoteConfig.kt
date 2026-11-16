@@ -1,5 +1,6 @@
 package com.allever.android.lib.admob.config
 
+import androidx.annotation.Keep
 import com.google.gson.JsonObject
 import com.google.gson.annotations.SerializedName
 
@@ -10,6 +11,7 @@ import com.google.gson.annotations.SerializedName
  * 其余根级字段会原样保存在 [extras] 中，供各项目自行解析扩展，
  * 后续接口在根级新增字段时模块无需改动
  */
+@Keep
 data class AdRemoteConfig(
     @SerializedName("switch") val switchConfig: AdSwitchConfig = AdSwitchConfig(),
     @SerializedName("interval") val intervalConfig: AdIntervalConfig = AdIntervalConfig(),
@@ -17,6 +19,7 @@ data class AdRemoteConfig(
 )
 
 /** 广告开关，缺省全部开启 */
+@Keep
 data class AdSwitchConfig(
     @SerializedName("open") val isOpen: Boolean = true,
     val inter: Boolean = true,
@@ -26,6 +29,7 @@ data class AdSwitchConfig(
 )
 
 /** 广告展示间隔配置，单位：秒 */
+@Keep
 data class AdIntervalConfig(
     val inter: Long = 30,
     val reward: Long = 30,
