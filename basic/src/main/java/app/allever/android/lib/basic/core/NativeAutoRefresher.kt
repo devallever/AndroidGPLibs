@@ -6,6 +6,7 @@ import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import app.allever.android.lib.ad.R
+import app.allever.android.lib.basic.ProjectConfig
 import com.allever.android.lib.ad.AdBusiness
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -104,13 +105,13 @@ class NativeAutoRefresher private constructor(
     }
 
     class Builder(private val lifecycleOwner: LifecycleOwner, private val container: ViewGroup) {
-        private var page: String = "default"
+        private var page: String = "page:${this.hashCode()}"
         private var nativeLayout = R.layout.ad_native_banner_normal
 
         private var skipIntervalCheck = false
 
-        private var minIntervalSec: Long = 30L
-        private var maxIntervalSec: Long = 120L
+        private var minIntervalSec: Long = if (ProjectConfig.isPrivateChannel()) 90L else 40L
+        private var maxIntervalSec: Long = if (ProjectConfig.isPrivateChannel()) 120L else 900L
 
         fun page(page: String): Builder {
             this.page = page
