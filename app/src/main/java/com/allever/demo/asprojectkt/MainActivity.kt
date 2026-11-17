@@ -9,6 +9,7 @@ import app.allever.android.lib.basic.ProjectConfig
 import app.allever.android.lib.basic.UsageManager
 import app.allever.android.lib.basic.core.AbstractBindingActivity
 import app.allever.android.lib.basic.core.ActivityHelper
+import app.allever.android.lib.basic.core.BannerLoader
 import app.allever.android.lib.basic.core.NativeAutoRefresher
 import app.allever.android.lib.basic.core.log
 import app.allever.android.lib.basic.core.toast
@@ -58,7 +59,7 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
             }
         })
 
-        AdManager.loadBanner(mBinding.bannerContainer)
+        BannerLoader.Builder(this, mBinding.bannerContainer).start()
         mBinding.btnOpen.setOnClickListener {
             AdManager.showOpen(this) {
                 toast("open finish")
@@ -130,20 +131,7 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
 
     override fun onResume() {
         super.onResume()
-        AdManager.resumeBanner(mBinding.bannerContainer)
-//        AdBusiness.loadNativeAd(mBinding.nativeContainer, "main")
         mBinding.leftCountView.updateLeftCount()
         VersionHelper.checkAndShow(this)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        AdManager.pauseBanner(mBinding.bannerContainer)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        AdManager.destroyBanner(mBinding.bannerContainer)
-//        AdBusiness.destroyNativeAd("main")
     }
 }
