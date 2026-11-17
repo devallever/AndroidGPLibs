@@ -17,6 +17,18 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    // ---------- 多渠道 ----------
+    flavorDimensions += "mark"
+    productFlavors {
+        create("private") {
+            dimension = "mark"
+        }
+//        create("huawei") {
+//            dimension = "mark"
+//        }
+//         create("other") { dimension = "mark" }
+    }
+
     buildTypes {
         release {
             isMinifyEnabled = false

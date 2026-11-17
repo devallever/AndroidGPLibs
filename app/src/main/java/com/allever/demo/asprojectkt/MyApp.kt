@@ -15,7 +15,7 @@ class MyApp : App() {
     override fun init() {
         ProjectConfig.init(
             this, Config(
-                "google",
+                BuildConfig.FLAVOR,
                 getString(R.string.app_name),
                 R.mipmap.ic_launcher,
                 BuildConfig.VERSION_NAME,

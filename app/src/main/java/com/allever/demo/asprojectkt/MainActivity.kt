@@ -1,9 +1,15 @@
 package com.allever.demo.asprojectkt
 
+import android.content.Context
+import android.os.Bundle
+import android.os.PowerManager
+import android.view.WindowManager
 import androidx.activity.OnBackPressedCallback
+import app.allever.android.lib.basic.ProjectConfig
 import app.allever.android.lib.basic.UsageManager
 import app.allever.android.lib.basic.core.AbstractBindingActivity
 import app.allever.android.lib.basic.core.ActivityHelper
+import app.allever.android.lib.basic.core.NativeAutoRefresher
 import app.allever.android.lib.basic.core.log
 import app.allever.android.lib.basic.core.toast
 import app.allever.android.lib.basic.ui.BasicSettingActivity
@@ -16,6 +22,7 @@ import com.allever.android.lib.ad.AdBusiness
 import com.allever.android.lib.admob.AdCallback
 import com.allever.android.lib.admob.AdManager
 import com.allever.demo.asprojectkt.databinding.ActivityMainBinding
+import com.allever.demo.asprojectkt.BuildConfig
 
 class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
 
@@ -29,8 +36,23 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
         return ActivityMainBinding.inflate(layoutInflater)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        if (ProjectConfig.isPrivateChannel()) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+        super.onCreate(savedInstanceState)
+    }
+
     override fun init() {
         adaptStatusBar(mBinding.funContainer)
+
+        NativeAutoRefresher.Builder(this)
+            .interval(5, 10)                              // n~m秒随机刷新
+            .onRefresh {
+                AdBusiness.loadNativeAd(mBinding.nativeContainer, "main")
+            }
+            .onDestroy { AdBusiness.destroyNativeAd("main") }
+            .start()
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -112,7 +134,7 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
     override fun onResume() {
         super.onResume()
         AdManager.resumeBanner(mBinding.bannerContainer)
-        AdBusiness.loadNativeAd(mBinding.nativeContainer, "main")
+//        AdBusiness.loadNativeAd(mBinding.nativeContainer, "main")
         mBinding.leftCountView.updateLeftCount()
         VersionHelper.checkAndShow(this)
     }
@@ -125,6 +147,6 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
     override fun onDestroy() {
         super.onDestroy()
         AdManager.destroyBanner(mBinding.bannerContainer)
-        AdBusiness.destroyNativeAd("main")
+//        AdBusiness.destroyNativeAd("main")
     }
 }

@@ -89,6 +89,8 @@ object ProjectConfig {
         return config.channel
     }
 
+    fun isPrivateChannel() = config.channel == "private"
+
     fun isHuawei(): Boolean {
         return config.channel == "huawei"
     }
