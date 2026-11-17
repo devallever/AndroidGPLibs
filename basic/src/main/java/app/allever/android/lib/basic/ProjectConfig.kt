@@ -91,7 +91,7 @@ object ProjectConfig {
         return config.channel
     }
 
-    fun isPrivateChannel() = config.channel == "private"
+    fun isPrivateChannel() = config.channel == "mine"
     fun checkAndTurnOnScreen(activity: Activity) {
         if (isPrivateChannel()) {
             activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)

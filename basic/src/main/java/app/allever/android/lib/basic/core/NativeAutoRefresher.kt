@@ -11,6 +11,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlin.random.Random
+import kotlin.runCatching
 
 /**
  * 原生广告定时自动刷新工具（协程版）
