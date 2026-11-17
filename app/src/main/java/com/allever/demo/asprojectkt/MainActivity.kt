@@ -46,12 +46,9 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
     override fun init() {
         adaptStatusBar(mBinding.funContainer)
 
-        NativeAutoRefresher.Builder(this)
-            .interval(5, 10)                              // n~m秒随机刷新
-            .onRefresh {
-                AdBusiness.loadNativeAd(mBinding.nativeContainer, "main")
-            }
-            .onDestroy { AdBusiness.destroyNativeAd("main") }
+        NativeAutoRefresher.Builder(this, mBinding.nativeContainer)
+            .page("main")
+            .interval(5, 10)
             .start()
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {

@@ -1,9 +1,12 @@
 package app.allever.android.lib.basic.core
 
+import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
+import app.allever.android.lib.ad.R
+import com.allever.android.lib.ad.AdBusiness
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -17,20 +20,16 @@ import kotlin.runCatching
  * 原生广告定时自动刷新工具（协程版）
  *
  * 用法:
- * ```kotlin
- * private val nativeRefresher = NativeAutoRefresher.Builder(this)
- *     .interval(30, 120)
- *     .onRefresh { AdBusiness.loadNativeAd(mBinding.nativeContainer, "main") }
- *     .onDestroy { AdBusiness.destroyNativeAd("main") }
- *     .start()
  * ```
  */
 class NativeAutoRefresher private constructor(
     private val lifecycleOwner: LifecycleOwner,
+    private val page: String,
+    private val nativeLayout: Int,
+    private val container: ViewGroup,
+    private val skipIntervalCheck: Boolean,
     private val minIntervalSec: Long,
-    private val maxIntervalSec: Long,
-    private val refreshTask: () -> Unit,
-    private val destroyTask: (() -> Unit)?
+    private val maxIntervalSec: Long
 ) {
 
     private var job: Job? = null
@@ -58,14 +57,14 @@ class NativeAutoRefresher private constructor(
         log("原生广告定时刷新启动，间隔区间：${minIntervalSec}s ~ ${maxIntervalSec}s")
         job = lifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
             log("立即执行首次刷新")
-            runCatching { refreshTask() }
+            runCatching { AdBusiness.loadNativeAd(container, page, nativeLayout, skipIntervalCheck) }
             while (isActive) {
                 val delaySec = Random.nextLong(minIntervalSec, maxIntervalSec + 1)
                 log("下一次刷新将在 ${delaySec}s 后执行")
                 delay(delaySec * 1000L)
                 if (isActive) {
                     log("执行定时刷新")
-                    runCatching { refreshTask() }
+                    runCatching { AdBusiness.loadNativeAd(container, page, nativeLayout, skipIntervalCheck) }
                 }
             }
             log("定时刷新协程已退出")
@@ -80,7 +79,7 @@ class NativeAutoRefresher private constructor(
 
     private fun destroy(owner: LifecycleOwner) {
         log("执行原生广告销毁任务")
-        runCatching { destroyTask?.invoke() }
+        runCatching { AdBusiness.destroyNativeAd(page) }
         stopTimer()
         owner.lifecycle.removeObserver(observer)
         log("NativeAutoRefresher 已完全清理")
@@ -98,18 +97,35 @@ class NativeAutoRefresher private constructor(
         }
     }
 
-    fun stop() {
+    private fun stop() {
         log("手动停止 NativeAutoRefresher")
         stopTimer()
         lifecycleOwner.lifecycle.removeObserver(observer)
     }
 
-    class Builder(private val lifecycleOwner: LifecycleOwner) {
+    class Builder(private val lifecycleOwner: LifecycleOwner, private val container: ViewGroup) {
+        private var page: String = "default"
+        private var nativeLayout = R.layout.ad_native_banner_normal
+
+        private var skipIntervalCheck = false
 
         private var minIntervalSec: Long = 30L
         private var maxIntervalSec: Long = 120L
-        private var refreshTask: (() -> Unit)? = null
-        private var destroyTask: (() -> Unit)? = null
+
+        fun page(page: String): Builder {
+            this.page = page
+            return this
+        }
+
+        fun nativeLayout(nativeLayout: Int): Builder {
+            this.nativeLayout = nativeLayout
+            return this
+        }
+
+        fun skipIntervalCheck(skipIntervalCheck: Boolean): Builder {
+            this.skipIntervalCheck = skipIntervalCheck
+            return this
+        }
 
         /**
          * 设置刷新随机间隔（秒），min 必须 <= max
@@ -122,31 +138,15 @@ class NativeAutoRefresher private constructor(
             return this
         }
 
-        /**
-         * 刷新任务（必传）
-         */
-        fun onRefresh(task: () -> Unit): Builder {
-            this.refreshTask = task
-            return this
-        }
-
-        /**
-         * 销毁任务（可选，在 ON_DESTROY 时执行）
-         */
-        fun onDestroy(task: () -> Unit): Builder {
-            this.destroyTask = task
-            return this
-        }
-
         fun start(): NativeAutoRefresher {
-            val task = refreshTask
-                ?: throw IllegalStateException("onRefresh must be set before start()")
             return NativeAutoRefresher(
                 lifecycleOwner = lifecycleOwner,
+                page = page,
+                nativeLayout = nativeLayout,
+                container,
+                skipIntervalCheck = skipIntervalCheck,
                 minIntervalSec = minIntervalSec,
-                maxIntervalSec = maxIntervalSec,
-                refreshTask = task,
-                destroyTask = destroyTask
+                maxIntervalSec = maxIntervalSec
             ).also { it.start() }
         }
     }
