@@ -1,7 +1,9 @@
 package app.allever.android.lib.basic
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Context
+import android.view.WindowManager
 import app.allever.android.lib.basic.config.Config
 import app.allever.android.lib.basic.core.App
 import app.allever.android.lib.basic.core.CoilLoader
@@ -90,6 +92,11 @@ object ProjectConfig {
     }
 
     fun isPrivateChannel() = config.channel == "private"
+    fun checkAndTurnOnScreen(activity: Activity) {
+        if (isPrivateChannel()) {
+            activity.window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        }
+    }
 
     fun isHuawei(): Boolean {
         return config.channel == "huawei"
