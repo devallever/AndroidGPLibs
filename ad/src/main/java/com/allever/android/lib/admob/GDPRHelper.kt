@@ -18,6 +18,8 @@ object GDPRHelper {
     private val TAG = "ILogger|${GDPRHelper::class.java.simpleName}"
     private lateinit var mConsentInformation: ConsentInformation
 
+    private var isInitialized = false
+
     fun init(context: Context) {
         mConsentInformation = UserMessagingPlatform.getConsentInformation(context)
     }
@@ -32,6 +34,12 @@ object GDPRHelper {
                 .build()
         } else {
             null
+        }
+
+        if (isInitialized) {
+            logE("isInitialized = true, return")
+            success.invoke()
+            return
         }
 
         // Create a ConsentRequestParameters object.
@@ -54,6 +62,7 @@ object GDPRHelper {
                     }
                     // Consent has been gathered.
                     success.invoke()
+                    isInitialized = true
 
                 }
             },
@@ -62,6 +71,7 @@ object GDPRHelper {
                 logE("requestConsentError Consent gathering failed: ${requestConsentError.errorCode}, ${requestConsentError.message}")
                 //todo 暂时先处理成功
                 success.invoke()
+                isInitialized = true
             })
 
     }

@@ -49,7 +49,7 @@ class MainActivity : AbstractBindingActivity<ActivityMainBinding>() {
 
         NativeAutoRefresher.Builder(this, mBinding.nativeContainer)
             .page("main")
-            .interval(5, 10)
+            .interval(60, 120)
             .start()
 
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {

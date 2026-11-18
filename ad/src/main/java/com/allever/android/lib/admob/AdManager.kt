@@ -289,6 +289,7 @@ object AdManager {
     }
 
     fun loadOpen(activity: Activity, adCallback: AdCallback? = null) {
+        log("进入开屏广告loadOpen")
         if (isPremiumUser) { adCallback?.onAdFailLoad(); return }
         // 远程配置关闭开屏广告
         if (!AdConfigHelper.isEnabled(IAdConfig.OPEN_AD)) {

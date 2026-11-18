@@ -20,13 +20,15 @@ android {
     // ---------- 多渠道 ----------
     flavorDimensions += "mark"
     productFlavors {
-        create("private") {
+        create("google") {
             dimension = "mark"
         }
-//        create("huawei") {
-//            dimension = "mark"
-//        }
-//         create("other") { dimension = "mark" }
+        create("other") {
+            dimension = "mark"
+        }
+        create("mine") {
+            dimension = "mark"
+        }
     }
 
     buildTypes {

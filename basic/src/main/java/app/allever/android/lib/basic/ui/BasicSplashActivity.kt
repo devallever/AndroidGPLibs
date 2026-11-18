@@ -10,6 +10,7 @@ import app.allever.android.lib.basic.ProjectConfig
 import app.allever.android.lib.basic.R
 import app.allever.android.lib.basic.core.AbstractActivity
 import app.allever.android.lib.basic.core.DisplayHelper
+import app.allever.android.lib.basic.core.logE
 import app.allever.android.lib.basic.core.toast
 import app.allever.android.lib.basic.databinding.ActivityBasicSplashBinding
 import app.allever.android.lib.basic.ui.dialog.PrivacyDialog
@@ -118,7 +119,10 @@ open class BasicSplashActivity : AbstractActivity() {
         lifecycleScope.launch {
             GDPRHelper.requestConsentInfoUpdate(this@BasicSplashActivity) {
                 AdManager.init(ProjectConfig.getAdConfig(), application, {
-                    if (!isActive || isDestroyed || isFinishing || lifecycle.currentState != Lifecycle.State.RESUMED)return@init
+                    if (!isActive || isDestroyed || isFinishing) {
+                        logE("状态不对, 结束")
+                        return@init
+                    }
                     if (AdManager.isInitSuccess()) {
                         if (!isActive) return@init
                         if (ProjectConfig.billingEnable() && ProjectConfig.hasActiveSubscription()){
