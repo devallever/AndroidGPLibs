@@ -302,6 +302,20 @@ object AdManager {
             return
         }
 
+        //缓存
+        if (mOpenAdCache != null && System.currentTimeMillis() - mOpenAdCacheTime < CACHE_TIME_OUT) {
+            log("openAd: 缓存已存在，直接展示")
+            mOpenAdCache?.fullScreenContentCallback = object : FullScreenContentCallback() {
+                override fun onAdDismissedFullScreenContent() {
+                    log("openAd: 关闭")
+                    adCallback?.onAdDismiss(false)
+                    mOpenAdCache = null
+                }
+            }
+            mOpenAdCache?.show(activity)
+            return
+        }
+
         val adRequest = AdRequest.Builder().build()
 
         val adId = mAdConfig.getAdId(IAdConfig.OPEN_AD)
@@ -318,10 +332,13 @@ object AdManager {
 
                 override fun onAdLoaded(appOpenAd: AppOpenAd) {
                     log("openAd: 加载成功")
+                    mOpenAdCache = appOpenAd
+                    mOpenAdCacheTime = System.currentTimeMillis()
                     appOpenAd.fullScreenContentCallback = object : FullScreenContentCallback() {
                         override fun onAdDismissedFullScreenContent() {
                             log("openAd: 关闭")
                             adCallback?.onAdDismiss(false)
+                            mOpenAdCache = null
                         }
 
                         override fun onAdFailedToShowFullScreenContent(p0: AdError) {

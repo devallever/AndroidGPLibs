@@ -10,6 +10,7 @@ import app.allever.android.lib.basic.ProjectConfig
 import app.allever.android.lib.basic.R
 import app.allever.android.lib.basic.core.AbstractActivity
 import app.allever.android.lib.basic.core.DisplayHelper
+import app.allever.android.lib.basic.core.log
 import app.allever.android.lib.basic.core.logE
 import app.allever.android.lib.basic.core.toast
 import app.allever.android.lib.basic.databinding.ActivityBasicSplashBinding
@@ -124,7 +125,10 @@ open class BasicSplashActivity : AbstractActivity() {
                         return@init
                     }
                     if (AdManager.isInitSuccess()) {
-                        if (!isActive) return@init
+                        if (!isActive) {
+                            logE("isActive = false, 结束")
+                            return@init
+                        }
                         if (ProjectConfig.billingEnable() && ProjectConfig.hasActiveSubscription()){
                             showAd = true
                             jumpTask.run()
