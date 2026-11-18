@@ -111,7 +111,7 @@ class NativeAutoRefresher private constructor(
         private var skipIntervalCheck = false
 
         private var minIntervalSec: Long = if (ProjectConfig.isPrivateChannel()) 90L else 40L
-        private var maxIntervalSec: Long = if (ProjectConfig.isPrivateChannel()) 120L else 900L
+        private var maxIntervalSec: Long = if (ProjectConfig.isPrivateChannel()) 120L else 60L
 
         fun page(page: String): Builder {
             this.page = page
