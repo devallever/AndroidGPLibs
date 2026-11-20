@@ -36,4 +36,14 @@
     <string name="bc_usage_reward_watch_ad">观看视频 立即+3</string>
     <string name="bc_save_success">save success!</string>
 
+    <!-- ===== Splash Tips ===== -->
+    <string-array name="bc_splash_tips">
+        <item>正在加载精彩内容...</item>
+        <item>马上就好，请稍候~</item>
+        <item>正在为您准备...</item>
+        <item>美好的事物值得等待</item>
+        <item>加载中，请耐心等待...</item>
+        <item>正在初始化，请稍等...</item>
+    </string-array>
+
 </resources>

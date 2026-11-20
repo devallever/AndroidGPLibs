@@ -45,5 +45,14 @@
     <string name="bc_usage_reward_watch_ad">Watch video to get +3</string>
     <string name="bc_save_success">save success!</string>
 
+    <!-- ===== Splash Tips ===== -->
+    <string-array name="bc_splash_tips">
+        <item>Loading exciting content...</item>
+        <item>Almost there, please wait~</item>
+        <item>Preparing everything for you...</item>
+        <item>Something good is worth waiting for</item>
+        <item>Loading, please be patient...</item>
+        <item>Initializing, please wait...</item>
+    </string-array>
 
 </resources>

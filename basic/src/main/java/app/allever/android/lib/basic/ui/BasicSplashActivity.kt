@@ -3,6 +3,7 @@ package app.allever.android.lib.basic.ui
 import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -29,6 +30,9 @@ open class BasicSplashActivity : AbstractActivity() {
     private val jumpTask = Runnable {
         jumpMain()
     }
+
+    private val usedTips = mutableListOf<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(mBinding.root)
@@ -100,6 +104,8 @@ open class BasicSplashActivity : AbstractActivity() {
         )
         alphaAnimato2.duration = duration
         alphaAnimato2.start()
+
+        scheduleSplashTips()
     }
 
     override fun onBackPressed() {
@@ -163,5 +169,31 @@ open class BasicSplashActivity : AbstractActivity() {
 
     private fun huaweiWay() {
 
+    }
+
+    private fun scheduleSplashTips() {
+        lifecycleScope.launch {
+            delay(5000)
+            showTip()
+            delay(5000)
+            showTip()
+            delay(5000)
+            showTip()
+        }
+    }
+
+    private fun showTip() {
+        val tipsPool = resources.getStringArray(R.array.bc_splash_tips).toList()
+        val available = tipsPool.filter { it !in usedTips }
+        if (available.isEmpty()) return
+        val tip = available.random()
+        usedTips.add(tip)
+
+        mBinding.tvTip.apply {
+            text = tip
+            visibility = View.VISIBLE
+            alpha = 0f
+            animate().alpha(1f).setDuration(400).start()
+        }
     }
 }
